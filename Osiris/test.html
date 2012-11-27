@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Osiris 1.1</title>
+<script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
+<script type="text/javascript" src="osiris.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var nPlayer = osiris.player("#vidbox");
+		nPlayer.setAttrs({
+			src: [
+				//"http://bumbuu.com/files/videos/dm_out_in_the_open.mp4", 
+				//"http://bumbuu.com/files/videos/dm_out_in_the_open.ogv"
+				"video.ogv"
+			],
+			width: 700,
+			height: 400,
+			strPlay: true
+		});
+		nPlayer.init();
+};
+</script>
+<style type="text/css">
+html,body{
+padding: 0px;
+margin: 0px;
+}
+
+body{
+background-color: #323232;
+background-image: url(http://bumbuu.com/files/img/noise_overlay.png);
+background-repeat: repeat;
+}
+
+#main_container{
+top: 0%;
+left: 50%;
+position: absolute;
+margin-left: -460px;
+margin-top: 20px;
+padding: 10px;
+width: 900px;
+min-height: 600px;
+}
+
+#main{
+width: 800px;
+height: 700px;
+margin-left: auto;
+margin-right: auto;
+padding: 10px;
+border-radius: 10px;
+background-color: #F4F4F4;
+border: 1px solid #F0F0F0;
+box-shadow: 0px 0px 5px #030303;
+}
+
+#title{
+width: 780px;
+height: 25px;
+font-family: Arial;
+font-size: 25px;
+color: #353535;
+background-color: #202020;
+padding: 10px;
+box-shadow: 0px 5px 5px #090909;
+}
+
+#title span{
+color: #565656;
+}
+
+#testing_area{
+width: 780px;
+padding: 10px;
+margin-top: 20px;
+height: 615px;
+}
+
+/* beginning of all Osiris-based CSS code */
+.osiris_content{
+width: 400px; /* these are default values, */
+height: 300px; /* they need not be changed */
+margin-left: auto;
+margin-right: auto;
+background-color: #010101;
+border: 1px solid #333333;
+overflow: hidden;
+}
+canvas.osiris_canvas{
+width: 400px;
+height: 300px;
+margin-top: 0px;
+margin-left: 0px;
+position: absolute;
+z-index: 1;
+}
+video.osiris_video{
+width: 400px;
+height: 300px;
+margin-top: 0px;
+position: absolute;
+margin-left: 0px;
+z-index: 0;
+}
+.osiris_vidBar{
+width: 390px;
+height: 24px;
+margin-left: -1px;
+padding: 5px;
+padding-left: 10px;
+padding-right: 10px;
+z-index: 1000;
+position: absolute;
+background: rgba(18,18,18,0.93);
+background: -moz-linear-gradient(rgba(30,30,30,0.93), rgba(5,5,5,0.93));
+background: -webkit-linear-gradient(rgba(30,30,30,0.93), rgba(5,5,5,0.93));
+background: -o-linear-gradient(rgba(30,30,30,0.93), rgba(5,5,5,0.93));
+background: -ms-linear-gradient(rgba(30,30,30,0.93), rgba(5,5,5,0.93));
+border-top: 1px solid #141414;
+box-shadow: inset 0px 1px 1px #4A4A4A;
+}
+.ovB_pd{
+height: 24px;
+width: 22px;
+margin-left: 0px;
+margin-top: 0px;
+float: left;
+clear: none;
+}
+img.ovB_play{
+height: 24px;
+cursor: pointer;
+position: absolute;
+margin-top: 0px;
+margin-left: 0px;
+display: none;
+}
+.ovB_pause{
+cursor: pointer;
+height: 24px;
+width: 20px;
+margin-top: 0px;
+margin-left: 0px;
+position: absolute;
+}
+.ovB_pauseBars{
+height: 20px;
+background-color: #D0D0D0;
+width: 5px;
+margin-left: 4px;
+margin-top: 3px;
+position: relative;
+float: left;
+clear: none;
+box-shadow: inset 0px 2px 1px #FFFFFF, inset 0px -1px 1px #7F7F7F;
+border-radius: 2px;
+}
+.ovB_pauseBars:nth-child(2){
+margin-left: 4px;
+}
+.ovB_t1{
+height: 12px;
+padding: 6px;
+float: left;
+clear: none;
+margin-left: 0px;
+font-family: Arial;
+font-size: 12px;
+color: #8F8F8F;
+text-align: center;
+}
+.ovB_cb{
+height: 10px;
+width: 500px;
+float: left;
+clear: none;
+border-radius: 10px;
+margin-top: 8px;
+background-color: rgba(55,55,55,0.93);
+box-shadow: inset 0px -1px 1px #484848, inset 0px 1px 1px #252525;
+}
+.ovB_pb{
+height: 10px;
+border-radius: 10px;
+position: absolute;
+margin-left: 0px;
+margin-top: 0px;
+}
+/* ending of all Osiris-based CSS code */
+
+#main_below{
+margin-left: auto;
+margin-right: auto;
+width: 800px;
+height: 30px;
+margin-top: 10px;
+padding: 10px;
+font-family: Arial;
+font-size: 12px;
+color: #F0F0F0;
+}
+
+#main_below table{
+margin-left: auto;
+margin-right: auto;
+display: block;
+position: relative;
+}
+
+#main_below table{
+width: 450px;
+margin-left: auto;
+margin-right: auto;
+}
+
+#main_below table td{
+padding-left: 20px;
+padding-right: 20px;
+}
+
+#main_below table td:nth-child(1){
+color: #A0A0A0;
+}
+</style>
+</head>
+<body>
+<div id="main_container">
+	<div id="main">
+		<div id="title">Tests: <span>Osiris</span></div>
+		<div id="testing_area">
+			<div id="vidbox"></div> <!--this is where the HTML5 canvas and video will go... -->
+		</div>
+	</div>
+	<div id="main_below">
+		<table>
+			<tbody>
+				<tr>
+					<td>&copy; 2012 Bumbuu, Inc.</td>
+					<td>Help</td>
+					<td>Policy</td>
+					<td>Staff</td>
+					<td>About</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>
