@@ -3,7 +3,7 @@
  * Description: an HTML5 video player, which
  * utilizes a combination of the <canvas> element
  * and CSS/HTML for a neat plugin-like technology.
- * Copyright 2012 Bumbuu
+ * Copyright 2013 Bumbuu
  * All Rights Reserved
  * ------------------------------------------
  * This file and its contents are free to 
@@ -18,15 +18,15 @@
 
 var osiris = {
 	version: 1.1,
-	player: function(elem){
-		function errLog(err){return(window.console.log ? window.console.log("Osiris:: "+err) : false)}
+	player: function(elem) {
+		function errLog(err) {return(window.console.log ? window.console.log("Osiris:: "+err) : alert(err))}
 		if (typeof $_ == "undefined" || $_ == null) return errLog("Error, missing functionality! Please include the ScriJe API for Osiris. This can be done by inserting the following code into the <head> of your HTML page (BEFORE the script declaration for Osiris):\n <script type=\"text/javascript\" src=\"http://bumbuu.com/files/js/scrije.lib.js\"></script>");
-		return new (function(d){
-			var cElem = function(c){return document.createElement(c)};
+		return new (function(d) {
+			var cElem = function(c) {return document.createElement(c)};
 			if (typeof $_(d).div == "undefined" || $_(d).div == null) return errLog("Error! Element \""+d+"\" is nonexistent. Please create a <div> with that ID in your HTML page.");
 			var div = $_(d); //the container
 				div.attr({className:"osiris_content"});
-			var initiated=false, fScreen=false,canvas={}, video={}, vBar={}, drawInterv=0, gThis=this;
+			var initiated=false, fScreen=false, canvas={}, video={}, vBar={}, drawInterv=0, gThis=this;
 			var oDivs = {
 				t1: {},
 				t2: {}
@@ -38,12 +38,12 @@ var osiris = {
 				controls: true,
 				strPlay: false
 			};
-			this.setAttrs = function(arr){
+			this.setAttrs = function(arr) {
 				if (typeof arr != "object") return;
 				for (var i in arr)
 					attrs[i] = arr[i];
 			};
-			this.init = function(){
+			this.init = function() {
 				initiated = true;
 				canvas = $_(cElem("canvas"));
 				video = $_(cElem("video"));
@@ -58,10 +58,10 @@ var osiris = {
 				var vb_t2 = $_(cElem("div"));
 				//inside vidbar
 				
-				div.add(canvas.div);
-				div.add(video.div);
-				div.add(vBar.div);
-				vBar.add(vB_play.div);
+				div.add(canvas.div); //the main canvas
+				div.add(video.div); //video element
+				div.add(vBar.div); //video bar; main source of interaction
+				vBar.add(vB_play.div); //pause/play button
 				vB_play.add(vBp_i.div);
 				vB_play.add(vBp_pause.div);
 				vBp_pause.add(vBp_p[0].div);
@@ -123,10 +123,10 @@ var osiris = {
 				});
 				vb_t1.html("0:00");
 				vb_t2.html("0:00");
-				for (var a=0; a<attrs.src.length; a++){
+				for (var a=0; a<attrs.src.length; a++) {
 					var nElem = cElem("source");
 					var ext = attrs.src[a].match(/(\.\w{1,4})$/i)[0];
-					if (ext != null) ext = (function(i){return i.substr(1)})(ext);
+					if (ext != null) ext = (function(i) {return i.substr(1)})(ext);
 					$_(nElem).attr({
 						src: attrs.src[a],
 						type: (ext != null ? ((ext.match(/^og/i) != null && ext.match(/^og/i)[0] != null) ? "video/ogg" : "video/"+ext) : "application/octet-stream")
@@ -139,23 +139,23 @@ var osiris = {
 				if (attrs.strPlay) gThis.play();
 				drawInterv = setInterval(draw, 1);		
 			};
-			this.play = function(){
+			this.play = function() {
 				if (!initiated) return;
 				video.play();
 			};
-			this.pause = function(){
+			this.pause = function() {
 				if (!initiated) return;
 				video.pause();
 			};
-			this.stopDraw = function(){
+			this.stopDraw = function() {
 				clearInterval(drawInterv);
 				return drawInterv == 0 ? true : false;
 			};
-			this.reDraw = function(){
+			this.reDraw = function() {
 				drawInterv = setInterval(draw, 1);
 			};
-			function draw(){
-				var ctx = canvas.ctx("2d+");
+			function draw() { //draw on the canvas
+				var cx = canvas.ctx("2d+");
 				var width = canvas.attr("width");
 				var height = canvas.attr("height");
 				//refresh the canvas
@@ -164,31 +164,22 @@ var osiris = {
 					width: width,
 					height: height
 				});
-				ctx.fillStyle = "rgb(0, 0, 0)";
-				ctx.strokeStyle = "rgb(0, 0, 0)";
-				ctx.clearRect(0, 0, width, height);
-				var fDim = { //the height of the video frame size
-					w: video.videoWidth,
-					h: video.videoHeight,
-					wRatio: video.videoWidth/video.videoHeight,
-					hRatio: video.videoHeight/video.videoWidth
-				};
-				if (fDim.w/fDim.h >= attrs.width/attrs.height){ //compare the ratios for w/h
-					var scaled = {
-						w: attrs.width,
-						h: attrs.width*(fDim.wRatio<1?fDim.wRatio:fDim.hRatio)
-					};
-				} else if (fDim.h/fDim.w > attrs.height/attrs.width){ //compare the ratios for h/w
-					var scaled = {
-						h: attrs.height,
-						w: attrs.height*(fDim.hRatio<1?fDim.hRatio:fDim.wRatio)
-					};
+				cx.fillStyle = "rgb(0, 0, 0)";
+				cx.strokeStyle = "rgb(0, 0, 0)";
+				cx.clearRect(0, 0, width, height);
+				if (video.videoWidth/video.videoHeight < 1) { //if video is portrait
+					var nvWidth = width/height<1 ? height/video.videoHeight * video.videoWidth : width;
+					var nvHeight = width/height<1 ? height : width/video.videoWidth * video.videoHeight;
+				} else if (video.videoWidth/video.videoHeight > 1) { //if video is widescreen
+					var nvHeight = width/height>1 ? height : width/video.videoWidth * video.videoHeight;
+					var nvWidth = width/height>1 ? height/video.videoHeight * video.videoWidth : width;
+				} else { //aspect ratio of 1:1
+					var nvHeight = height;
+					var nvWidth = width;
 				}
-				scaled.x = Math.round((scaled.w-attrs.width)/2);
-				scaled.y = Math.round((scaled.h-attrs.height)/2);
-				ctx.drawImage(video,scaled.x,scaled.y,scaled.w,scaled.h);
-				function tString(t){
-					var sTime = Math.floor(((t/60)-parseInt(t/60))*60), mTime = parseInt(t/60);
+				cx.drawImage(video, Math.round((width-nvWidth)/2), Math.round((height-nvHeight)/2), nvWidth, nvHeight); //draw image of video
+				function tString(t) { //parse and format time
+					var sTime = parseInt(t%60), mTime = parseInt(t/60);
 					return mTime+":"+(sTime < 10 ? "0"+sTime : sTime);
 				}
 				oDivs.t1.innerHTML = tString(video.currentTime);
