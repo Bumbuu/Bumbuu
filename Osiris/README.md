@@ -16,4 +16,4 @@ Will be integrated throughout [Bumbuu](http://bumbuu.com).
  - Full-screen mode ( **todo** )
 
 ###Miscellaneous TODO Items
- - Create SVG art for volume icon ( **needs rework** )
+ - Create SVG art for volume icon ( **done** )
