@@ -3,14 +3,14 @@
 Version 1.1
 
 
-**What is Osiris?**
-
+###What is Osiris?
 An HTML5 video-based JavaScript API.
 
-**What purpose does it serve?**
+###What purpose does it serve?
+Will be integrated throughout (Bumbuu)[http://bumbuu.com].
 
-
-**Some Features/Todo List**
+###Some Features/Todo List
  - Canvas-based rendering with some effects ( **started** )
- - Complete video playback control ( **started** )
- - Video info UI ( **todo** )
+ - Complete video playback control ( **mostly done** )
+ - Video info UI ( **started** )
+ - Full-screen mode ( **todo** )

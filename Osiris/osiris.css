@@ -88,7 +88,7 @@ video.osiris_video {
 	clear: none;
 }
 
-img.ovB_play { /* TODO: replace with SVG */
+img.ovB_play { 
 	height: 24px;
 	cursor: pointer;
 	position: absolute;
