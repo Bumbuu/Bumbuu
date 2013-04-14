@@ -28,6 +28,7 @@ var osiris = {
 				var sTime = parseInt(t%60), mTime = parseInt(t/60);
 				return mTime+":"+(sTime < 10 ? "0"+sTime : sTime);
 			}
+			var videoIsBeingSeeked = false;
 			if (typeof $_(d).div == "undefined" || $_(d).div == null) return errLog("Error! Element \""+d+"\" is nonexistent. Please create a <div> with that ID in your HTML page.");
 			var div = $_(d); //the container
 				div.attr({className:"osiris_content"});
@@ -41,18 +42,20 @@ var osiris = {
 				height: 300,
 				src: new Array(),
 				controls: true,
-				strPlay: false
+				strPlay: false,
+				title: "Untitled Video"
 			};
 			this.setAttrs = function(arr) {
 				if (typeof arr != "object") return;
 				for (var i in arr)
-					attrs[i] = arr[i];
+					if (i in attrs) attrs[i] = arr[i];
 			};
 			this.init = function() {
 				initiated = true;
 				canvas = $_(cElem("canvas"));
 				video = $_(cElem("video"));
 				vBar = $_(cElem("div")); //video bar
+				vBInfo = $_(cElem("div")); //video information bar
 				//inside vidbar
 				vB_toggle = $_(cElem("div")); //container for the play button
 				vB_play = $_(cElem("img"));
@@ -64,7 +67,10 @@ var osiris = {
 				vB_cb_prog = $_(cElem("div")); //video progress bar
 				vb_t2 = $_(cElem("div"));
 				//inside vidbar
-				
+				//inside video information bar
+				vBI_tl = $_(cElem("div")); //title of video
+				vBI_ms = $_(cElem("div")); //miscellaneous (ms) information
+				//inside video information bar
 				div.add(canvas.div); //the main canvas
 				div.add(video.div); //video element
 				div.add(vBar.div); //video bar; main source of interaction
@@ -78,6 +84,8 @@ var osiris = {
 				vBar.add(vb_t2.div);
 				vB_cb.add(vB_cb_prog.div);
 				vB_cb.add(vB_cb_hnd.div);
+				vBInfo.add(vBI_tl);
+				vBInfo.add(vBI_ms);
 				div.css({
 					width: attrs.width+"px",
 					height: attrs.height+"px"
@@ -104,6 +112,12 @@ var osiris = {
 				vBar.css({
 					marginTop: attrs.height-34+"px",
 					width: attrs.width-18+"px"
+				});
+				vBInfo.attr({
+					className: "osiris_vidInfoBar"
+				});
+				vBInfo.css({
+					width: attrs.width+"px"
 				});
 				vB_toggle.attr({
 					className: "ovB_pd"
@@ -139,6 +153,12 @@ var osiris = {
 				vb_t2.attr({
 					className: "ovB_t1"
 				});
+				vBI_tl.attr({
+					className: "ovIB_title"
+				});
+				vBI_ms.attr({
+					className: "ovIB_misc"
+				});
 				vb_t1.html("0:00");
 				vb_t2.html("0:00");
 				for (var a=0; a<attrs.src.length; a++) {
@@ -168,21 +188,27 @@ var osiris = {
 					var oOff_x = (event.clientX || event.pageX)-vB_cb.offset().x;
 						oOff_x = oOff_x > vB_cb.offsetWidth() ? vB_cb.offsetWidth() : (oOff_x < 0 ? 0 : oOff_x);
 					vB_cb_prog.css("width", oOff_x+"px");
-					video.currentTime = (vB_cb_prog.offsetWidth()/vB_cb.offsetWidth() * video.duration);
+					vB_cb_hnd.css("margin-left", oOff_x-7+"px");
+					video.currentTime = ((vB_cb_prog.offsetWidth()-7)/(vB_cb.offsetWidth()-14) * video.duration);
+					videoIsBeingSeeked = true;
 					vBar.mousemove(function(event2) {
 						var off_x = (event2.clientX || event2.pageX)-vB_cb.offset().x;
 							off_x = off_x > vB_cb.offsetWidth() ? vB_cb.offsetWidth() : (off_x < 0 ? 0 : off_x);
 						vB_cb_prog.css("width", off_x+"px");
-						video.currentTime = (vB_cb_prog.offsetWidth()/vB_cb.offsetWidth() * video.duration);
+						vB_cb_hnd.css("margin-left", off_x-7+"px");
+						video.currentTime = ((vB_cb_prog.offsetWidth()-7)/(vB_cb.offsetWidth()-14) * video.duration);
 						return false;
 					});
 					return false;
 				});
 				vBar.mouseup(function() {
 					vBar.mousemove(null);
+					videoIsBeingSeeked = false;
 					return false;
 				});
-			};
+				vBI_tl.html(attrs.title);
+				vBI_ms.html("Dimensions: "+video.videoWidth+"x"+video.videoHeight+"p");
+			}; // <-------------- end of initialization code -------------->
 			function update() {
 				oDivs.t1.innerHTML = tString(video.currentTime);
 				oDivs.t2.innerHTML = tString(video.duration);
@@ -194,9 +220,11 @@ var osiris = {
 					vB_pause.effects.fadeTo(100, 200);
 				}
 				//change positions of seeker and current info, accordingly
-				var pos = Math.round(video.currentTime/video.duration * (vB_cb.offsetWidth()-14));
-				vB_cb_prog.css("width", 7+pos+"px");
-				vB_cb_hnd.css("margin-left", pos+"px");
+				if (!videoIsBeingSeeked) {
+					var pos = Math.round(video.currentTime/video.duration * (vB_cb.offsetWidth()-14));
+					vB_cb_prog.css("width", 7+pos+"px");
+					vB_cb_hnd.css("margin-left", pos+"px");
+				}
 			}
 			function draw() { //draw on the canvas
 				var cx = canvas.ctx("2d+");
