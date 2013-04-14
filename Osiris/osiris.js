@@ -48,7 +48,8 @@ var osiris = {
 				src: new Array(),
 				controls: true,
 				strPlay: false,
-				title: "Untitled Video"
+				title: "Untitled Video",
+				fileType: "video"
 			};
 			this.setAttrs = function(arr) {
 				if (typeof arr != "object") return;
@@ -71,6 +72,7 @@ var osiris = {
 				vB_cb_hnd = $_(cElem("div")); //seeker handle, for seeking
 				vB_cb_prog = $_(cElem("div")); //video progress bar
 				vb_t2 = $_(cElem("div"));
+				vb_vol = $_(cElem("img")); //volume image
 				//inside vidbar
 				//inside video information bar
 				vBI_tl = $_(cElem("div")); //title of video
@@ -78,6 +80,7 @@ var osiris = {
 				//inside video information bar
 				div.add(canvas.div); //the main canvas
 				div.add(video.div); //video element
+				div.add(vBInfo.div); //video information bar
 				div.add(vBar.div); //video bar; main source of interaction
 				vBar.add(vB_toggle.div); //play container
 				vB_toggle.add(vB_play.div); //video play button (SVG data)
@@ -87,10 +90,11 @@ var osiris = {
 				vBar.add(vb_t1.div);
 				vBar.add(vB_cb.div);
 				vBar.add(vb_t2.div);
+				vBar.add(vb_vol.div);
 				vB_cb.add(vB_cb_prog.div);
 				vB_cb.add(vB_cb_hnd.div);
-				vBInfo.add(vBI_tl);
-				vBInfo.add(vBI_ms);
+				vBInfo.add(vBI_tl.div);
+				vBInfo.add(vBI_ms.div);
 				div.css({
 					width: attrs.width+"px",
 					height: attrs.height+"px"
@@ -147,7 +151,7 @@ var osiris = {
 					className: "ovB_cb"
 				});
 				vB_cb.css({
-					width: (parseInt(vBar.css("width"))-2*parseInt(vBar.css("padding-left"))-24*7)+"px"
+					width: (parseInt(vBar.css("width"))-2*parseInt(vBar.css("padding-left"))-24*8)+"px"
 				});
 				vB_cb_prog.attr({
 					className: "ovB_cb_prog"
@@ -161,9 +165,20 @@ var osiris = {
 				vBI_tl.attr({
 					className: "ovIB_title"
 				});
+				vBI_tl.css({
+					width: attrs.width-2*parseInt(vBI_tl.css("margin-left"))+"px"
+				});
 				vBI_ms.attr({
 					className: "ovIB_misc"
 				});
+				vBI_ms.css({
+					width: attrs.width-2*parseInt(vBI_ms.css("margin-left"))+"px"
+				});
+				vb_vol.attr({
+					className: "ovB_vol",
+					src: "data:image/png;base64,"+VIDEO_SOUND_MUTE_IMG_DATA //default
+				});
+				video.volume = 1; //highest value
 				vb_t1.html("0:00");
 				vb_t2.html("0:00");
 				for (var a=0; a<attrs.src.length; a++) {
@@ -174,6 +189,7 @@ var osiris = {
 						src: attrs.src[a],
 						type: (ext != null ? ((ext.match(/^og/i) != null && ext.match(/^og/i)[0] != null) ? "video/ogg" : "video/"+ext) : "application/octet-stream")
 					});
+					attrs.fileType = $_(nElem).attr("type");
 					video.add(nElem);	
 				}
 				video = video.div;
@@ -187,7 +203,10 @@ var osiris = {
 				if (attrs.strPlay) {
 					vB_play.css("display", "none"); //make play button hidden by default
 					video.play();
-				} else vB_pause.css("display", "none");
+				} else { 
+					vB_pause.css("display", "none");
+					vB_play.css("display", "block");
+				}
 				//events...
 				vB_cb.mousedown(function(event) { //dragging video
 					var oOff_x = (event.clientX || event.pageX)-vB_cb.offset().x;
@@ -212,7 +231,14 @@ var osiris = {
 					return false;
 				});
 				vBI_tl.html(attrs.title);
-				vBI_ms.html("Dimensions: "+video.videoWidth+"x"+video.videoHeight+"p");
+				div.mousemove(function(event) {
+					var off_y = event.clientY || event.pageY;
+						off_y = off_y < 0 ? 0 : (off_y > attrs.height ? attrs.height : off_y);
+					if (off_y < 200 && vBInfo.css("display") == "none")
+						vBInfo.effects.fadeTo(100, 700);
+					else if (vBInfo.css("opacity") == 1 && off_y >= 200)
+						vBInfo.effects.fadeTo(0, 700);
+				});
 			}; // <-------------- end of initialization code -------------->
 			function update() {
 				oDivs.t1.innerHTML = tString(video.currentTime);
@@ -230,6 +256,9 @@ var osiris = {
 					vB_cb_prog.css("width", 7+pos+"px");
 					vB_cb_hnd.css("margin-left", pos+"px");
 				}
+				vBI_ms.html("Dimensions: "+video.videoWidth+"x"+video.videoHeight+"p"+" \
+					&nbsp;&nbsp;&nbsp;&nbsp;Video Source: "+(video.currentSrc.length > 50 ? video.currentSrc.substr(0,17)+"..."+video.currentSrc.substr(video.currentSrc.length-30,30) : video.currentSrc)+" \
+					&nbsp;&nbsp;&nbsp;&nbsp;Content Type: "+attrs.fileType);
 			}
 			function draw() { //draw on the canvas
 				var cx = canvas.ctx("2d+");
