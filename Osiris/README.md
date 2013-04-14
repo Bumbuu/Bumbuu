@@ -7,7 +7,7 @@ Version 1.1
 An HTML5 video-based JavaScript API.
 
 ###What purpose does it serve?
-Will be integrated throughout (Bumbuu)[http://bumbuu.com].
+Will be integrated throughout (http://bumbuu.com)[Bumbuu].
 
 ###Some Features/Todo List
  - Canvas-based rendering with some effects ( **started** )
