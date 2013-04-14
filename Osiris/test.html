@@ -9,9 +9,7 @@ window.onload = function() {
 	var nPlayer = osiris.player("#vidbox");
 		nPlayer.setAttrs({
 			src: [
-				//"http://bumbuu.com/files/videos/dm_out_in_the_open.mp4", 
-				//"http://bumbuu.com/files/videos/dm_out_in_the_open.ogv"
-				"data/video.webm"
+				"data/minute_waltz.webm"
 			],
 			width: 700,
 			height: 400,
@@ -23,94 +21,94 @@ window.onload = function() {
 <style type="text/css">
 @import url('osiris.css'); /* osiris css code */
 
-html,body{
-padding: 0px;
-margin: 0px;
+html, body {
+	padding: 0px;
+	margin: 0px;
 }
 
-body{
-background-color: #323232;
-background-image: url(http://bumbuu.com/files/img/noise_overlay.png);
-background-repeat: repeat;
+body {
+	background-color: #323232;
+	background-image: url('http://bumbuu.com/files/img/noise_overlay.png');
+	background-repeat: repeat;
 }
 
-#main_container{
-top: 0%;
-left: 50%;
-position: absolute;
-margin-left: -460px;
-margin-top: 20px;
-padding: 10px;
-width: 900px;
-min-height: 600px;
+#main_container {
+	top: 0%;
+	left: 50%;
+	position: absolute;
+	margin-left: -460px;
+	margin-top: 20px;
+	padding: 10px;
+	width: 900px;
+	min-height: 600px;
 }
 
-#main{
-width: 800px;
-height: 700px;
-margin-left: auto;
-margin-right: auto;
-padding: 10px;
-border-radius: 10px;
-background-color: #F4F4F4;
-border: 1px solid #F0F0F0;
-box-shadow: 0px 0px 5px #030303;
+#main {
+	width: 800px;
+	height: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #F4F4F4;
+	border: 1px solid #F0F0F0;
+	box-shadow: 0px 0px 5px #030303;
 }
 
-#title{
-width: 780px;
-height: 25px;
-font-family: Arial;
-font-size: 25px;
-color: #353535;
-background-color: #202020;
-padding: 10px;
-box-shadow: 0px 5px 5px #090909;
+#title 	{
+	width: 780px;
+	height: 25px;
+	font-family: Arial;
+	font-size: 25px;
+	color: #353535;
+	background-color: #202020;
+	padding: 10px;
+	box-shadow: 0px 5px 5px #090909;
 }
 
-#title span{
-color: #565656;
+#title span {
+	color: #565656;
 }
 
-#testing_area{
-width: 780px;
-padding: 10px;
-margin-top: 20px;
-height: 615px;
+#testing_area {
+	width: 780px;
+	padding: 10px;
+	margin-top: 20px;
+	height: 615px;
 }
 
-#main_below{
-margin-left: auto;
-margin-right: auto;
-width: 800px;
-height: 30px;
-margin-top: 10px;
-padding: 10px;
-font-family: Arial;
-font-size: 12px;
-color: #F0F0F0;
+#main_below {
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	height: 30px;
+	margin-top: 10px;
+	padding: 10px;
+	font-family: Arial;
+	font-size: 12px;
+	color: #F0F0F0;
 }
 
-#main_below table{
-margin-left: auto;
-margin-right: auto;
-display: block;
-position: relative;
+#main_below table {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	position: relative;
 }
 
-#main_below table{
-width: 450px;
-margin-left: auto;
-margin-right: auto;
+#main_below table {
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-#main_below table td{
-padding-left: 20px;
-padding-right: 20px;
+#main_below table td {
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
-#main_below table td:nth-child(1){
-color: #A0A0A0;
+#main_below table td:nth-child(1) {
+	color: #A0A0A0;
 }
 </style>
 </head>
@@ -119,7 +117,9 @@ color: #A0A0A0;
 	<div id="main">
 		<div id="title">Tests: <span>Osiris</span></div>
 		<div id="testing_area">
-			<div id="vidbox"></div> <!--this is where the HTML5 canvas and video will go... -->
+			<div id="vidbox">
+				<!-- this is where the HTML5 canvas and video will go... -->
+			</div>
 		</div>
 	</div>
 	<div id="main_below">
