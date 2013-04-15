@@ -354,6 +354,9 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				}
 				if (animFrame) animFrame(draw);
 			}
+			this.fullscreen = function() { //fullscreen the video
+				
+			};
 		})(elem);
 	}
 };
