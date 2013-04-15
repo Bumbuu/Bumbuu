@@ -15,12 +15,23 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="Osiris Volume.svg"
-   inkscape:export-filename="/home/princetonferro/Desktop/volume_mute.png"
+   sodipodi:docname="volume.svg"
+   inkscape:export-filename="/home/princetonferro/Desktop/volume_low.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient3787">
+      <stop
+         style="stop-color:#808080;stop-opacity:1;"
+         offset="0"
+         id="stop3789" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3791" />
+    </linearGradient>
     <linearGradient
        id="linearGradient4567">
       <stop
@@ -132,6 +143,33 @@
          operator="over"
          result="composite2" />
     </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3787"
+       id="linearGradient3793"
+       x1="16.050697"
+       y1="12.499983"
+       x2="29"
+       y2="12.499983"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3787"
+       id="linearGradient3795"
+       x1="16.050697"
+       y1="12.499983"
+       x2="29"
+       y2="12.499983"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3787"
+       id="linearGradient3798"
+       x1="16.050697"
+       y1="1039.8622"
+       x2="29"
+       y2="1039.8622"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -141,15 +179,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="21.0681"
-     inkscape:cx="13.888228"
-     inkscape:cy="12.347566"
+     inkscape:cx="9.0031417"
+     inkscape:cy="12.74296"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1416"
      inkscape:window-height="796"
-     inkscape:window-x="224"
-     inkscape:window-y="132"
+     inkscape:window-x="161"
+     inkscape:window-y="109"
      inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
@@ -167,7 +205,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -195,8 +233,28 @@
        sodipodi:nodetypes="cccc" />
     <path
        id="path4540"
-       style="fill:none;stroke:url(#radialGradient4575);stroke-width:1.37077676999999998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4705)"
+       style="fill:none;stroke:url(#radialGradient4575);stroke-width:1.37077677px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:none;filter:url(#filter4705)"
        d="m 16.122858,1035.9226 7.754284,7.7542 m 0,-7.7542 -7.754284,7.7542"
        inkscape:connector-curvature="0" />
+    <path
+       style="fill:url(#linearGradient3798);fill-opacity:1;stroke:none"
+       d="m 16.050698,1036.3622 c 3.398856,3.0143 2.039277,5.1091 0,7 l 1.012177,1 c 4.967013,-4.3999 0.854553,-8.6795 0,-9 z"
+       id="path3007"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:url(#linearGradient3795);fill-opacity:1;stroke:none"
+       d="m 18,7 c 4.724599,4.070443 3.011637,8.394245 0,11 l 1,1 c 1.79628,-2.386689 6.146092,-6.661246 0,-13 z"
+       id="path3783"
+       inkscape:connector-curvature="0"
+       transform="translate(0,1027.3622)"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:url(#linearGradient3793);fill-opacity:1;stroke:none"
+       d="m 20,5 c 4.02704,4.4770078 5.660121,9.264919 0,15 l 1,1 c 4.059417,-4.737403 6.337935,-9.882481 0,-17 z"
+       id="path3785"
+       inkscape:connector-curvature="0"
+       transform="translate(0,1027.3622)"
+       sodipodi:nodetypes="ccccc" />
   </g>
 </svg>
