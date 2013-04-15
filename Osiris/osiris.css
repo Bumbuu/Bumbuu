@@ -197,7 +197,7 @@ img.ovB_vol { /* volume image */
 
 .ovB_vol_control { /* volume control bar */
 	height: 8px;
-	width: 70px;
+	width: 78px;
 	float: left;
 	clear: none;
 	border-radius: 10px;
@@ -222,5 +222,31 @@ img.ovB_vol { /* volume image */
 }
 
 .ovB_fs { /* fullscreen button */
-	
+	width: 25px;
+	height: 14px;
+	background-color: #D0D0D0;
+	box-shadow: inset 0px 1px 1px #F9F9F9, 0px 0px 2px #333333;
+	cursor: pointer;
+	margin-top: 6px;
+	margin-left: 14px;
+	float: left;
+	clear: none;
+	overflow: hidden;
+}
+
+.ovB_fs:hover {
+	box-shadow: inset 0px 1px 1px #F9F9F9, 0px 0px 5px #7f7f7f, inset 0px 0px 2px #4f4f4f;
+}
+
+.ovB_fs:active {
+	box-shadow: 0px 0px 5px #7f7f7f, inset 0px 0px 2px #4f4f4f;
+}
+
+.ovB_fs_in { /* inside, smaller fullscreen div */
+	width: 12px;
+	height: 7px;
+	margin-left: 13px;
+	margin-top: 7px;
+	background-color: rgba(24,24,24,0.88);
+	box-shadow: 0px 0px 2px #626262;
 }

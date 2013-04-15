@@ -94,6 +94,8 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				vb_vol_ctrl = $_(cElem("div")); //volume controller
 				vb_vol = $_(cElem("img")); //volume image
 				vb_vol_hnd = $_(cElem("div")); //volume handle
+				vB_fs = $_(cElem("div")); //fullscreen large div
+				vB_fss = $_(cElem("div")); //fullscreen small div
 				//inside vidbar
 				//inside video information bar
 				vBI_tl = $_(cElem("div")); //title of video
@@ -113,11 +115,13 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				vBar.add(vb_t2.div);
 				vBar.add(vb_vol.div);
 				vBar.add(vb_vol_ctrl.div);
+				vBar.add(vB_fs.div);
 				vB_cb.add(vB_cb_prog.div);
 				vB_cb.add(vB_cb_hnd.div);
 				vBInfo.add(vBI_tl.div);
 				vBInfo.add(vBI_ms.div);
 				vb_vol_ctrl.add(vb_vol_hnd.div);
+				vB_fs.add(vB_fss.div);
 				div.css({
 					width: attrs.width+"px",
 					height: attrs.height+"px"
@@ -209,6 +213,12 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				});
 				vb_vol_hnd.attr({
 					className: "ovB_vc_hnd"
+				});
+				vB_fs.attr({
+					className: "ovB_fs"
+				});
+				vB_fss.attr({
+					className: "ovB_fs_in"
 				});
 				vb_t1.html("0:00");
 				vb_t2.html("0:00");
