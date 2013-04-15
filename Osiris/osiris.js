@@ -330,15 +330,9 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				var cx = canvas.ctx("2d+");
 				var width = canvas.attr("width");
 				var height = canvas.attr("height");
-				//refresh the canvas
-				/*
-				canvas.attr({
-					width: width,
-					height: height
-				});*/
-				cx.fillStyle = "rgb(0, 0, 0)";
-				cx.strokeStyle = "rgb(0, 0, 0)";
-				cx.clearRect(0, 0, width, height);
+				cx.fillStyle = "rgba(0, 0, 0, 0)";
+				cx.strokeStyle = "rgba(0, 0, 0, 0)";
+				cx.clearRect(0, 0, width, height); //refresh the canvas
 				if (!video.ended) {
 					if (video.videoWidth/video.videoHeight < 1) { //if video is portrait
 						var nvWidth = width/height<1 ? height/video.videoHeight * video.videoWidth : width;
@@ -374,13 +368,11 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					else var sWidth = window.innerWidth, sHeight = window.innerHeight;
 					if (typeof sWidth == "undefined" || typeof sHeight == "undefined")
 						var sWidth = screen.width, sHeight = screen.height;
-					/*
 					canvas.attr({
 						width: sWidth,
 						height: sHeight
-					});*/
+					});
 					
-					//else return false;
 					fScreen = true;
 				}
 			};
