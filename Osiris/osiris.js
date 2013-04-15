@@ -257,7 +257,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				});
 				vb_vol_ctrl.mousedown(function(event) { //changing sound
 					var oOff_x = (event.clientX || event.pageX)-vb_vol_ctrl.offset().x;
-						oOff_x = oOff_x > vb_vol_ctrl.offsetWidth()-6 ? vb_vol_ctrl.offsetWidth()-6 : (oOff_x < 6 ? 0 : oOff_x);
+						oOff_x = oOff_x > vb_vol_ctrl.offsetWidth()-6 ? vb_vol_ctrl.offsetWidth()-6 : (oOff_x < 6 ? 6 : oOff_x);
 					vb_vol_hnd.css("margin-left", oOff_x-6+"px");
 					video.volume = parseInt(vb_vol_hnd.css("margin-left"))/(vb_vol_ctrl.offsetWidth()-6);
 					vBar.mousemove(function(event2) {
