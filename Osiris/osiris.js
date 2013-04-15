@@ -52,6 +52,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				return mTime+":"+(sTime < 10 ? "0"+sTime : sTime);
 			}
 			var videoIsBeingSeeked = false;
+			var videoVolumeChanging = false;
 			if (typeof $_(d).div == "undefined" || $_(d).div == null) return errLog("Error! Element \""+d+"\" is nonexistent. Please create a <div> with that ID in your HTML page.");
 			var div = $_(d); //the container
 				div.attr({className:"osiris_content"});
@@ -259,12 +260,13 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					var oOff_x = (event.clientX || event.pageX)-vb_vol_ctrl.offset().x;
 						oOff_x = oOff_x > vb_vol_ctrl.offsetWidth()-6 ? vb_vol_ctrl.offsetWidth()-6 : (oOff_x < 6 ? 6 : oOff_x);
 					vb_vol_hnd.css("margin-left", oOff_x-6+"px");
-					video.volume = parseInt(vb_vol_hnd.css("margin-left"))/(vb_vol_ctrl.offsetWidth()-6);
+					video.volume = (parseInt(vb_vol_hnd.css("margin-left"))-6)/(vb_vol_ctrl.offsetWidth()-12);
+					videoVolumeChanging = true;
 					vBar.mousemove(function(event2) {
 						var off_x = (event2.clientX || event2.pageX)-vb_vol_ctrl.offset().x;
 							off_x = off_x > vb_vol_ctrl.offsetWidth()-6 ? vb_vol_ctrl.offsetWidth()-6 : (off_x < 6 ? 6 : off_x);
 						vb_vol_hnd.css("margin-left", off_x-6+"px");
-						video.volume = parseInt(vb_vol_hnd.css("margin-left"))/(vb_vol_ctrl.offsetWidth()-6);
+						video.volume = (parseInt(vb_vol_hnd.css("margin-left"))-6)/(vb_vol_ctrl.offsetWidth()-12);
 						return false;
 					});
 					return false;
@@ -272,6 +274,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				vBar.mouseup(function() {
 					vBar.mousemove(null);
 					videoIsBeingSeeked = false;
+					videoVolumeChanging = false;
 					return false;
 				});
 				vBI_tl.html(attrs.title);
@@ -311,6 +314,8 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					vb_vol.attr("src", "data:image/png;base64,"+VIDEO_SOUND_LOW_IMG_DATA);
 				else if (video.volume == 0 || video.muted)
 					vb_vol.attr("src", "data:image/png;base64,"+VIDEO_SOUND_MUTE_IMG_DATA);
+				if (!videoVolumeChanging)
+					vb_vol_hnd.css("margin-left", Math.round(video.volume*(vb_vol_ctrl.offsetWidth()-12))+"px");
 			}
 			function draw() { //draw on the canvas
 				var cx = canvas.ctx("2d+");
