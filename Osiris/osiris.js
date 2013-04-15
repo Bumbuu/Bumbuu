@@ -51,12 +51,10 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				var sTime = parseInt(t%60), mTime = parseInt(t/60);
 				return mTime+":"+(sTime < 10 ? "0"+sTime : sTime);
 			}
-			var videoIsBeingSeeked = false;
-			var videoVolumeChanging = false;
 			if (typeof $_(d).div == "undefined" || $_(d).div == null) return errLog("Error! Element \""+d+"\" is nonexistent. Please create a <div> with that ID in your HTML page.");
 			var div = $_(d); //the container
 				div.attr({className:"osiris_content"});
-			var initiated=false, fScreen=false, canvas={}, video={}, vBar={}, drawInterv=0, gThis=this;
+			var initiated=false, fScreen=false, canvas={}, video={}, vBar={}, drawInterv=0, gThis=this, videoIsBeingSeeked=false, videoVolumeChanging=false;
 			var oDivs = {
 				t1: {},
 				t2: {}
@@ -239,8 +237,9 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				if (animFrame) animFrame(draw); //visual update
 				else setInterval(draw, 1); //for Opera and other browsers
 				setInterval(update, 5); //mechanical update
-				vB_play.div.addEventListener("click", function() {video.play()}, true);
-				vB_pause.div.addEventListener("click", function() {video.pause()}, true);
+				vB_play.click(function() {video.play()});
+				vB_pause.click(function() {video.pause()});
+				vB_fs.click(function() {gThis.fullscreen()});
 				if (attrs.strPlay) {
 					vB_play.css("display", "none"); //make play button hidden by default
 					video.play();
@@ -270,13 +269,13 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					var oOff_x = (event.clientX || event.pageX)-vb_vol_ctrl.offset().x;
 						oOff_x = oOff_x > vb_vol_ctrl.offsetWidth()-6 ? vb_vol_ctrl.offsetWidth()-6 : (oOff_x < 6 ? 6 : oOff_x);
 					vb_vol_hnd.css("margin-left", oOff_x-6+"px");
-					video.volume = (parseInt(vb_vol_hnd.css("margin-left"))-6)/(vb_vol_ctrl.offsetWidth()-12);
+					video.volume = parseInt(vb_vol_hnd.css("margin-left"))/(vb_vol_ctrl.offsetWidth()-12);
 					videoVolumeChanging = true;
 					vBar.mousemove(function(event2) {
 						var off_x = (event2.clientX || event2.pageX)-vb_vol_ctrl.offset().x;
 							off_x = off_x > vb_vol_ctrl.offsetWidth()-6 ? vb_vol_ctrl.offsetWidth()-6 : (off_x < 6 ? 6 : off_x);
 						vb_vol_hnd.css("margin-left", off_x-6+"px");
-						video.volume = (parseInt(vb_vol_hnd.css("margin-left"))-6)/(vb_vol_ctrl.offsetWidth()-12);
+						video.volume = parseInt(vb_vol_hnd.css("margin-left"))/(vb_vol_ctrl.offsetWidth()-12);
 						return false;
 					});
 					return false;
@@ -332,10 +331,11 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				var width = canvas.attr("width");
 				var height = canvas.attr("height");
 				//refresh the canvas
+				/*
 				canvas.attr({
 					width: width,
 					height: height
-				});
+				});*/
 				cx.fillStyle = "rgb(0, 0, 0)";
 				cx.strokeStyle = "rgb(0, 0, 0)";
 				cx.clearRect(0, 0, width, height);
@@ -355,7 +355,34 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				if (animFrame) animFrame(draw);
 			}
 			this.fullscreen = function() { //fullscreen the video
-				
+				if (fScreen) {
+					if (document.cancelFullScreen)
+						document.cancelFullScreen();
+					else if (document.mozCancelFullScreen)
+						document.mozCancelFullScreen();
+					else if (document.webkitCancelFullScreen)
+						document.webkitCancelFullScreen();
+					
+					fScreen = false;
+				} else {
+					if (document.documentElement.requestFullscreen)
+						document.documentElement.requestFullscreen();
+					else if (document.documentElement.mozRequestFullScreen)
+						document.documentElement.mozRequestFullScreen();
+					else if (document.documentElement.webkitRequestFullscreen)
+						document.documentElement.webkitRequestFullscreen();
+					else var sWidth = window.innerWidth, sHeight = window.innerHeight;
+					if (typeof sWidth == "undefined" || typeof sHeight == "undefined")
+						var sWidth = screen.width, sHeight = screen.height;
+					/*
+					canvas.attr({
+						width: sWidth,
+						height: sHeight
+					});*/
+					
+					//else return false;
+					fScreen = true;
+				}
 			};
 		})(elem);
 	}
