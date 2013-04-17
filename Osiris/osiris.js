@@ -368,13 +368,38 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					else var sWidth = window.innerWidth, sHeight = window.innerHeight;
 					if (typeof sWidth == "undefined" || typeof sHeight == "undefined")
 						var sWidth = screen.width, sHeight = screen.height;
-					canvas.attr({
-						width: sWidth,
-						height: sHeight
-					});
-					
 					fScreen = true;
 				}
+				//change values
+				div.css({
+					position: (fScreen ? "fixed" : "relative"),
+					width: (fScreen ? sWidth : attrs.width)+"px",
+					height: (fScreen ? sHeight : attrs.height)+"px"
+				});
+				canvas.attr({
+					width: (fScreen ? sWidth : attrs.width),
+					height: (fScreen ? sHeight : attrs.height)
+				});
+				canvas.css({
+					width: (fScreen ? sWidth : attrs.width)+"px",
+					height: (fScreen ? sHeight : attrs.height)+"px"
+				});
+				$_(video).attr({
+					width: (fScreen ? sWidth : attrs.width),
+					height: (fScreen ? sHeight : attrs.height)
+				});
+				$_(video).css({
+					width: (fScreen ? sWidth : attrs.width)+"px",
+					height: (fScreen ? sHeight : attrs.height)+"px"
+				});
+				vBar.css({
+					marginTop: (fScreen ? sHeight : attrs.height)-34+"px",
+					width: (fScreen ? sWidth : attrs.width)-18+"px"
+				});
+				console.log("vBar width, in pixels, is "+vBar.css("width"));
+				vB_cb.css({
+					width: (parseInt(vBar.css("width"))-2*parseInt(vBar.css("padding-left"))-24*9)+"px"
+				});
 			};
 		})(elem);
 	}
