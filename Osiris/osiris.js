@@ -57,7 +57,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 			if (typeof $_(d).div == "undefined" || $_(d).div == null) return errLog("Error! Element \""+d+"\" is nonexistent. Please create a <div> with that ID in your HTML page.");
 			var div = $_(d); //the container
 				div.attr({className:"osiris_content"});
-			var initiated=false, fScreen=false, canvas={}, video={}, vBar={}, drawInterv=0, gThis=this, videoIsBeingSeeked=false, videoVolumeChanging=false, changingFullscreen=false, fScTimeout=0;
+			var initiated=false, fScreen=false, canvas={}, video={}, vBar={}, drawInterv=0, gThis=this, videoIsBeingSeeked=false, videoVolumeChanging=false, changingFullscreen=false, fScTimeout=0, hideVideoBarTimeout=0, vidBarFadingIn=false;
 			var oDivs = {
 				t1: {},
 				t2: {}
@@ -91,6 +91,11 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				vB_cb = $_(cElem("div")); //seeker object
 				vB_cb_hnd = $_(cElem("div")); //seeker handle, for seeking
 				vB_cb_prog = $_(cElem("div")); //video progress bar
+				vB_prev = $_(cElem("div")); //video previewing holder
+				vB_prev_t = $_(cElem("span")); //time indicator for video preview
+				vB_prev_ins = $_(cElem("div")); //video bar previewer inside
+				canvas_prev = $_(cElem("canvas")); //canvas preview element, for seeking
+				video_prev = $_(cElem("video")); //video preview element, for seeking
 				vb_t2 = $_(cElem("div"));
 				vb_vol_ctrl = $_(cElem("div")); //volume controller
 				vb_vol = $_(cElem("img")); //volume image
@@ -117,11 +122,16 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				vBar.add(vb_vol.div);
 				vBar.add(vb_vol_ctrl.div);
 				vBar.add(vB_fs.div);
+				vBar.add(vB_prev.div);
 				vB_cb.add(vB_cb_prog.div);
 				vB_cb.add(vB_cb_hnd.div);
 				vBInfo.add(vBI_tl.div);
 				vBInfo.add(vBI_ms.div);
 				vb_vol_ctrl.add(vb_vol_hnd.div);
+				vB_prev.add(vB_prev_ins.div);
+				vB_prev.add(vB_prev_t.div);
+				vB_prev_ins.add(video_prev.div);
+				vB_prev_ins.add(canvas_prev.div);
 				vB_fs.add(vB_fss.div);
 				div.css({
 					width: attrs.width+"px",
@@ -145,60 +155,36 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					width: attrs.width+"px",
 					height: attrs.height+"px"
 				});
-				vBar.attr({className: "osiris_vidBar"});
+				vBar.attr("className", "osiris_vidBar");
 				vBar.css({
 					marginTop: attrs.height-34+"px",
 					width: attrs.width-20+"px"
 				});
-				vBInfo.attr({
-					className: "osiris_vidInfoBar"
-				});
+				vBInfo.attr("className", "osiris_vidInfoBar");
 				vBInfo.css({
 					width: attrs.width+"px"
 				});
-				vB_toggle.attr({
-					className: "ovB_pd"
-				});
+				vB_toggle.attr("className", "ovB_pd");
 				vB_play.attr({
 					className: "ovB_play",
 					src:"data:image/png;base64,"+VIDEO_PLAY_IMG_DATA //svg data for image
 				});
-				vB_pause.attr({
-					className: "ovB_pause"
-				});
-				vBp_p[0].attr({
-					className: "ovB_pauseBars"
-				});
-				vBp_p[1].attr({
-					className: "ovB_pauseBars"
-				});
-				vb_t1.attr({
-					className: "ovB_t1"
-				});
-				vB_cb.attr({
-					className: "ovB_cb"
-				});
+				vB_pause.attr("className", "ovB_pause");
+				vBp_p[0].attr("className", "ovB_pauseBars");
+				vBp_p[1].attr("className", "ovB_pauseBars");
+				vb_t1.attr("className", "ovB_t1");
+				vB_cb.attr("className", "ovB_cb");
 				vB_cb.css({
 					width: (parseInt(vBar.css("width"))-2*parseInt(vBar.css("padding-left"))-24*9)+"px"
 				});
-				vB_cb_prog.attr({
-					className: "ovB_cb_prog"
-				});
-				vB_cb_hnd.attr({
-					className: "ovB_cb_handle"
-				});
-				vb_t2.attr({
-					className: "ovB_t1"
-				});
-				vBI_tl.attr({
-					className: "ovIB_title"
-				});
+				vB_cb_prog.attr("className", "ovB_cb_prog");
+				vB_cb_hnd.attr("className", "ovB_cb_handle");
+				vb_t2.attr("className", "ovB_t1");
+				vBI_tl.attr("className", "ovIB_title");
 				vBI_tl.css({
 					width: attrs.width-2*parseInt(vBI_tl.css("margin-left"))+"px"
 				});
-				vBI_ms.attr({
-					className: "ovIB_misc"
-				});
+				vBI_ms.attr("className", "ovIB_misc");
 				vBI_ms.css({
 					width: attrs.width-2*parseInt(vBI_ms.css("margin-left"))+"px"
 				});
@@ -209,37 +195,59 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					VIDEO_SOUND_MED_IMG_DATA,
 					VIDEO_SOUND_HIGH_IMG_DATA][Math.ceil(video.volume*3)] //default
 				});
-				vb_vol_ctrl.attr({
-					className: "ovB_vol_control"
+				vb_vol_ctrl.attr("className", "ovB_vol_control");
+				vb_vol_hnd.attr("className", "ovB_vc_hnd");
+				vB_prev.attr("className", "osiris_preview");
+				vB_prev.css({
+					width: "100px",
+					height: "75px"
 				});
-				vb_vol_hnd.attr({
-					className: "ovB_vc_hnd"
+				//no classname necessary for vB_prev_t
+				vB_prev_ins.attr("className", "osiris_preview_inside");
+				vB_prev_ins.css({
+					width: "100px",
+					height: "85px"
 				});
-				vB_fs.attr({
-					className: "ovB_fs"
+				video_prev.attr({
+					className: "osiris_video_preview",
+					width: "100px",
+					height: "85px"
 				});
-				vB_fss.attr({
-					className: "ovB_fs_in"
+				video_prev.css({
+					marginTop: "0px",
+					marginLeft: "0px"
 				});
+				canvas_prev.attr({
+					className: "osiris_canvas_preview",
+					width: "100px",
+					height: "85px"
+				});
+				canvas_prev.css({
+					marginTop: "-85px",
+					marginLeft: "0px"
+				});
+				vB_fs.attr("className", "ovB_fs");
+				vB_fss.attr("className", "ovB_fs_in");
 				vb_t1.html("0:00");
 				vb_t2.html("0:00");
 				for (var a=0; a<attrs.src.length; a++) {
-					var nElem = cElem("source");
+					var nElems = [cElem("source"), cElem("source")];
 					var ext = attrs.src[a].match(/(\.\w{1,4})$/i)[0];
 					if (ext != null) ext = (function(i) {return i.substr(1)})(ext);
-					$_(nElem).attr({
+					$_(nElems).attr({
 						src: attrs.src[a],
 						type: (ext != null ? ((ext.match(/^og/i) != null && ext.match(/^og/i)[0] != null) ? "video/ogg" : "video/"+ext) : "application/octet-stream")
 					});
-					attrs.fileType = $_(nElem).attr("type");
-					video.add(nElem);	
+					attrs.fileType = $_(nElems[0]).attr("type");
+					video.add(nElems[0]);
+					video_prev.add(nElems[1]);
 				}
 				video = video.div;
 				oDivs.t1 = vb_t1.div;
 				oDivs.t2 = vb_t2.div;
 				if (animFrame) animFrame(draw); //visual update
 				else setInterval(draw, 1); //for Opera and other browsers
-				setInterval(update, 5); //mechanical update
+				setInterval(update, 50); //mechanical update
 				vB_play.click(function() {video.play()});
 				vB_pause.click(function() {video.pause()});
 				vB_fs.click(function() {gThis.fullscreen()});
@@ -250,11 +258,28 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					vB_pause.css("display", "none");
 					vB_play.css("display", "block");
 				}
-				if (video.networkState == video.NETWORK_NO_SOURCE) {
-					console.log("no source can be found!");
-					return false;
-				}
 				//events...
+				vB_cb.mousemove(function(event) { //previewing video
+					var off_x = (event.clientX || event.pageX)-vB_cb.offset().x;
+						off_x = off_x > vB_cb.offsetWidth()-7 ? vB_cb.offsetWidth()-7 : (off_x < 7 ? 7 : off_x);
+					if (vB_prev.css("opacity") != 1 && !$_scjvar.effects.fadeTimers[vB_prev.uniqueVal()])
+						vB_prev.effects.fadeTo(100, 400);
+					vB_prev.css("margin-left", off_x+"px");
+					var cTime = (off_x-7)/(vB_cb.offsetWidth()-14) * video_prev.div.duration;
+					video_prev.div.currentTime = cTime;
+					vB_prev_t.html(tString(cTime));
+					var ctx = canvas_prev.ctx("2d+");
+					ctx.clearRect(0, 0, canvas_prev.attr("width"), canvas_prev.attr("height"));
+					ctx.drawImage(video_prev.div, video_prev.attr("width"), video_prev.attr("height"));					
+				});
+				vB_cb.mouseout(function(event) {
+					var e = event.toElement || event.relatedTarget;
+					for (var i=0; i<6; i++) {
+						if (e.parentNode == this || e == this) return false;
+						else e = e.parentNode; //iterative parent node checking
+					}
+					vB_prev.effects.fadeTo(0, 400); //fade out
+				});
 				vB_cb.mousedown(function(event) { //dragging video
 					var oOff_x = (event.clientX || event.pageX)-vB_cb.offset().x;
 						oOff_x = oOff_x > vB_cb.offsetWidth()-7 ? vB_cb.offsetWidth() : (oOff_x < 7 ? 7 : oOff_x);
@@ -301,6 +326,25 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 						vBInfo.effects.fadeTo(100, 700);
 					else if (vBInfo.css("opacity") == 1 && off_y >= 200)
 						vBInfo.effects.fadeTo(0, 700);
+					if (vBar.css("opacity") != 1 && !vidBarFadingIn) {
+						vidBarFadingIn = true;
+						vBar.effects.fadeTo(100, 400, function() {
+							vidBarFadingIn = false;
+						});
+					}
+					clearTimeout(hideVideoBarTimeout);
+					hideVideoBarTimeout = setTimeout(function() {
+						vBar.effects.fadeTo(0, 400);
+					}, 5000); //hide after 5 seconds
+				});
+				div.mouseout(function(event) {
+					var e = event.toElement || event.relatedTarget;
+					for (var i=0; i<6; i++) {
+						if (e.parentNode == this || e == this) return false;
+						else e = e.parentNode; //iterative parent node checking
+					}
+					clearTimeout(hideVideoBarTimeout);
+					vBar.effects.fadeTo(0, 400); //prompt hiding of the video bar
 				});
 			}; // <-------------- end of initialization code -------------->
 			function update() {
@@ -347,7 +391,8 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				var height = canvas.attr("height");
 				cx.fillStyle = "rgba(0, 0, 0, 0)";
 				cx.strokeStyle = "rgba(0, 0, 0, 0)";
-				cx.clearRect(0, 0, width, height); //refresh the canvas
+				if (!videoIsBeingSeeked) //keep last image if being seeked
+					cx.clearRect(0, 0, width, height); //refresh the canvas
 				if (!video.ended) {
 					if (video.videoWidth/video.videoHeight < 1) { //if video is portrait
 						var nvWidth = width/height<1 ? height/video.videoHeight * video.videoWidth : width;
