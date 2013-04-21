@@ -14,7 +14,7 @@ Will be integrated throughout [Bumbuu](http://bumbuu.com).
  - Complete video playback control ( **done** )
  - Video info UI ( **done** )
  - Full-screen mode ( **done** )
- - Video seeking preview ( **started** )
+ - Video seeking preview ( **done** )
 
 ###Miscellaneous TODO Items
  - Create SVG art for volume icon ( **done** )
