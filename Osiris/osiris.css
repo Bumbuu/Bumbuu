@@ -165,6 +165,7 @@ img.ovB_play {
 	margin-left: 0px; /* this is modified */
 	background-color: #C3C3C3;
 	box-shadow: 0px 0px 5px #F0F0F0;
+	z-index: 45;
 	cursor: pointer;
 	position: absolute;
 }
@@ -177,7 +178,19 @@ img.ovB_play {
 	background-color: #406A77;
 	box-shadow: inset 0px 0px 3px #8898A8;
 	border-radius: 10px;
+	z-index: 40;
 	float: left;
+	clear: none;
+}
+
+.ovB_cb_buff { /* buffered amounts */
+	height: 10px;
+	width: 0px; /* this is modified */
+	margin-left: 0px;
+	margin-top: 0px;
+	background-color: #5f5f5f;
+	box-shadow: inset 0px 0px 3px #202020;
+	border-radius: 10px;
 	clear: none;
 }
 

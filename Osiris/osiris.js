@@ -356,6 +356,19 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					vb_vol.attr("src", "data:image/png;base64,"+VIDEO_SOUND_MUTE_IMG_DATA);
 					return false;
 				}
+				var ranges = video.buffered;
+				$_(vBar.div.getElementsByClassName("ovB_cb_buff")).destroy(); //remove elements
+				for (var i=0; i<ranges.length; i++) {
+					var start = 7+Math.round(ranges.start(i)/video.duration * (vB_cb.offsetWidth()-14));
+					var end = 7+Math.round(ranges.end(i)/video.duration * (vB_cb.offsetWidth()-14));
+					var bElem = $_(cElem("div"));
+					bElem.attr("className", "ovB_cb_buff");
+					bElem.css({
+						marginLeft: start+"px",
+						width: end+"px"
+					});
+					vB_cb.add(bElem.div);
+				}
 				oDivs.t1.innerHTML = tString(video.currentTime);
 				oDivs.t2.innerHTML = tString(video.duration);
 				if (video.paused && vB_play.css("display")=="none") {
