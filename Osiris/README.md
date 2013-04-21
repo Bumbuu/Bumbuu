@@ -10,10 +10,10 @@ An HTML5 video-based JavaScript API.
 Will be integrated throughout [Bumbuu](http://bumbuu.com).
 
 ###Some Features/Todo List
- - Canvas-based rendering with some effects ( **partially done** )
+ - Canvas-based rendering with some effects ( **done** )
  - Complete video playback control ( **done** )
  - Video info UI ( **done** )
- - Full-screen mode ( **started** )
+ - Full-screen mode ( **done** )
 
 ###Miscellaneous TODO Items
  - Create SVG art for volume icon ( **done** )

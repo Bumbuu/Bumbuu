@@ -162,7 +162,7 @@ img.ovB_play {
 	border: 2px solid #F8F8F8;
 	border-radius: 10px;
 	margin-top: -2px;
-	margin-left: -7px; /* this is modified */
+	margin-left: 0px; /* this is modified */
 	background-color: #C3C3C3;
 	box-shadow: 0px 0px 5px #F0F0F0;
 	cursor: pointer;

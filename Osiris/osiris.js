@@ -51,10 +51,13 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				var sTime = parseInt(t%60), mTime = parseInt(t/60);
 				return mTime+":"+(sTime < 10 ? "0"+sTime : sTime);
 			}
+			function isFullscreen() {
+				return (window.navigator.standalone || (document.fullScreenElement && document.fullScreenElement !== null) || (document.mozFullScreen || document.webkitIsFullScreen) || (!window.screenTop && !window.screenY));
+			}
 			if (typeof $_(d).div == "undefined" || $_(d).div == null) return errLog("Error! Element \""+d+"\" is nonexistent. Please create a <div> with that ID in your HTML page.");
 			var div = $_(d); //the container
 				div.attr({className:"osiris_content"});
-			var initiated=false, fScreen=false, canvas={}, video={}, vBar={}, drawInterv=0, gThis=this, videoIsBeingSeeked=false, videoVolumeChanging=false;
+			var initiated=false, fScreen=false, canvas={}, video={}, vBar={}, drawInterv=0, gThis=this, videoIsBeingSeeked=false, videoVolumeChanging=false, changingFullscreen=false, fScTimeout=0;
 			var oDivs = {
 				t1: {},
 				t2: {}
@@ -247,6 +250,10 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					vB_pause.css("display", "none");
 					vB_play.css("display", "block");
 				}
+				if (video.networkState == video.NETWORK_NO_SOURCE) {
+					console.log("no source can be found!");
+					return false;
+				}
 				//events...
 				vB_cb.mousedown(function(event) { //dragging video
 					var oOff_x = (event.clientX || event.pageX)-vB_cb.offset().x;
@@ -297,6 +304,14 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				});
 			}; // <-------------- end of initialization code -------------->
 			function update() {
+				if (!isFullscreen() && fScreen && !changingFullscreen)
+					gThis.fullscreen(); //undo fullscreen by toggling
+				if (video.networkState == video.NETWORK_NO_SOURCE) {
+					oDivs.t1.innerHTML = "0:00";
+					oDivs.t2.innerHTML = "0:00";
+					vb_vol.attr("src", "data:image/png;base64,"+VIDEO_SOUND_MUTE_IMG_DATA);
+					return false;
+				}
 				oDivs.t1.innerHTML = tString(video.currentTime);
 				oDivs.t2.innerHTML = tString(video.duration);
 				if (video.paused && vB_play.css("display")=="none") {
@@ -349,6 +364,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				if (animFrame) animFrame(draw);
 			}
 			this.fullscreen = function() { //fullscreen the video
+				changingFullscreen = true;
 				if (fScreen) {
 					if (document.cancelFullScreen)
 						document.cancelFullScreen();
@@ -356,7 +372,6 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 						document.mozCancelFullScreen();
 					else if (document.webkitCancelFullScreen)
 						document.webkitCancelFullScreen();
-					
 					fScreen = false;
 				} else {
 					if (document.documentElement.requestFullscreen)
@@ -369,6 +384,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					if (typeof sWidth == "undefined" || typeof sHeight == "undefined")
 						var sWidth = screen.width, sHeight = screen.height;
 					fScreen = true;
+					console.log("Width: "+window.innerWidth+", Height: "+window.innerHeight);
 				}
 				//change values
 				div.css({
@@ -396,10 +412,20 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					marginTop: (fScreen ? sHeight : attrs.height)-34+"px",
 					width: (fScreen ? sWidth : attrs.width)-18+"px"
 				});
-				console.log("vBar width, in pixels, is "+vBar.css("width"));
+				vBInfo.css({
+					width: (fScreen ? sWidth : attrs.width)+"px"
+				});
 				vB_cb.css({
 					width: (parseInt(vBar.css("width"))-2*parseInt(vBar.css("padding-left"))-24*9)+"px"
 				});
+				vBI_tl.css({
+					width: (fScreen ? sWidth : attrs.width)-2*parseInt(vBI_tl.css("margin-left"))+"px"
+				});
+				vBI_ms.css({
+					width: (fScreen ? sWidth : attrs.width)-2*parseInt(vBI_ms.css("margin-left"))+"px"
+				});
+				clearTimeout(fScTimeout);
+				fScTimeout = setTimeout(function(){changingFullscreen=false},100);
 			};
 		})(elem);
 	}
