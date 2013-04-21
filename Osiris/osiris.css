@@ -329,6 +329,11 @@ img.ovB_vol { /* volume image */
 	float: left;
 	clear: none;
 	overflow: hidden;
+	transition: box-shadow 500ms;
+	-ms-transition: box-shadow 500ms;
+	-moz-transition: box-shadow 500ms;
+	-webkit-transition: box-shadow 500ms;
+	-o-transition: box-shadow 500ms;
 }
 
 .ovB_fs:hover {

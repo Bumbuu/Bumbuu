@@ -49,7 +49,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 			function cElem(c) {return document.createElement(c)};
 			function tString(t) { //parse and format time
 				var sTime = parseInt(t%60), mTime = parseInt(t/60);
-				return mTime+":"+(sTime < 10 ? "0"+sTime : sTime);
+				return isNaN(t) ? "0:00" : mTime+":"+(sTime < 10 ? "0"+sTime : sTime);
 			}
 			function isFullscreen() {
 				return (window.navigator.standalone || (document.fullScreenElement && document.fullScreenElement !== null) || (document.mozFullScreen || document.webkitIsFullScreen) || (!window.screenTop && !window.screenY));
