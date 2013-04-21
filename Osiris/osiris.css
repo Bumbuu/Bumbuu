@@ -8,7 +8,6 @@
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #010101;
-	border: 1px solid #333333;
 	left: 0px;
 	top: 0px; /* for when changing to fullscreen mode */
 	overflow: hidden;
@@ -71,7 +70,7 @@ video.osiris_video {
 .osiris_vidBar { /* video bar container div */
 	width: 390px; /* modified by osiris.js */
 	height: 24px;
-	margin-left: -1px;
+	margin-left: 0px;
 	padding: 5px;
 	padding-left: 10px;
 	padding-right: 10px;

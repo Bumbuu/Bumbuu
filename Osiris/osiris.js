@@ -148,7 +148,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				vBar.attr({className: "osiris_vidBar"});
 				vBar.css({
 					marginTop: attrs.height-34+"px",
-					width: attrs.width-18+"px"
+					width: attrs.width-20+"px"
 				});
 				vBInfo.attr({
 					className: "osiris_vidInfoBar"
