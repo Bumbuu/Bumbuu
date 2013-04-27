@@ -1,6 +1,6 @@
 /***************************************************
  * Osiris (version 1.1)
- * Description: an HTML5 video player, which
+ * Description: an HTML5 video player that
  * utilizes a combination of the <canvas> element
  * and CSS/HTML for a neat plugin-like technology.
  * Copyright 2013 Bumbuu
