@@ -34,10 +34,12 @@ _Note that all preferences from here on will be denoted with the prefix "Pref\_"
 *	Pref\_NotifyNewHiveRequest: _Boolean_
 *	Pref\_ContentCensorLanguage: _Boolean_
 *	Pref\_ContentCensorContent: _Boolean_ (uses algorithm to censor pictures/media in addition to text)
+
 #####buzzes_USERID
 *	BuzzID: _Integer_ (unique integer incremented value)
 *	Content: _String_ (blob)
 *	DatePosted: _Date_
 *	Device: _String_ (could be "Computer", "Windows Phone", "Android", et cetera...)
+
 #####followers_USERID
 *	UserID: _String_ (unique string value of other users)
