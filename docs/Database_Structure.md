@@ -4,8 +4,8 @@ MySQL Database Format
 _Below is a draft of the MySQL database structure for Bumbuu..._
 
 Format: <br>
-###bumbuuco_&lt;&lt;MySQL DB USER&gt;&gt;
-####bumbuuco_&lt;&lt;DBNAME&gt;&gt; (&lt;&lt;MORE INFORMATION&gt;&gt;) <br>
+###bumbuuco_MySQL DB USER
+####bumbuuco_DBNAME (MORE INFORMATION) <br>
 #####TABLE NAME
 *	EXAMPLE PREFERENCE: _DATA TYPE_ (MORE INFORMATION)
 
