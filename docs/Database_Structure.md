@@ -3,18 +3,18 @@ MySQL Database Format
 
 _Below is a draft of the MySQL database structure for Bumbuu..._
 
-Format:
+Format: <br>
 MySQL DB User: bumbuuco_&lt;&lt;USER&gt;&gt;:
--	bumbuuco_&lt;&lt;DBNAME&gt;&gt; (&lt;&lt;MORE INFORMATION&gt;&gt;)
+-	bumbuuco_&lt;&lt;DBNAME&gt;&gt; (&lt;&lt;MORE INFORMATION&gt;&gt;) <br>
 	&lt;&lt;TABLE NAME&gt;&gt;
 	-	&lt;&lt;EXAMPLE PREFERENCE&gt;&gt;: &lt;&lt;DATA TYPE&gt;&gt; (&lt;&lt;MORE INFORMATION&gt;&gt;)
 
 
 bumbuuco_userdata:
--	bumbuuco_users
+-	bumbuuco_users<br>
 	**user_USERID**
 	-	UserID: _String_ (unique string value)
-	-	Username: _String_ ( **debate: can be changed or not?** )
+	-	Username: _String_ \(**debate: can be changed or not?**\)
 	-	Password: _String_ (salted SHA256()-encrypted)
 	-	Email: _String_
 	-	Active: _Boolean_
