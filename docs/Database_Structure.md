@@ -9,6 +9,7 @@ Format: <br>
 #####&lt;&lt;TABLE NAME&gt;&gt;
 *	&lt;&lt;EXAMPLE PREFERENCE&gt;&gt;: &lt;&lt;DATA TYPE&gt;&gt; (&lt;&lt;MORE INFORMATION&gt;&gt;)
 
+-------------------------------
 
 ###bumbuuco_userdata
 ####bumbuuco_users
