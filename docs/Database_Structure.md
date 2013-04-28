@@ -10,9 +10,9 @@ MySQL DB User: bumbuuco_&lt;&lt;USER&gt;&gt;:
 	-	&lt;&lt;EXAMPLE PREFERENCE&gt;&gt;: &lt;&lt;DATA TYPE&gt;&gt; (&lt;&lt;MORE INFORMATION&gt;&gt;)
 
 
-bumbuuco_userdata:
--	bumbuuco_users
-	<br>**user_USERID**
+###bumbuuco_userdata:
+####bumbuuco_users
+#####user_USERID
 	-	UserID: _String_ (unique string value)
 	-	Username: _String_ (**debate: can be changed or not?**)
 	-	Password: _String_ (salted SHA256()-encrypted)
@@ -35,11 +35,11 @@ bumbuuco_userdata:
 	-	Pref\_ContentCensorLanguage: _Boolean_
 	-	Pref\_ContentCensorContent: _Boolean_ (uses algorithm to censor pictures/media in addition to text)
 
-<br>**buzzes_USERID**
+####buzzes_USERID
 	-	BuzzID: _Integer_ (unique integer incremented value)
 	-	Content: _String_ (blob)
 	-	DatePosted: _Date_
 	-	Device: _String_ (could be "Computer", "Windows Phone", "Android", et cetera...)
 
-<br>**followers_USERID**
+####followers_USERID
 	-	UserID: _String_ (unique string value of other users)
