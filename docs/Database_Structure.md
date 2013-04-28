@@ -25,7 +25,7 @@ Format: <br>
 *	PSalt: _String_ (salt for password; plaintext)
 *	Gender: _String_ 
 *	Icon: _String_ (contains local URL of uploaded icon at bumbuu.com/files/users/<USERNAME>/def.<EXT>)
-_Note that all preferences from here on will be denoted with the prefix "Pref\_"_
+<br>**Note that all preferences from here on will be denoted with the prefix "Pref\_"**
 *	Pref\_TimeOffset: _String_ (PHP timezone; i.e. America/New_York; see [PHP Timezones](http://php.net/manual/en/timezones.php))
 *	Pref\_ShowEmail: _String_ ("Everyone", List of people, "Only Followers", "None")
 *	Pref\_ShowBuzzes: _String_ ("Everyone", List of people, "Only Followers", "None")
