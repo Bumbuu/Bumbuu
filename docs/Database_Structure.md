@@ -4,10 +4,10 @@ MySQL Database Format
 _Below is a draft of the MySQL database structure for Bumbuu..._
 
 Format:
-MySQL DB User: bumbuuco_<<USER>>:
--	bumbuuco_<<DBNAME>> (<<MORE INFORMATION>>)
-	<<TABLE NAME>>
-	-	<<EXAMPLE PREFERENCE>>: <<DATA TYPE>> (<<MORE INFORMATION>>)
+MySQL DB User: bumbuuco_&lt;&lt;USER&gt;&gt;:
+-	bumbuuco_&lt;&lt;DBNAME&gt;&gt; (&lt;&lt;MORE INFORMATION&gt;&gt;)
+	&lt;&lt;TABLE NAME&gt;&gt;
+	-	&lt;&lt;EXAMPLE PREFERENCE&gt;&gt;: &lt;&lt;DATA TYPE&gt;&gt; (&lt;&lt;MORE INFORMATION&gt;&gt;)
 
 
 bumbuuco_userdata:
