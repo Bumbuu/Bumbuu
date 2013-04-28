@@ -11,8 +11,8 @@ MySQL DB User: bumbuuco_&lt;&lt;USER&gt;&gt;:
 
 
 bumbuuco_userdata:
--	bumbuuco_users<br>
-	**user_USERID**
+-	bumbuuco_users
+	<br>**user_USERID**
 	-	UserID: _String_ (unique string value)
 	-	Username: _String_ (**debate: can be changed or not?**)
 	-	Password: _String_ (salted SHA256()-encrypted)
@@ -34,10 +34,10 @@ bumbuuco_userdata:
 	-	Pref\_NotifyNewHiveRequest: _Boolean_
 	-	Pref\_ContentCensorLanguage: _Boolean_
 	-	Pref\_ContentCensorContent: _Boolean_ (uses algorithm to censor pictures/media in addition to text)
-	**buzzes_USERID**
+	<br>**buzzes_USERID**
 	-	BuzzID: _Integer_ (unique integer incremented value)
 	-	Content: _String_ (blob)
 	-	DatePosted: _Date_
 	-	Device: _String_ (could be "Computer", "Windows Phone", "Android", et cetera...)
-	**followers_USERID**
+	<br>**followers_USERID**
 	-	UserID: _String_ (unique string value of other users)
