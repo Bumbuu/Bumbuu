@@ -7,7 +7,7 @@ Format: <br>
 ###bumbuuco_MySQL DB USER
 ####bumbuuco_DBNAME (MORE INFORMATION) <br>
 #####TABLE NAME
-*	EXAMPLE PREFERENCE: _DATA TYPE_ (MORE INFORMATION)
+*	EXAMPLE COLUMN: _DATA TYPE_ (MORE INFORMATION)
 
 -------------------------------
 
