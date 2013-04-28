@@ -11,7 +11,7 @@ Format: <br>
 
 -------------------------------
 
-###bumbuuco_userdata
+###bumbuuco_usrdata
 ####bumbuuco_users
 #####user_USERID
 *	UserID: _String_ (unique string value)
