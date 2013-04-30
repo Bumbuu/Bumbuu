@@ -314,6 +314,8 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				});
 				vBar.mouseup(function() {
 					vBar.mousemove(null);
+					if (videoIsBeingSeeked && video.paused)
+						video.play();
 					videoIsBeingSeeked = false;
 					videoVolumeChanging = false;
 					return false;
@@ -382,7 +384,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					var pos = Math.round(video.currentTime/video.duration * (vB_cb.offsetWidth()-14));
 					vB_cb_prog.css("width", 7+pos+"px");
 					vB_cb_hnd.css("margin-left", pos+"px");
-				}
+				} else if (!video.paused) video.pause();
 				vBI_ms.html("Dimensions: "+video.videoWidth+"x"+video.videoHeight+"p"+" \
 					&nbsp;&nbsp;&nbsp;&nbsp;Video Source: "+(video.currentSrc.length > 50 ? video.currentSrc.substr(0,17)+"..."+video.currentSrc.substr(video.currentSrc.length-30,30) : video.currentSrc)+" \
 					&nbsp;&nbsp;&nbsp;&nbsp;Content Type: "+attrs.fileType);
