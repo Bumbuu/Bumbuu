@@ -84,6 +84,7 @@ video.osiris_video {
 	background: -ms-linear-gradient(rgba(30,30,30,0.93), rgba(5,5,5,0.93));
 	border-top: 1px solid #141414;
 	box-shadow: inset 0px 1px 1px #4A4A4A;
+	display: none; /* hidden by default */
 }
 
 .ovB_pd  {

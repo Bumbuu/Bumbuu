@@ -14,17 +14,17 @@ Format: <br>
 ###bumbuuco_usrdata
 ####bumbuuco_users
 #####user_USERID
-*	UserID: _String_ (unique string value)
-*	Username: _String_ (**debate: can be changed or not?**)
-*	Password: _String_ (salted SHA256()-encrypted)
-*	Email: _String_
+*	UserID: _BIGINT_ (unique integer value; indexed)
+*	Username: _VARCHAR()_ (**debate: can be changed or not?**)
+*	Password: _CHAR(256)_ (salted SHA256()-encrypted)
+*	Email: _VARCHAR(254)_ (254 is current email length maximum specified in [RFC 5321](http://tools.ietf.org/html/rfc5321#section-4.5.3))
 *	Active: _Boolean_
 *	JoinDate: _Date_
-*	RealName: _String_
-*	Country: _String_
-*	PSalt: _String_ (salt for password; plaintext)
-*	Gender: _String_ 
-*	Icon: _String_ (contains local URL of uploaded icon at bumbuu.com/files/users/<USERNAME>/def.<EXT>)
+*	RealName: _VARCHAR(40)_
+*	Country: _VARCHAR(64)_
+*	PSalt: _CHAR(20)_ (salt for password; plaintext)
+*	Gender: _CHAR(1)_ ("m"=male; "f"=female; "u"=unspecified)
+*	Icon: _VARCHAR(256)_ (contains local URL of uploaded icon at bumbuu.com/files/users/<USERNAME>/def.<EXT>)
 <br>**Note that all preferences from here on will be denoted with the prefix "Pref\_"**
 *	Pref\_TimeOffset: _String_ (PHP timezone; i.e. America/New_York; see [PHP Timezones](http://php.net/manual/en/timezones.php))
 *	Pref\_ShowEmail: _String_ ("Everyone", List of people, "Only Followers", "None")
@@ -38,7 +38,7 @@ Format: <br>
 
 #####buzzes_USERID
 *	BuzzID: _Integer_ (unique integer incremented value)
-*	Content: _String_ (blob)
+*	Content: _String_
 *	DatePosted: _Date_
 *	Device: _String_ (could be "Computer", "Windows Phone", "Android", et cetera...)
 

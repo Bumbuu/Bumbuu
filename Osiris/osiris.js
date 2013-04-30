@@ -322,12 +322,9 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				div.mousemove(function(event) {
 					var off_y = event.clientY || event.pageY;
 						off_y = off_y < 0 ? 0 : (off_y > attrs.height ? attrs.height : off_y);
-					if (off_y < 200 && vBInfo.css("display") == "none")
-						vBInfo.effects.fadeTo(100, 700);
-					else if (vBInfo.css("opacity") == 1 && off_y >= 200)
-						vBInfo.effects.fadeTo(0, 700);
 					if (vBar.css("opacity") != 1 && !vidBarFadingIn) {
 						vidBarFadingIn = true;
+						vBInfo.effects.fadeTo(100, 400);
 						vBar.effects.fadeTo(100, 400, function() {
 							vidBarFadingIn = false;
 						});
@@ -335,6 +332,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 					clearTimeout(hideVideoBarTimeout);
 					hideVideoBarTimeout = setTimeout(function() {
 						vBar.effects.fadeTo(0, 400);
+						vBInfo.effects.fadeTo(0, 400);
 					}, 5000); //hide after 5 seconds
 				});
 				div.mouseout(function(event) {
@@ -344,6 +342,7 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 						else e = e.parentNode; //iterative parent node checking
 					}
 					clearTimeout(hideVideoBarTimeout);
+					vBInfo.effects.fadeTo(0, 400);
 					vBar.effects.fadeTo(0, 400); //prompt hiding of the video bar
 				});
 			}; // <-------------- end of initialization code -------------->
