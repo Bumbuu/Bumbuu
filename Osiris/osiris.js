@@ -274,10 +274,11 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				});
 				vB_cb.mouseout(function(event) {
 					var e = event.toElement || event.relatedTarget;
-					for (var i=0; i<6; i++) {
-						if (e.parentNode == this || e == this) return false;
-						else e = e.parentNode; //iterative parent node checking
-					}
+					if (typeof e != "undefined")
+						for (var i=0; i<6; i++) {
+							if (e.parentNode == this || e == this) return false;
+							else e = e.parentNode; //iterative parent node checking
+						}
 					vB_prev.effects.fadeTo(0, 400); //fade out
 				});
 				vB_cb.mousedown(function(event) { //dragging video
@@ -339,10 +340,11 @@ XGnX2wQHoKK2tvZLURQ/AlCGe5zBAYC/b8B/Ev8Abw6CEmPz9C4AAAAASUVORK5CYII=";
 				});
 				div.mouseout(function(event) {
 					var e = event.toElement || event.relatedTarget;
-					for (var i=0; i<6; i++) {
-						if (e.parentNode == this || e == this) return false;
-						else e = e.parentNode; //iterative parent node checking
-					}
+					if (typeof e != "undefined")
+						for (var i=0; i<6; i++) {
+							if (e.parentNode == this || e == this) return false;
+							else e = e.parentNode; //iterative parent node checking
+						}
 					clearTimeout(hideVideoBarTimeout);
 					vBInfo.effects.fadeTo(0, 400);
 					vBar.effects.fadeTo(0, 400); //prompt hiding of the video bar
