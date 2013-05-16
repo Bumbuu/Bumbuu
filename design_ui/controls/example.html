@@ -3,12 +3,13 @@
 <head>
 <title>Bumbuu - Controls Demo</title>
 <style type="text/css">
+@import url('default_elements.css');
 html, body {
 	margin: 0 auto;
 	padding: 0px;
 }
 body {
-	background-color: #ababab;
+	background-color: #abadb0;
 }
 #main {
 	border: 1px solid #7f7f7f;
@@ -34,19 +35,26 @@ body {
 .container div {
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 20px;
 }
-.slider {
-	width: 200px; /* changeable */
-	height: 6px;
-	border-radius: 12px;
-	background-color: #8f8f8f;
+.container div:first-child {
+	margin-top: 0px;
 }
 </style>
+<script type="text/javascript" src="default_elements.js"></script>
 </head>
 <body>
 <div id="main">
 	<div class="container">
-		<div class="slider"></div>
+		<div class="bumbuu_slider" type="horizontal">
+			<div class="bumbuu_slider_handle" type="horizontal"></div>
+		</div>
+		<div class="bumbuu_slider" type="horizontal">
+			<div class="bumbuu_slider_handle" type="horizontal"></div>
+		</div>
+		<div class="bumbuu_slider" type="horizontal">
+			<div class="bumbuu_slider_handle" type="horizontal"></div>
+		</div>
 	</div>
 </div>
 </body>
