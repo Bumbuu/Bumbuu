@@ -13,6 +13,8 @@ function initiate_default_elements() {
 				slider.addEventListener("mousemove", function(event) {
 					var pos_x = (event.clientX || event.pageX);
 					var pos_y = (event.clientY || event.pageY);
+					//if (handle.getAttribute("type") == "horizontal")
+					//	handle.style.marginLeft = 
 				});
 			});
 	}

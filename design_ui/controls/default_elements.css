@@ -2,6 +2,8 @@
  * Default elements for Bumbuu
  * 2013 Bumbuu
 ********/
+
+/* UI element: slider type */
 div.bumbuu_slider[type=horizontal],
 div.bumbuu_slider[type=vertical]
 {
@@ -29,3 +31,8 @@ div.bumbuu_slider[type=vertical] div.bumbuu_slider_handle[type=vertical]
 	position: absolute;
 	cursor: pointer;
 }
+div.bumbuu_slider[type=vertical] div.bumbuu_slider_handle[type=vertical] {
+	margin-left: -5px;
+	
+}
+
