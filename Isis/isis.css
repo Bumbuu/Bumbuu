@@ -1,0 +1,14 @@
+/* isis.css */
+
+.isis_content { /* the main container */
+	width: 800px;
+	height: 230px;
+	background-color: #000000;
+}
+
+.isis_audio { /* the audio component */
+	width: 800px; /* subject to modification */
+	height: 230px;
+	margin-top: 0px;
+	margin-left: 0px;
+}
