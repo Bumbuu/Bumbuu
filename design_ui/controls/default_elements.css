@@ -52,6 +52,7 @@ button.bumbuu_button_dark {
 	padding: 5px;
 	border-radius: 6px;
 	display: inline;
+	outline: none;
 }
 button.bumbuu_button_light {
 	color: #676767;
@@ -83,8 +84,27 @@ button.bumbuu_button_radioactive {
 	animation-direction: alternate;
 	animation-iteration-count: infinite;
 	animation-timing-function: ease-in-out;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-name: bumbuu_button_radioactive_pulse;
+	-webkit-animation-direction: alternate;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: ease-in-out;
 }
 @keyframes bumbuu_button_radioactive_pulse {
+	from {
+		border: 1px solid #106482;
+		background-color: #167799;
+		box-shadow: inset 0px 0px 15px #89b3cb, 0px 0px 5px #d3d3d3;
+		text-shadow: 0px 1px 0px #0b4d64;
+	}
+	to {
+		border: 1px solid #821023;
+		background-color: #9a1539;
+		box-shadow: inset 0px 0px 15px #cd899f, 0px 0px 5px #d3d3d3;
+		text-shadow: 0px 1px 0px #640b26;
+	}
+}
+@-webkit-keyframes bumbuu_button_radioactive_pulse {
 	from {
 		border: 1px solid #106482;
 		background-color: #167799;
@@ -109,8 +129,27 @@ button.bumbuu_button_radioactive:active {
 	animation-direction: alternate;
 	animation-iteration-count: infinite;
 	animation-timing-function: ease-in-out;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-name: bumbuu_button_radioactive_pulse_active;
+	-webkit-animation-direction: alternate;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: ease-in-out;
 }
 @keyframes bumbuu_button_radioactive_pulse_active {
+	from {
+		border: 1px solid #073140;
+		background-color: #167799;
+		box-shadow: inset 0px 0px 15px #3d525e, 0px 0px 5px #d3d3d3;
+		text-shadow: 0px 1px 0px #0b4d64;
+	}
+	to {
+		border: 1px solid #490813;
+		background-color: #9a1539;
+		box-shadow: inset 0px 0px 15px #533840, 0px 0px 5px #d3d3d3;
+		text-shadow: 0px 1px 0px #640b26;
+	}
+}
+@-webkit-keyframes bumbuu_button_radioactive_pulse_active {
 	from {
 		border: 1px solid #073140;
 		background-color: #167799;
@@ -144,4 +183,63 @@ button.bumbuu_button_dark:active {
 	background-color: #434343;
 	border: 1px solid #2f2f2f;
 	box-shadow: inset 0px 0px 3px #3f3f3f, 0px 0px 5px #b7b7b7;
+}
+input.bumbuu_input_light,
+input.bumbuu_input_light[type=password] {
+	width: 206px;
+	min-width: 200px;
+	height: 16px;
+	font-family: Arial;
+	font-size: 14px;
+	padding: 6px;
+	background-color: #f0f0f0;
+	box-shadow: inset 0px 1px 3px #cfcfcf, 0px 0px 5px #d9d9d9;
+	text-shadow: 0px 1px 0px #fafafa;
+	border: 1px solid #b7b7b7;
+	color: #454545;
+	border-radius: 6px;
+	outline: none;
+}
+input.bumbuu_input_light[type=password] {
+	border-radius: 6px 0px 0px 6px;
+	min-width: 169px;
+	width: 169px;
+	border-right: none;
+	float: left;
+	clear: none;
+}
+div.bumbuu_input_holder {
+	min-width: 220px;
+	width: 220px;
+	min-height: 30px;
+	height: 30px;
+	display: block;
+}
+div.bumbuu_input_light_right_label {
+	width: 12px;
+	height: 4px;
+	padding: 12px;
+	border: 1px solid #af1919;
+	background-color: #c33030;
+	border-radius: 0px 6px 6px 0px;
+	box-shadow: inset 0px 0px 5px #d35959, 0px 0px 5px #d9d9d9;
+	float: right;
+	clear: none;
+}
+div.bumbuu_input_light_right_label div {
+	/* inside bar, indicating invalidity */
+	width: 12px;
+	height: 4px;
+	background-color: #f1bdbd;
+	box-shadow: 0px 1px 0px #570d0d;
+	margin-left: auto;
+	margin-right: auto;
+}
+input.bumbuu_input_light::selection,
+input.bumbuu_input_light[type=password]::selection {
+	background-color: #d3d3d3;
+}
+input.bumbuu_input_light::-moz-selection,
+input.bumbuu_input_light[type=password]::-moz-selection {
+	background-color: #d3d3d3;
 }

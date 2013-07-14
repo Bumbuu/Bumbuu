@@ -21,7 +21,7 @@ body {
 	background-color: #f2f2f2;
 	box-shadow: inset 0px 4px 3px #fbfbfb, 0px 0px 15px #929292;
 	width: 970px;
-	height: 600px;
+	height: 700px;
 	padding: 20px;
 }
 #main_title {
@@ -53,7 +53,7 @@ body {
 	float: left;
 	clear: none;
 }
-.container div {
+.container div.bumbuu_slider {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
@@ -73,6 +73,11 @@ body {
 #buttons_area button {
 	margin-top: 10px;
 	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#text_input_area div.bumbuu_input_holder {
+	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -126,8 +131,17 @@ window.onload = function() { //main function
 		<button class="bumbuu_button_radioactive">Important Radioactive Button</button>
 		<button class="bumbuu_button_dark">Dark Form Button</button>
 	</div>
-	<div class="container">
+	<div class="container" id="text_input_area">
 		<div class="container_label">Text Input</div>
+		<div class="bumbuu_input_holder">
+			<input class="bumbuu_input_light" type="text" value="Light Text Input"></input>
+		</div>
+		<div class="bumbuu_input_holder">
+			<input class="bumbuu_input_light" type="password" value="Password"></input>
+			<div class="bumbuu_input_light_right_label" type="invalid">
+				<div></div>
+			</div>
+		</div>
 	</div>
 	<div class="container">
 		<div class="container_label">Text Area</div>
