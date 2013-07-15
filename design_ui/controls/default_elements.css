@@ -243,3 +243,59 @@ input.bumbuu_input_light::-moz-selection,
 input.bumbuu_input_light[type=password]::-moz-selection {
 	background-color: #d3d3d3;
 }
+div.bumbuu_textarea_light {
+	width: 200px;
+	min-width: 200px;
+	height: 70px;
+	min-height: 70px;
+	padding: 10px;
+	background-color: #f0f0f0;
+	box-shadow: inset 0px 1px 3px #cfcfcf, 0px 0px 5px #d9d9d9;
+	border: 1px solid #b7b7b7;
+	border-radius: 6px;
+}
+textarea.bumbuu_textarea_light_text {
+	width: 100%;
+	height: 100%;
+	height: calc(100% - 16px);
+	height: -webkit-calc(100% - 19px);
+	margin-top: 0px;
+	margin-left: 0px;
+	border: none;
+	background-color: rgba(0,0,0,0);
+	resize: none;
+	font-family: Arial;
+	font-size: 14px;
+	color: #454545;
+	text-shadow: 0px 1px 0px #fafafa;
+	display: block;
+	outline: none;
+}
+textarea.bumbuu_textarea_light_text::selection {
+	background-color: #d3d3d3;
+}
+textarea.bumbuu_textarea_light_text::-moz-selection {
+	background-color: #d3d3d3;
+}
+div.bumbuu_textarea_light_submit_button {
+	width: 24px;
+	height: 24px;
+	border-left: 1px solid #b7b7b7;
+	border-top: 1px solid #b7b7b7;
+	border-radius: 0px 0px 6px 0px;
+	margin-top: 0px;
+	margin-left: 185px;
+	margin-left: calc(100% - 15px);
+	margin-left: -webkit-calc(100% - 15px);
+	background-color: #d9d9d9;
+	box-shadow: inset 0px 0px 5px #e8e8e8;
+	cursor: pointer;
+}
+div.bumbuu_textarea_light_submit_button:hover {
+	background-color: #d0d0d0;
+	box-shadow: inset 0px 0px 5px #e3e3e3;
+}
+div.bumbuu_textarea_light_submit_button:active {
+	background-color: #c8c8c8;
+	box-shadow: inset 0px 0px 5px #c0c0c0;
+}

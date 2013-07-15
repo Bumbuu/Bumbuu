@@ -21,7 +21,7 @@ body {
 	background-color: #f2f2f2;
 	box-shadow: inset 0px 4px 3px #fbfbfb, 0px 0px 15px #929292;
 	width: 970px;
-	height: 700px;
+	height: 750px;
 	padding: 20px;
 }
 #main_title {
@@ -77,6 +77,11 @@ body {
 	margin-right: auto;
 }
 #text_input_area div.bumbuu_input_holder {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#textareas_area div.bumbuu_textarea_light {
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
@@ -143,14 +148,24 @@ window.onload = function() { //main function
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" id="textareas_area">
 		<div class="container_label">Text Area</div>
+		<div class="bumbuu_textarea_light">
+			<textarea class="bumbuu_textarea_light_text">Light Text Area</textarea>
+			<div class="bumbuu_textarea_light_submit_button"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="container_label">Labels</div>
 	</div>
 	<div class="container">
 		<div class="container_label">In-Text Notifications</div>
 	</div>
 	<div class="container">
-		<div class="container_label">BBCode Tags</div>
+		<div class="container_label">Checkboxes</div>
+	</div>
+	<div class="container">
+		<div class="container_label">Switches</div>
 	</div>
 </div>
 </body>
