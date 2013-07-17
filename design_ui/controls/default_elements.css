@@ -278,8 +278,9 @@ textarea.bumbuu_textarea_light_text::-moz-selection {
 	background-color: #d3d3d3;
 }
 div.bumbuu_textarea_light_submit_button {
-	width: 24px;
-	height: 24px;
+	width: 14px;
+	height: 14px;
+	padding: 5px;
 	border-left: 1px solid #b7b7b7;
 	border-top: 1px solid #b7b7b7;
 	border-radius: 0px 0px 6px 0px;
@@ -298,4 +299,72 @@ div.bumbuu_textarea_light_submit_button:hover {
 div.bumbuu_textarea_light_submit_button:active {
 	background-color: #c8c8c8;
 	box-shadow: inset 0px 0px 5px #c0c0c0;
+}
+div.bumbuu_textarea_light_submit_button div:first-child {
+	width: 14px;
+	height: 4px;
+	margin-left: 0px;
+	margin-top: 5px;
+}
+div.bumbuu_textarea_light_submit_button div:nth-child(2) {
+	width: 4px;
+	height: 14px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -9px;
+}
+div.bumbuu_textarea_light_submit_button div {
+	background-color: #a8a8a8;
+	box-shadow: 0px 1px 0px #e8e8e8;
+}
+div.bumbuu_textarea_light_submit_button:hover div {
+	background-color: #a0a0a0;
+	box-shadow: 0px 1px 0px #e0e0e0;
+}
+div.bumbuu_textarea_light_submit_button:active div {
+	background-color: #939393;
+	box-shadow: 0px 1px 0px #e3e3e3;
+}
+.bumbuu_labeled_item {
+	display: inline;
+}
+.bumbuu_labeled_item span {
+	color: #596f73;
+	text-shadow: 0px 1px 0px #f4f4f4;
+	cursor: pointer;
+}
+.bumbuu_labeled_item span:hover {
+	text-decoration: underline;
+}
+.bumbuu_labeled_item span:active {
+	color: #394f53;
+}
+.bumbuu_labeled_item span::selection {
+	background-color: #cfcfcf;
+}
+.bumbuu_labeled_item span::-moz-selection {
+	background-color: #cfcfcf;
+}
+.bumbuu_labeled_item div.bumbuu_label {
+	background-color: #2f2f2f;
+	width: 100px;
+	height: 30px;
+	display: block;
+	opacity: 0.8;
+	padding: 5px;
+	position: absolute;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: normal;
+	color: #afafaf;
+	text-shadow: 0px 1px 0px #141414;
+	border: 1px solid #0a0a0a;
+	box-shadow: inset 0px 1px 0px #555555, inset 0px -1px 1px #252525, 0px 0px 5px #939393;
+	border-radius: 5px;
+}
+.bumbuu_labeled_item div.bumbuu_label::selection {
+	background-color: #202020;
+}
+.bumbuu_labeled_item div.bumbuu_label::-moz-selection {
+	background-color: #202020;
 }

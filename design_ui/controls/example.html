@@ -86,6 +86,11 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
+#labels_area {
+	font-family: Arial;
+	font-size: 14px;
+	color: #454545;
+}
 </style>
 <script type="text/javascript" src="default_elements.js"></script>
 <script type="text/javascript">
@@ -152,11 +157,20 @@ window.onload = function() { //main function
 		<div class="container_label">Text Area</div>
 		<div class="bumbuu_textarea_light">
 			<textarea class="bumbuu_textarea_light_text">Light Text Area</textarea>
-			<div class="bumbuu_textarea_light_submit_button"></div>
+			<div class="bumbuu_textarea_light_submit_button">
+				<div></div>
+				<div></div>
+			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" id="labels_area">
 		<div class="container_label">Labels</div>
+		<span>Within a general sentence, some words, such as </span>
+		<div class="bumbuu_labeled_item">
+			<div class="bumbuu_label">Label Text</div>
+			<span>this,</span>
+		</div>
+		<span>may be tagged.</span>
 	</div>
 	<div class="container">
 		<div class="container_label">In-Text Notifications</div>
