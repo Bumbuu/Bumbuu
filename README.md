@@ -16,4 +16,4 @@ Consequently, a basic principle of Bumbuu will be that it contains no advertisem
 I'm trying to do something different here, and while I can't be sure of its feasibility, at least someone can say that there was an effort to change things.
 
 ##Documentation
-Consult docs/*document name*.md for further information.
+Consult `docs/` for further information.
