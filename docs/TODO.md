@@ -15,8 +15,8 @@ Below is a list of _remaining_ objectives, not including any completions in the 
  - dev.bumbuu.com ( **not started** )
 
 ##Database Structuring
-* Consider security plans ( **done - see mockups/security.png** )
-* Formulate database model ( **in progress - see docs/Database Structure.md** )
+* Consider security plans ( **done** - see `mockups/security.png` )
+* Formulate database model ( **in progress** - see `docs/Database Structure.md` )
 * Populate MySQL DB ( **started** )
 * Set PHP frontends for acquiring info ( **not started** )
 
