@@ -91,6 +91,11 @@ body {
 	font-size: 14px;
 	color: #454545;
 }
+#notifs_area div.bumbuu_intext_notif {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
 </style>
 <script type="text/javascript" src="default_elements.js"></script>
 <script type="text/javascript">
@@ -167,13 +172,16 @@ window.onload = function() { //main function
 		<div class="container_label">Labels</div>
 		<span>Within a general sentence, some words, such as </span>
 		<div class="bumbuu_labeled_item">
-			<div class="bumbuu_label">Label Text</div>
+			<div class="bumbuu_label">An example label.</div>
 			<span>this,</span>
 		</div>
 		<span>may be tagged.</span>
 	</div>
-	<div class="container">
+	<div class="container" id="notifs_area">
 		<div class="container_label">In-Text Notifications</div>
+		<div class="bumbuu_intext_notif" type="warning">Warning Message</div>
+		<div class="bumbuu_intext_notif" type="general">General Message</div>
+		<div class="bumbuu_intext_notif" type="positive">Positive Message</div>
 	</div>
 	<div class="container">
 		<div class="container_label">Checkboxes</div>
