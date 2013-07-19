@@ -96,7 +96,28 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
+#checkboxes_area div[type=label] {
+	font-family: Arial;
+	font-size: 14px;
+	color: #4f4f4f;
+	text-shadow: 0px 1px 0px #f9f9f9;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	padding: 0px;
+}
+#checkboxes_area div[type=label] p {
+	display: inline-block;
+	vertical-align: 30%;
+}
+#checkboxes_area div[type=label] p::selection {
+	background-color: #d0d0d0;
+}
+#checkboxes_area div[type=label] p::-moz-selection {
+	background-color: #d0d0d0;
+}
 </style>
+<script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
 <script type="text/javascript" src="default_elements.js"></script>
 <script type="text/javascript">
 window.onload = function() { //main function
@@ -171,11 +192,16 @@ window.onload = function() { //main function
 	<div class="container" id="labels_area">
 		<div class="container_label">Labels</div>
 		<span>Within a general sentence, some words, such as </span>
-		<div class="bumbuu_labeled_item">
+		<div class="bumbuu_labeled_item" id="labeled_item_1" to="bumbuu_label_1">
 			<span>this,</span>
 		</div>
-		<div class="bumbuu_label" type="below">An example label.</div>
-		<span>may be tagged. Unfortunately, due to CSS positioning, further changes must be made in order to perfect the appearance of it.</span>
+		<div class="bumbuu_label" id="bumbuu_label_1" for="labeled_item_1" type="below">Below Label</div>
+		<span>may be tagged. Unfortunately, due to</span>
+		<div class="bumbuu_labeled_item" id="labeled_item_2" to="bumbuu_label_2">
+			<span>CSS positioning,</span>
+		</div>
+		<div class="bumbuu_label" id="bumbuu_label_2" for="labeled_item_2" type="above">Above Label</div>
+		<span>further changes must be made in order to perfect the appearance of it.</span>
 	</div>
 	<div class="container" id="notifs_area">
 		<div class="container_label">In-Text Notifications</div>
@@ -183,8 +209,16 @@ window.onload = function() { //main function
 		<div class="bumbuu_intext_notif" type="general">General Message</div>
 		<div class="bumbuu_intext_notif" type="positive">Positive Message</div>
 	</div>
-	<div class="container">
+	<div class="container" id="checkboxes_area">
 		<div class="container_label">Checkboxes</div>
+		<div type="label">
+			<p>Bumbuu Checkbox Light</p>
+			<div class="bumbuu_checkbox_light"></div>
+		</div>
+		<div type="label">
+			<p>Bumbuu Checkbox Light</p>
+			<div class="bumbuu_checkbox_light"></div>
+		</div>
 	</div>
 	<div class="container">
 		<div class="container_label">Switches</div>

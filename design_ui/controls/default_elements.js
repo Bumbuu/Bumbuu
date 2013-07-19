@@ -7,15 +7,29 @@ function initiate_default_elements() {
 	/* This function simply initiates certain mouse
 	   event captures based on the properties of 
 	   each standard user control. */
-	for (var slider in document.getElementsByClassName("bumbuu_slider")) {
-		for (var handle in slider.getElementsByClassName("bumbuu_slider_handle"))
-			handle.addEventListener("mousedown", function() {
-				slider.addEventListener("mousemove", function(event) {
-					var pos_x = (event.clientX || event.pageX);
-					var pos_y = (event.clientY || event.pageY);
-					//if (handle.getAttribute("type") == "horizontal")
-					//	handle.style.marginLeft = 
-				});
-			});
+	//labels
+	var labels = $_(".bumbuu_label");
+	for (var i=0; i<labels.div.length; i++) {
+		var label = $_(labels.div[i]);
+		var labeled_item = $_("#"+label.attr("for"));
+		//if (!labeled_item) continue;
+		label.css("display", "block");
+		var x = labeled_item.offset().x + labeled_item.offsetWidth()/2 - label.offsetWidth()/2,
+			y = labeled_item.offset().y + (label.attr("type")=="above" ? -labeled_item.offsetHeight()/2 - label.offsetHeight() : labeled_item.offsetHeight()*3/2);
+		$_(labels.div[i]).css({
+			left: x+"px",
+			top: y+"px"
+		});
+		if (!labeled_item.attr("to"))
+			labeled_item.attr("to", labels.div[i].id);
+		$_(labels.div[i]).css("display", "none");
+		labeled_item.mouseover(function() {
+			var labeldiv = $_("#"+$_(this).attr("to"));
+			labeldiv.effects.fadeTo(80, 400);
+		});
+		labeled_item.mouseout(function() {
+			var labeldiv = $_("#"+$_(this).attr("to"));
+			labeldiv.effects.fadeTo(0, 400);
+		});
 	}
 }
