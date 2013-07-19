@@ -58,7 +58,7 @@ body {
 	margin-right: auto;
 	margin-top: 20px;
 }
-.container div:first-child {
+.container > div:first-child {
 	margin-top: 0px;
 }
 
@@ -115,6 +115,11 @@ body {
 }
 #checkboxes_area div[type=label] p::-moz-selection {
 	background-color: #d0d0d0;
+}
+#switches_area > div:nth-child(n+2) {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
 }
 </style>
 <script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
@@ -211,16 +216,31 @@ window.onresize = initiate_default_elements;
 	<div class="container" id="checkboxes_area">
 		<div class="container_label">Checkboxes</div>
 		<div type="label">
-			<p>Bumbuu Checkbox Light</p>
+			<p>Light Checkbox</p>
 			<div class="bumbuu_checkbox_light"><div></div><div></div></div>
 		</div>
 		<div type="label">
-			<p>Bumbuu Checkbox Dark</p>
+			<p>Dark Checkbox</p>
 			<div class="bumbuu_checkbox_dark"><div></div><div></div></div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" id="switches_area">
 		<div class="container_label">Switches</div>
+		<div class="bumbuu_switch_light">
+			<div class="bumbuu_switch_light_handle"></div>
+			<div class="bumbuu_switch_light_label"></div>
+			<div class="bumbuu_switch_light_label"></div>
+		</div>
+		<div class="bumbuu_switch_light">
+			<div class="bumbuu_switch_light_handle"></div>
+			<div class="bumbuu_switch_light_label"></div>
+			<div class="bumbuu_switch_light_label"></div>
+		</div>
+		<div class="bumbuu_switch_light">
+			<div class="bumbuu_switch_light_handle"></div>
+			<div class="bumbuu_switch_light_label"></div>
+			<div class="bumbuu_switch_light_label"></div>
+		</div>
 	</div>
 </div>
 </body>

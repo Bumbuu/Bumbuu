@@ -37,4 +37,10 @@ function initiate_default_elements() {
 		$_(checkboxes.div[i]).click(function() {
 			$_(this).attr("value", $_(this).attr("value")=="checked" ? "unchecked" : "checked");
 		});
+	var switches = $_(".bumbuu_switch_light");
+		for (var i=0; i<switches.div.length; i++) {
+			$_(switches.div[i]).click(function(e) {
+				var handle = this.getElementsByClassName("bumbuu_switch_light_handle")[0];
+				
+			});
 }

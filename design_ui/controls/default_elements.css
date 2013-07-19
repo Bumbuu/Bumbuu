@@ -518,7 +518,7 @@ div.bumbuu_label[type=below]:before {
 .bumbuu_checkbox_dark:active {
 	background-color: #5f5f5f;
 	border: 1px solid #4a4a4a;
-	box-shadow: inset 0px 0px 2px #555555, 0px 0px 5px #b5b5b5;
+	box-shadow: inset 0px 0px 2px #555555, 0px 0px 5px #b0b0b0;
 }
 .bumbuu_checkbox_dark[value=checked] div:first-child {
 	height: 4px;
@@ -540,4 +540,69 @@ div.bumbuu_label[type=below]:before {
 	-webkit-transform: rotate(-45deg);
 	position: absolute;
 	clear: none;
+}
+.bumbuu_switch_light {
+	width: 82px;
+	height: 24px;
+	border: 1px solid #56656d;
+	background-color: #8397a3;
+	border-radius: 5px;
+	box-shadow: inset 0px 0px 3px #5f6f78, 0px 0px 5px #c9c9c9;
+	display: block;
+}
+.bumbuu_switch_light .bumbuu_switch_light_handle {
+	width: 40px;
+	height: 22px;
+	border: 1px solid #3d484e;
+	background-color: #dfdfdf;
+	box-shadow: inset 0px 0px 3px #f6f6f6, 0px 0px 3px #59646a;
+	border-radius: 5px;
+	display: block;
+	position: absolute;
+	clear: none;
+	margin-top: 0px;
+	margin-left: 0px;
+	z-index: 30;
+	transition: margin-left 700ms;
+}
+.bumbuu_switch_light .bumbuu_switch_light_handle:active {
+	border: 1px solid #2c3438;
+	background-color: #d0d0d0;
+	box-shadow: inset 0px 0px 3px #f0f0f0, 0px 0px 3px #3f474b;
+}
+.bumbuu_switch_light:active .bumbuu_switch_light_handle {
+	margin-left: 40px;
+}
+.bumbuu_switch_light .bumbuu_switch_light_label {
+	font-family: Arial;
+	font-size: 14px;
+	color: #222a2e;
+	font-weight: bold;
+	text-shadow: 0px 1px 0px #b3c6d0;
+	width: 33%;
+	position: relative;
+	height: 14px;
+	padding: 5px;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+.bumbuu_switch_light .bumbuu_switch_light_label::selection {
+	background-color: #51646f;
+}
+.bumbuu_switch_light .bumbuu_switch_light_label::-moz-selection {
+	background-color: #51646f;
+}
+.bumbuu_switch_light .bumbuu_switch_light_label:nth-child(2) {
+	float: left;
+	clear: none;
+}
+.bumbuu_switch_light .bumbuu_switch_light_label:nth-child(2):after {
+	content: "ON";
+}
+.bumbuu_switch_light .bumbuu_switch_light_label:nth-child(3) {
+	float: right;
+	clear: none;
+}
+.bumbuu_switch_light .bumbuu_switch_light_label:nth-child(3):after {
+	content: "OFF";
 }
