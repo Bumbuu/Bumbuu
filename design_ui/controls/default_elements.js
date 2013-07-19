@@ -35,6 +35,6 @@ function initiate_default_elements() {
 	var checkboxes = $_(".bumbuu_checkbox_light, .bumbuu_checkbox_dark");
 	for (var i=0; i<checkboxes.div.length; i++)
 		$_(checkboxes.div[i]).click(function() {
-			$_(this).attr("type", $_(this).attr("type")=="checked" ? "unchecked" : "checked");
+			$_(this).attr("value", $_(this).attr("value")=="checked" ? "unchecked" : "checked");
 		});
 }
