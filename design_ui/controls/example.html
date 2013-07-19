@@ -120,9 +120,8 @@ body {
 <script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
 <script type="text/javascript" src="default_elements.js"></script>
 <script type="text/javascript">
-window.onload = function() { //main function
-	initiate_default_elements();
-};
+window.onload = initiate_default_elements;
+window.onresize = initiate_default_elements;
 </script>
 </head>
 <body>
@@ -213,11 +212,11 @@ window.onload = function() { //main function
 		<div class="container_label">Checkboxes</div>
 		<div type="label">
 			<p>Bumbuu Checkbox Light</p>
-			<div class="bumbuu_checkbox_light"></div>
+			<div class="bumbuu_checkbox_light"><div></div><div></div></div>
 		</div>
 		<div type="label">
-			<p>Bumbuu Checkbox Light</p>
-			<div class="bumbuu_checkbox_light"></div>
+			<p>Bumbuu Checkbox Dark</p>
+			<div class="bumbuu_checkbox_dark"><div></div><div></div></div>
 		</div>
 	</div>
 	<div class="container">

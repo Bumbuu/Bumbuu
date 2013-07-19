@@ -25,11 +25,16 @@ function initiate_default_elements() {
 		$_(labels.div[i]).css("display", "none");
 		labeled_item.mouseover(function() {
 			var labeldiv = $_("#"+$_(this).attr("to"));
-			labeldiv.effects.fadeTo(80, 400);
+			labeldiv.effects.fadeTo(90, 400);
 		});
 		labeled_item.mouseout(function() {
 			var labeldiv = $_("#"+$_(this).attr("to"));
 			labeldiv.effects.fadeTo(0, 400);
 		});
 	}
+	var checkboxes = $_(".bumbuu_checkbox_light, .bumbuu_checkbox_dark");
+	for (var i=0; i<checkboxes.div.length; i++)
+		$_(checkboxes.div[i]).click(function() {
+			$_(this).attr("type", $_(this).attr("type")=="checked" ? "unchecked" : "checked");
+		});
 }
