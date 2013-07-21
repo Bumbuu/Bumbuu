@@ -549,6 +549,7 @@ div.bumbuu_label[type=below]:before {
 	border-radius: 5px;
 	box-shadow: inset 0px 0px 3px #5f6f78, 0px 0px 5px #c9c9c9;
 	display: block;
+	cursor: default;
 }
 .bumbuu_switch_light .bumbuu_switch_light_handle {
 	width: 40px;
@@ -563,16 +564,17 @@ div.bumbuu_label[type=below]:before {
 	margin-top: 0px;
 	margin-left: 0px;
 	z-index: 30;
-	transition: margin-left 700ms;
 }
 .bumbuu_switch_light .bumbuu_switch_light_handle:active {
 	border: 1px solid #2c3438;
 	background-color: #d0d0d0;
 	box-shadow: inset 0px 0px 3px #f0f0f0, 0px 0px 3px #3f474b;
 }
+/*
 .bumbuu_switch_light:active .bumbuu_switch_light_handle {
 	margin-left: 40px;
 }
+*/
 .bumbuu_switch_light .bumbuu_switch_light_label {
 	font-family: Arial;
 	font-size: 14px;

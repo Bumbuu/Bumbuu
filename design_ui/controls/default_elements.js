@@ -37,10 +37,35 @@ function initiate_default_elements() {
 		$_(checkboxes.div[i]).click(function() {
 			$_(this).attr("value", $_(this).attr("value")=="checked" ? "unchecked" : "checked");
 		});
-	var switches = $_(".bumbuu_switch_light");
-		for (var i=0; i<switches.div.length; i++) {
-			$_(switches.div[i]).click(function(e) {
-				var handle = this.getElementsByClassName("bumbuu_switch_light_handle")[0];
-				
+	var switch_handles = $_(".bumbuu_switch_light_handle");
+		for (var i=0; i<switch_handles.div.length; i++) {
+			$_(switch_handles.div[i]).effects.toPosition("margin-left", [0, 40][($_(switch_handles.div[i].parentNode).attr("value")=="on" ? 1 : 0)], 300);
+			$_(switch_handles.div[i]).mousedown(function(ev) {
+				var orig_x = (ev.pageX || ev.clientX) - $_(this.parentNode).offset().x;
+				var orig_m = parseInt($_(this).css("margin-left"));
+				var has_moved = false;
+				$_(this).mousemove(function(e) {
+					has_moved = true;
+					var x = (e.pageX || e.clientX) - $_(this.parentNode).offset().x;
+					var new_x = orig_m+x-orig_x < 0 ? 0 : (orig_m+x-orig_x > 40 ? 40 : orig_m+x-orig_x);
+					$_(this).css("margin-left", new_x+"px");
+				});
+				$_(this).mouseout(function() {
+					var is_on = Math.round(($_(this).offset().x-$_(this.parentNode).offset().x)/40);
+					$_(this.parentNode).attr("value", ["off", "on"][is_on]);
+					$_(this).effects.toPosition("margin-left", [0, 40][is_on], 300);
+					$_(this).mousemove(false);
+					$_(this).mouseup(false);
+				});
+				$_(this).mouseup(function() {
+					if (!has_moved) //it was a static click
+						var is_on = $_(this.parentNode).attr("value")=="on" ? 0 : 1; //toggle
+					else var is_on = Math.round(($_(this).offset().x-$_(this.parentNode).offset().x)/40);
+					$_(this.parentNode).attr("value", ["off", "on"][is_on]);
+					$_(this).effects.toPosition("margin-left", [0, 40][is_on], 300);
+					$_(this).mousemove(false);
+					$_(this).mouseup(false);
+				});
 			});
+		}
 }
