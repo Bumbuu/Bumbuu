@@ -56,6 +56,7 @@ function initiate_default_elements() {
 					$_(this).effects.toPosition("margin-left", [0, 40][is_on], 300);
 					$_(this).mousemove(false);
 					$_(this).mouseup(false);
+					$_(this).mouseout(false);
 				});
 				$_(this).mouseup(function() {
 					if (!has_moved) //it was a static click
@@ -65,6 +66,7 @@ function initiate_default_elements() {
 					$_(this).effects.toPosition("margin-left", [0, 40][is_on], 300);
 					$_(this).mousemove(false);
 					$_(this).mouseup(false);
+					$_(this).mouseout(false);
 				});
 			});
 		}
