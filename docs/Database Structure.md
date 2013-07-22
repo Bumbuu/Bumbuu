@@ -15,8 +15,6 @@ Format: <br>
 ####bumbuuco_users
 #####user_info
 *	UserCount: **BIGINT(256)** (the current user count; used for generating a unique user ID)
-
-#####friends
 -	*This might wind up being slightly large...*
 *	Friend1: **BIGINT(256)** (user ID of friend 1)
 *	Friend2: **BIGINT(256)** (user ID of friend 2)	
