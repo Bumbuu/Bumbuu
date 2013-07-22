@@ -24,9 +24,9 @@ div.bumbuu_slider[type=horizontal] div.bumbuu_slider_handle[type=horizontal],
 div.bumbuu_slider[type=vertical] div.bumbuu_slider_handle[type=vertical]
 { /* div is handle*/
 	margin-left: 0px; /* changeable */
+	margin-top: 0px; /* changeable */
 	height: 14px;
 	width: 14px;
-	margin-top: -5px;
 	border-radius: 12px;
 	box-shadow: inset 0px 0px 2px #f8f8f8, 0px 0px 3px #c3c3c3;
 	background-color: #d3d3d3;
@@ -34,8 +34,13 @@ div.bumbuu_slider[type=vertical] div.bumbuu_slider_handle[type=vertical]
 	position: absolute;
 	cursor: pointer;
 }
+div.bumbuu_slider[type=horizontal] div.bumbuu_slider_handle[type=horizontal] {
+	margin-left: -7px;
+	margin-top: -5px;
+}
 div.bumbuu_slider[type=vertical] div.bumbuu_slider_handle[type=vertical] {
 	margin-left: -5px;
+	margin-top: -7px;
 }
 
 /* UI element: button type */

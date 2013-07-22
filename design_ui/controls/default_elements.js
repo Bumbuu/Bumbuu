@@ -7,6 +7,42 @@ function initiate_default_elements() {
 	/* This function simply initiates certain mouse
 	   event captures based on the properties of 
 	   each standard user control. */
+	//sliders
+	var sliders = $_(".bumbuu_slider_handle");
+	for (var i=0; i<sliders.div.length; i++)
+		$_(sliders.div[i]).mousedown(function(ev) {
+			if ($_(this.parentNode).attr("type") == "vertical") {
+				var orig_y = (ev.pageY || ev.clientY) - $_(this.parentNode).offset().y;
+				var orig_m = parseInt($_(this).css("margin-top"));
+				$_(this).mousemove(function(e) {
+					var y = (e.pageY || e.clientY) - $_(this.parentNode).offset().y;
+					var new_m = orig_m + y-orig_y > $_(this.parentNode).offsetHeight()-$_(this).offsetHeight()/2 ?
+								$_(this.parentNode).offsetHeight()-$_(this).offsetHeight()/2 :
+								(orig_m + y-orig_y < -$_(this).offsetWidth()/2 ? -$_(this).offsetWidth()/2 : orig_m + y-orig_y);
+					$_(this).css("margin-top", new_m+"px");
+				});
+			} else {
+				var orig_x = (ev.pageX || ev.clientX) - $_(this.parentNode).offset().x;
+				var orig_m = parseInt($_(this).css("margin-left"));
+				$_(this).mousemove(function(e) {
+					var x = (e.pageX || e.clientX) - $_(this.parentNode).offset().x;
+					var new_m = orig_m + x-orig_x > $_(this.parentNode).offsetWidth()-$_(this).offsetWidth()/2 ?
+								$_(this.parentNode).offsetWidth()-$_(this).offsetWidth()/2 :
+								(orig_m + x-orig_x < -$_(this).offsetWidth()/2 ? -$_(this).offsetWidth()/2 : orig_m + x-orig_x);
+					$_(this).css("margin-left", new_m+"px");
+				});
+			}
+			$_(this).mouseout(function() {
+				$_(this).mouseout(false);
+				$_(this).mousemove(false);
+				$_(this).mouseup(false);
+			});
+			$_(this).mouseup(function() {
+				$_(this).mouseup(false);
+				$_(this).mouseout(false);
+				$_(this).mousemove(false);
+			});
+		});
 	//labels
 	var labels = $_(".bumbuu_label");
 	for (var i=0; i<labels.div.length; i++) {
