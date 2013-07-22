@@ -9,7 +9,7 @@ if (isset($_GET['create'])):
 	header("Cache-Control: no-store, no-cache, must-revalidate");
 	$xml_data = simplexml_load_file("../server_info/server.conf.xml");
 	$db_passwords = array();
-	//populate array with user, password information
+	//populate array with user, password iznformation
 	foreach ($xml_data->children() as $user)
 		foreach ($user->children() as $attr)
 			if ($pass->getName() == 'password')
