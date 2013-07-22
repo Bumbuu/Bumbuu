@@ -7,40 +7,48 @@ Format: <br>
 ###bumbuuco_MySQL DB USER
 ####bumbuuco_DBNAME (MORE INFORMATION) <br>
 #####TABLE NAME
-*	EXAMPLE COLUMN: _DATA TYPE_ (MORE INFORMATION)
+*	EXAMPLE COLUMN: **DATA TYPE** (MORE INFORMATION)
 
 -------------------------------
 
 ###bumbuuco_usrdata
 ####bumbuuco_users
-#####user_USERID
-*	UserID: _BIGINT_ (unique integer value; indexed)
-*	Username: _VARCHAR()_ (**debate: can be changed or not?**)
-*	Password: _CHAR(256)_ (salted SHA256()-encrypted)
-*	Email: _VARCHAR(254)_ (254 is current email length maximum specified in [RFC 5321](http://tools.ietf.org/html/rfc5321#section-4.5.3))
-*	Active: _Boolean_
-*	JoinDate: _Date_
-*	RealName: _VARCHAR(40)_
-*	Country: _VARCHAR(64)_
-*	PSalt: _CHAR(20)_ (salt for password; plaintext)
-*	Gender: _CHAR(1)_ ("m"=male; "f"=female; "u"=unspecified)
-*	Icon: _VARCHAR(256)_ (contains local URL of uploaded icon at bumbuu.com/files/users/<USERNAME>/def.<EXT>)
-<br>**Note that all preferences from here on will be denoted with the prefix "Pref\_"**
-*	Pref\_TimeOffset: _String_ (PHP timezone; i.e. America/New_York; see [PHP Timezones](http://php.net/manual/en/timezones.php))
-*	Pref\_ShowEmail: _String_ ("Everyone", List of people, "Only Followers", "None")
-*	Pref\_ShowBuzzes: _String_ ("Everyone", List of people, "Only Followers", "None")
-*	Pref\_ShowBuzzLocation: _String_ (Involves decision to show location in buzzes, but is **not retroactive**; "Everyone", List of people, "Only Followers", "None")
-*	Pref\_NotifyFollowRequest: _Boolean_
-*	Pref\_NotifyNewMessage: _Boolean_
-*	Pref\_NotifyNewHiveRequest: _Boolean_
-*	Pref\_ContentCensorLanguage: _Boolean_
-*	Pref\_ContentCensorContent: _Boolean_ (uses algorithm to censor pictures/media in addition to text)
+#####user_info
+*	UserCount: **BIGINT(256)** (the current user count; used for generating a unique user ID)
+
+#####friends
+-	*This might wind up being slightly large...*
+*	Friend1: **BIGINT(256)** (user ID of friend 1)
+*	Friend2: **BIGINT(256)** (user ID of friend 2)	
+
+#####userlist
+*	UserID: **BIGINT(256)** (unique integer value; indexed)
+*	Username: **VARCHAR(60)** (**debate: can be changed or not?**)
+*	Password: **VARCHAR(256)** (salted SHA256()-encrypted)
+*	Email: **VARCHAR(254)** (254 is current email length maximum specified in [RFC 5321](http://tools.ietf.org/html/rfc5321#section-4.5.3))
+*	Active: **Boolean**
+*	JoinDate: **Date**
+*	RealName: **VARCHAR(40)**
+*	Country: **VARCHAR(64)**
+*	PSalt: **CHAR(20)** (salt for password; plaintext)
+*	Gender: **CHAR(1)** ("m"=male; "f"=female; "u"=unspecified)
+*	Icon: **VARCHAR(256)** (contains local URL of uploaded icon at bumbuu.com/files/users/**USERNAME**/def.**EXT**)
+<br>_Note that all preferences from here on will be denoted with the prefix "Pref\_"_
+*	Pref\_TimeOffset: **String** (PHP timezone; i.e. America/New_York; see [PHP Timezones](http://php.net/manual/en/timezones.php))
+*	Pref\_ShowEmail: **String** ("Everyone", List of people, "Only Followers", "None")
+*	Pref\_ShowBuzzes: **String** ("Everyone", List of people, "Only Followers", "None")
+*	Pref\_ShowBuzzLocation: **String** (Involves decision to show location in buzzes, but is **not retroactive**; "Everyone", List of people, "Only Followers", "None")
+*	Pref\_NotifyFollowRequest: **Boolean**
+*	Pref\_NotifyNewMessage: **Boolean**
+*	Pref\_NotifyNewHiveRequest: **Boolean**
+*	Pref\_ContentCensorLanguage: **Boolean**
+*	Pref\_ContentCensorContent: **Boolean** (uses algorithm to censor pictures/media in addition to text)
 
 #####buzzes_USERID
-*	BuzzID: _Integer_ (unique integer incremented value)
-*	Content: _String_
-*	DatePosted: _Date_
-*	Device: _String_ (could be "Computer", "Windows Phone", "Android", et cetera...)
+*	BuzzID: **Integer** (unique integer incremented value)
+*	Content: **String**
+*	DatePosted: **Date**
+*	Device: **String** (could be "Computer", "Windows Phone", "Android", et cetera...)
 
 #####followers_USERID
-*	UserID: _String_ (unique string value of other users)
+*	UserID: **String** (unique string value of other users)
