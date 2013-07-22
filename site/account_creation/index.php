@@ -1,7 +1,7 @@
 <?php
 //the general account creation script that conducts SQL queries to update the DB with a new user
 if ($_SERVER['REMOTE_ADDR'] !== $_SERVER['SERVER_ADDR']) {
-	//prevent remote POST requests
+	//prevent remote POST/GET requests
 	header("No remote access allowed.", true, 400);
 	exit;
 }
@@ -20,6 +20,9 @@ if (isset($_GET['create'])) {
 	$country = $_POST['country'] or die("No country specified.");
 	$gender = $_POST['gender'] or die("No gender information specified.");
 } else {
-	
+	//display normal page
+?>
+<!--webpage goes here-->
+<?php
 }
 ?>
