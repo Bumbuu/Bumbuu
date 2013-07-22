@@ -5,7 +5,7 @@ if ($_SERVER['REMOTE_ADDR'] !== $_SERVER['SERVER_ADDR']) {
 	header("No remote access allowed.", true, 400);
 	exit;
 }
-if (isset($_GET['create'])) {
+if (isset($_GET['create'])):
 	header("Cache-Control: no-store, no-cache, must-revalidate");
 	$xml_data = simplexml_load_file("../server_info/server.conf.xml");
 	$db_passwords = array();
@@ -19,13 +19,12 @@ if (isset($_GET['create'])) {
 	$email = $_POST['email'] or die("No email specified.");
 	$country = $_POST['country'] or die("No country specified.");
 	$gender = $_POST['gender'] or die("No gender information specified.");
-} else {
-	//display normal page
+else: //display normal page
 ?>
+
 <!--webpage goes here-->
 <!DOCTYPE html>
 <html lang="en">
 </html>
-<?php
-}
-?>
+
+<?php endif; ?>
