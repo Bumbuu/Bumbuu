@@ -13,14 +13,13 @@ Format: <br>
 
 ###bumbuuco_usrdata
 ####bumbuuco_users
-#####user_info
-*	UserCount: **BIGINT(256)** (the current user count; used for generating a unique user ID)
+#####friends
 -	*This might wind up being slightly large...*
 *	Friend1: **BIGINT(256)** (user ID of friend 1)
 *	Friend2: **BIGINT(256)** (user ID of friend 2)	
 
 #####userlist
-*	UserID: **BIGINT(256)** (unique integer value; indexed)
+*	UserID: **BIGINT(256)** (unique integer value; indexed; auto-increments)
 *	Username: **VARCHAR(60)** (**debate: can be changed or not?**)
 *	Password: **VARCHAR(256)** (salted SHA256()-encrypted)
 *	Email: **VARCHAR(254)** (254 is current email length maximum specified in [RFC 5321](http://tools.ietf.org/html/rfc5321#section-4.5.3))
