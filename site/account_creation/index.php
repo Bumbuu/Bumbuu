@@ -23,6 +23,9 @@ if (isset($_GET['create'])) {
 	//display normal page
 ?>
 <!--webpage goes here-->
+<!DOCTYPE html>
+<html lang="en">
+</html>
 <?php
 }
 ?>
