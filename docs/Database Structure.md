@@ -30,7 +30,8 @@ Format: <br>
 *	JoinDate: **Date**
 *	FirstName: **VARCHAR(20)**
 *	LastName: **VARCHAR(20)**
-*	Country: **VARCHAR(64)**
+*	Country: **ENUM(list of countries)**
+*	Language: **ENUM(supported languages)** (defaults to "English")
 *	PSalt: **CHAR(20)** (salt for password; plaintext)
 *	Gender: **ENUM('male','female','unspecified')** (male; female; unspecified, which is default)
 *	Icon: **VARCHAR(255)** (contains local URL of uploaded icon at `bumbuu.com/files/users/USERNAME/def.EXT`)
