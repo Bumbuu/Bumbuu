@@ -13,10 +13,13 @@ Format: <br>
 
 ###bumbuuco_usrdata
 ####bumbuuco_users
-#####user_relationships
+#####user_friends
 -	*This might wind up being slightly large...*
 *	Friend1: **UNSIGNED INT(64)** (user ID of friend 1)
-*	Friend2: **UNSIGNED INT(64)** (user ID of friend 2)	
+*	Friend2: **UNSIGNED INT(64)** (user ID of friend 2)
+
+#####user_followers
+-	*This might wind up being slightly large...*
 *	Followee: **UNSIGNED INT(64)** (user ID of person being followed)
 *	Follower: **UNSIGNED INT(64)** (user ID of person following)
 
@@ -30,8 +33,8 @@ Format: <br>
 *	JoinDate: **Date**
 *	FirstName: **VARCHAR(20)**
 *	LastName: **VARCHAR(20)**
-*	Country: **ENUM(list of countries)**
-*	Language: **ENUM(supported languages)** (defaults to "English")
+*	Country: **ENUM('unspecified', list of countries...)** (defaults to "Unspecified")
+*	Language: **ENUM(supported languages...)** (defaults to "English")
 *	PSalt: **CHAR(20)** (salt for password; plaintext)
 *	Gender: **ENUM('male','female','unspecified')** (male; female; unspecified, which is default)
 *	Icon: **VARCHAR(255)** (contains local URL of uploaded icon at `bumbuu.com/files/users/USERNAME/def.EXT`)
