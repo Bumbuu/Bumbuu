@@ -33,7 +33,7 @@ Format: <br>
 *	JoinDate: **Date**
 *	FirstName: **VARCHAR(20)**
 *	LastName: **VARCHAR(20)**
-*	Country: **ENUM('unspecified', list of countries...)** (defaults to "Unspecified")
+*	Country: **ENUM('Unspecified', list of countries...)** (defaults to "Unspecified")
 *	Language: **ENUM(supported languages...)** (defaults to "English")
 *	PSalt: **CHAR(20)** (salt for password; plaintext)
 *	Gender: **ENUM('male','female','unspecified')** (male; female; unspecified, which is default)
