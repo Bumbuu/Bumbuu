@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
 <title>Bumbuu - Alpha</title>
+<meta charset="utf-8">
 <link rel="StyleSheet" type="text/css" href="alpha.css">
 <link rel="StyleSheet" type="text/css" href="http://bumbuu.com/files/apis/default_elements.css">
+<script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
 <script type="text/javascript" src="http://bumbuu.com/files/apis/default_elements.js"></script>
+<script type="text/javascript" src="alpha.js"></script>
+<script type="text/javascript">
+window.onload = initiate_default_elements;
+window.onresize = initiate_default_elements;
+</script>
 </head>
 <body>
 <div id="background"></div>
@@ -17,8 +24,36 @@
 	<div class="signup_holder">
 		<div>
 			<div class="signup_info_title">User Credentials</div>
+			<div class="signup_info_description">
+				This information will serve to identify you on Bumbuu as a unique user. In addition, your email shall be useful in providing a safety for your account, in the event of a forgotten password or a compromised account. It is advisable to use your dominant email, if you have multiple, perhaps so that the chances of losing your Bumbuu account's credentials to a terminated or forgotten email account are less likely.
+			</div>
 		</div>
 		<div>
+			<div class="signup_interaction_inside" style="margin-top: 60px;">
+				<div class="signup_interaction_row">
+					<div class="bumbuu_input_holder">
+						<input class="bumbuu_input_light" type="text" placeholder="Username"></input>
+					</div>
+				</div>
+				<div class="signup_interaction_row">
+					<div class="bumbuu_input_holder">
+						<input class="bumbuu_input_light" type="text" placeholder="First Name"></input>
+					</div>
+					<div class="bumbuu_input_holder">
+						<input class="bumbuu_input_light" type="text" placeholder="Last Name"></input>
+					</div>
+				</div>
+				<div class="signup_interaction_row">
+					<div class="bumbuu_input_holder">
+						<input class="bumbuu_input_light" type="text" placeholder="Email Address"></input>
+					</div>
+				</div>
+				<div class="signup_interaction_row">
+					<div class="bumbuu_input_holder">
+						<input class="bumbuu_input_light" type="text" placeholder="Gender"></input>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

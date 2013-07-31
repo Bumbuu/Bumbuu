@@ -84,7 +84,7 @@ div.main {
 	position: absolute;
 	left: 50%;
 	margin-left: -20px;
-	top: calc(34% - 100px);
+	margin-top: 50px;
 }
 
 .step_counter[active] {
@@ -114,11 +114,11 @@ div.main {
 }
 
 .signup_holder {
-	width: 800px;
-	height: 400px;
+	width: 720px;
+	height: 340px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 100px;
+	margin-top: 140px;
 	box-shadow: 0px 0px 5px #929292;
 	border-radius: 10px;
 }
@@ -162,4 +162,42 @@ div.main {
 	font-weight: bold;
 	color: #9fb4bf;
 	text-shadow: 0px 1px 0px #010507;
+}
+
+.signup_info_description {
+	width: calc(100% - 20px);
+	height: calc(100% - 20px - 20px);
+	margin-top: 6px;
+	margin-left: 0px;
+	padding: 10px;
+	font-family: Arial;
+	font-size: 10px;
+	color: #cfe1e6;
+	text-shadow: 0px 1px 0px #010507;
+	line-height: 14px;
+}
+
+.signup_interaction_inside {
+	width: 100%;
+	height: 220px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.signup_interaction_row {
+	width: calc(100% - 20px);
+	height: 30px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 10px;
+}
+
+.signup_interaction_row > .bumbuu_input_holder {
+	float: left;
+	clear: none;
+	margin-left: 20px;
+}
+
+.signup_interaction_row > .bumbuu_input_holder:first-child {
+	margin-left: 0px;
 }
