@@ -5,8 +5,8 @@ Below is a list of _remaining_ objectives, not including any completions in the 
 
 
 ##User Interface and Design
-* Finish CSS code for labels, buttons, etc ( **in progress** )
-* Finish JS code for elements ( **not started** )
+* Finish CSS code for labels, buttons, etc ( **done** )
+* Finish JS code for elements ( **done** )
 * Rework new site-specific pages and areas
  - bumbuu.com ( **not started** )
  - User pages and settings ( **not started** )
