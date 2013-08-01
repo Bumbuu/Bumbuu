@@ -615,7 +615,7 @@ div.bumbuu_label[type=below]:before {
 }
 select.bumbuu_selectarea_light {
 	width: 206px;
-	min-width: 200px;
+	min-width: 220px;
 	height: 32px;
 	font-family: Arial;
 	font-size: 14px;
