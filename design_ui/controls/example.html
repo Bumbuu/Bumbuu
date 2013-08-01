@@ -21,7 +21,7 @@ body {
 	background-color: #f2f2f2;
 	box-shadow: inset 0px 4px 3px #fbfbfb, 0px 0px 15px #929292;
 	width: 970px;
-	height: 750px;
+	height: 1000px;
 	padding: 20px;
 }
 #main_title {
@@ -34,6 +34,10 @@ body {
 	padding-bottom: 10px;
 	font-weight: bold;
 	text-align: center;
+}
+.container_row {
+	width: 100%;
+	min-height: 240px;
 }
 .container_label {
 	font-family: Arial;
@@ -121,6 +125,14 @@ body {
 	margin-right: auto;
 	margin-top: 10px;
 }
+
+#select_container {
+	text-align: center;
+}
+
+#select_container > select.bumbuu_selectarea_light {
+	margin-top: 10px;
+}
 </style>
 <script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
 <script type="text/javascript" src="default_elements.js"></script>
@@ -132,114 +144,140 @@ window.onresize = initiate_default_elements;
 <body>
 <div id="main">
 	<div id="main_title">Bumbuu UI Elements</div>
-	<div class="container">
-		<div class="container_label">Sliders (Horizontal)</div>
-		<div class="bumbuu_slider" type="horizontal">
-			<div class="bumbuu_slider_handle" type="horizontal"></div>
+	<div class="container_row">
+		<div class="container">
+			<div class="container_label">Sliders (Horizontal)</div>
+			<div class="bumbuu_slider" type="horizontal">
+				<div class="bumbuu_slider_handle" type="horizontal"></div>
+			</div>
+			<div class="bumbuu_slider" type="horizontal">
+				<div class="bumbuu_slider_handle" type="horizontal"></div>
+			</div>
+			<div class="bumbuu_slider" type="horizontal">
+				<div class="bumbuu_slider_handle" type="horizontal"></div>
+			</div>
 		</div>
-		<div class="bumbuu_slider" type="horizontal">
-			<div class="bumbuu_slider_handle" type="horizontal"></div>
+		<div class="container" id="sliders_vertical">
+			<div class="container_label">Sliders (Vertical)</div>
+			<div class="bumbuu_slider" type="vertical">
+				<div class="bumbuu_slider_handle" type="vertical"></div>
+			</div>
+			<div class="bumbuu_slider" type="vertical">
+				<div class="bumbuu_slider_handle" type="vertical"></div>
+			</div>
+			<div class="bumbuu_slider" type="vertical">
+				<div class="bumbuu_slider_handle" type="vertical"></div>
+			</div>
+			<div class="bumbuu_slider" type="vertical">
+				<div class="bumbuu_slider_handle" type="vertical"></div>
+			</div>
+			<div class="bumbuu_slider" type="vertical">
+				<div class="bumbuu_slider_handle" type="vertical"></div>
+			</div>
+			<div class="bumbuu_slider" type="vertical">
+				<div class="bumbuu_slider_handle" type="vertical"></div>
+			</div>
 		</div>
-		<div class="bumbuu_slider" type="horizontal">
-			<div class="bumbuu_slider_handle" type="horizontal"></div>
+		<div class="container" id="buttons_area">
+			<div class="container_label">Buttons</div>
+			<button class="bumbuu_button_light">Light Form Button</button>
+			<button class="bumbuu_button_radioactive">Important Radioactive Button</button>
+			<button class="bumbuu_button_dark">Dark Form Button</button>
 		</div>
 	</div>
-	<div class="container" id="sliders_vertical">
-		<div class="container_label">Sliders (Vertical)</div>
-		<div class="bumbuu_slider" type="vertical">
-			<div class="bumbuu_slider_handle" type="vertical"></div>
+	<div class="container_row">
+		<div class="container" id="text_input_area">
+			<div class="container_label">Text Input</div>
+			<div class="bumbuu_input_holder">
+				<input class="bumbuu_input_light" type="text" value="Light Text Input"></input>
+			</div>
+			<div class="bumbuu_input_holder">
+				<input class="bumbuu_input_light" type="password" value="Password"></input>
+				<div class="bumbuu_input_light_right_label" type="invalid">
+					<div></div>
+				</div>
+			</div>
 		</div>
-		<div class="bumbuu_slider" type="vertical">
-			<div class="bumbuu_slider_handle" type="vertical"></div>
+		<div class="container" id="textareas_area">
+			<div class="container_label">Text Area</div>
+			<div class="bumbuu_textarea_light">
+				<textarea class="bumbuu_textarea_light_text">Light Text Area</textarea>
+				<div class="bumbuu_textarea_light_submit_button">
+					<div></div>
+					<div></div>
+				</div>
+			</div>
 		</div>
-		<div class="bumbuu_slider" type="vertical">
-			<div class="bumbuu_slider_handle" type="vertical"></div>
-		</div>
-		<div class="bumbuu_slider" type="vertical">
-			<div class="bumbuu_slider_handle" type="vertical"></div>
-		</div>
-		<div class="bumbuu_slider" type="vertical">
-			<div class="bumbuu_slider_handle" type="vertical"></div>
-		</div>
-		<div class="bumbuu_slider" type="vertical">
-			<div class="bumbuu_slider_handle" type="vertical"></div>
+		<div class="container" id="labels_area">
+			<div class="container_label">Labels</div>
+			<span>Within a general sentence, some words, such as </span>
+			<div class="bumbuu_labeled_item" id="labeled_item_1" to="bumbuu_label_1">
+				<span>this,</span>
+			</div>
+			<div class="bumbuu_label" id="bumbuu_label_1" for="labeled_item_1" type="below">Below Label</div>
+			<span>may be tagged. Unfortunately, due to</span>
+			<div class="bumbuu_labeled_item" id="labeled_item_2" to="bumbuu_label_2">
+				<span>CSS positioning,</span>
+			</div>
+			<div class="bumbuu_label" id="bumbuu_label_2" for="labeled_item_2" type="above">Above Label</div>
+			<span>further changes must be made in order to perfect the appearance of it.</span>
 		</div>
 	</div>
-	<div class="container" id="buttons_area">
-		<div class="container_label">Buttons</div>
-		<button class="bumbuu_button_light">Light Form Button</button>
-		<button class="bumbuu_button_radioactive">Important Radioactive Button</button>
-		<button class="bumbuu_button_dark">Dark Form Button</button>
-	</div>
-	<div class="container" id="text_input_area">
-		<div class="container_label">Text Input</div>
-		<div class="bumbuu_input_holder">
-			<input class="bumbuu_input_light" type="text" value="Light Text Input"></input>
+	<div class="container_row">
+		<div class="container" id="notifs_area">
+			<div class="container_label">In-Text Notifications</div>
+			<div class="bumbuu_intext_notif" type="warning">Warning Message</div>
+			<div class="bumbuu_intext_notif" type="general">General Message</div>
+			<div class="bumbuu_intext_notif" type="positive">Positive Message</div>
 		</div>
-		<div class="bumbuu_input_holder">
-			<input class="bumbuu_input_light" type="password" value="Password"></input>
-			<div class="bumbuu_input_light_right_label" type="invalid">
-				<div></div>
+		<div class="container" id="checkboxes_area">
+			<div class="container_label">Checkboxes</div>
+			<div type="label">
+				<p>Light Checkbox</p>
+				<div class="bumbuu_checkbox_light"><div></div><div></div></div>
+			</div>
+			<div type="label">
+				<p>Dark Checkbox</p>
+				<div class="bumbuu_checkbox_dark"><div></div><div></div></div>
+			</div>
+		</div>
+		<div class="container" id="switches_area">
+			<div class="container_label">Switches</div>
+			<div class="bumbuu_switch_light" value="off">
+				<div class="bumbuu_switch_light_handle">
+					<div></div><div></div><div></div>
+				</div>
+				<div class="bumbuu_switch_light_label"></div>
+				<div class="bumbuu_switch_light_label"></div>
+			</div>
+			<div class="bumbuu_switch_light" value="on">
+				<div class="bumbuu_switch_light_handle">
+					<div></div><div></div><div></div>
+				</div>
+				<div class="bumbuu_switch_light_label"></div>
+				<div class="bumbuu_switch_light_label"></div>
+			</div>
+			<div class="bumbuu_switch_light" value="off">
+				<div class="bumbuu_switch_light_handle">
+					<div></div><div></div><div></div>
+				</div>
+				<div class="bumbuu_switch_light_label"></div>
+				<div class="bumbuu_switch_light_label"></div>
 			</div>
 		</div>
 	</div>
-	<div class="container" id="textareas_area">
-		<div class="container_label">Text Area</div>
-		<div class="bumbuu_textarea_light">
-			<textarea class="bumbuu_textarea_light_text">Light Text Area</textarea>
-			<div class="bumbuu_textarea_light_submit_button">
-				<div></div>
-				<div></div>
-			</div>
+	<div class="container_row">
+		<div class="container" id="select_container">
+			<div class="container_label">Select Area</div>
+			<select class="bumbuu_selectarea_light">
+				<option>Select Area Light</option>
+				<option>Select Area Light</option>
+				<option>Select Area Light</option>
+			</select>
 		</div>
-	</div>
-	<div class="container" id="labels_area">
-		<div class="container_label">Labels</div>
-		<span>Within a general sentence, some words, such as </span>
-		<div class="bumbuu_labeled_item" id="labeled_item_1" to="bumbuu_label_1">
-			<span>this,</span>
+		<div class="container">
 		</div>
-		<div class="bumbuu_label" id="bumbuu_label_1" for="labeled_item_1" type="below">Below Label</div>
-		<span>may be tagged. Unfortunately, due to</span>
-		<div class="bumbuu_labeled_item" id="labeled_item_2" to="bumbuu_label_2">
-			<span>CSS positioning,</span>
-		</div>
-		<div class="bumbuu_label" id="bumbuu_label_2" for="labeled_item_2" type="above">Above Label</div>
-		<span>further changes must be made in order to perfect the appearance of it.</span>
-	</div>
-	<div class="container" id="notifs_area">
-		<div class="container_label">In-Text Notifications</div>
-		<div class="bumbuu_intext_notif" type="warning">Warning Message</div>
-		<div class="bumbuu_intext_notif" type="general">General Message</div>
-		<div class="bumbuu_intext_notif" type="positive">Positive Message</div>
-	</div>
-	<div class="container" id="checkboxes_area">
-		<div class="container_label">Checkboxes</div>
-		<div type="label">
-			<p>Light Checkbox</p>
-			<div class="bumbuu_checkbox_light"><div></div><div></div></div>
-		</div>
-		<div type="label">
-			<p>Dark Checkbox</p>
-			<div class="bumbuu_checkbox_dark"><div></div><div></div></div>
-		</div>
-	</div>
-	<div class="container" id="switches_area">
-		<div class="container_label">Switches</div>
-		<div class="bumbuu_switch_light" value="off">
-			<div class="bumbuu_switch_light_handle"></div>
-			<div class="bumbuu_switch_light_label"></div>
-			<div class="bumbuu_switch_light_label"></div>
-		</div>
-		<div class="bumbuu_switch_light" value="on">
-			<div class="bumbuu_switch_light_handle"></div>
-			<div class="bumbuu_switch_light_label"></div>
-			<div class="bumbuu_switch_light_label"></div>
-		</div>
-		<div class="bumbuu_switch_light" value="off">
-			<div class="bumbuu_switch_light_handle"></div>
-			<div class="bumbuu_switch_light_label"></div>
-			<div class="bumbuu_switch_light_label"></div>
+		<div class="container">
 		</div>
 	</div>
 </div>

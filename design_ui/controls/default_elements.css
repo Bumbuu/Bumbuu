@@ -613,3 +613,26 @@ div.bumbuu_label[type=below]:before {
 .bumbuu_switch_light .bumbuu_switch_light_label:nth-child(3):after {
 	content: "OFF";
 }
+select.bumbuu_selectarea_light {
+	width: 206px;
+	min-width: 200px;
+	height: 32px;
+	font-family: Arial;
+	font-size: 14px;
+	padding: 6px;
+	background-color: #f0f0f0;
+	box-shadow: inset 0px 1px 3px #cfcfcf, 0px 0px 5px #d9d9d9;
+	text-shadow: 0px 1px 0px #fafafa;
+	border: 1px solid #b7b7b7;
+	color: #454545;
+	border-radius: 6px;
+}
+select.bumbuu_selectarea_light > option {
+	text-shadow: none;
+}
+select.bumbuu_selectarea_light::selection {
+	background-color: pink;
+}
+select.bumbuu_selectarea_light:focus {
+	outline: none;
+}
