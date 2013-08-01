@@ -8,26 +8,26 @@ html, body {
 
 body {
 	background-color: #abadb0;
+	overflow: hidden;
 }
 
 #background {
 	position: fixed;
-	z-index: 0;
 	top: 0%;
 	left: 0%;
 	width: 100%;
 	height: 100%;
 	clear: none;
 	background: radial-gradient(#cbcdd0, rgba(255,255,255,0));
+	z-index: 0;
 }
 
 div.main {
 	position: absolute;
 	width: 100%;
-	height: 100%;
-	left: 0px;
-	top: 0px;
-	margin-top: 0px;
+	height: 80%;
+	left: 0%;
+	top: 0%;
 	display: block;
 	z-index: 1;
 }
