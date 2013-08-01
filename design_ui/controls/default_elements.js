@@ -8,6 +8,10 @@ function initiate_default_elements() {
 	   event captures based on the properties of 
 	   each standard user control. */
 	//sliders
+	if (typeof $_ == "undefined") {
+		console.error("Requires ScriJe API, at http://bumbuu.com/files/js/scrije.lib.js");
+		return false;
+	}
 	var sliders = $_(".bumbuu_slider_handle");
 	for (var i=0; i<sliders.div.length; i++)
 		$_(sliders.div[i]).mousedown(function(ev) {
