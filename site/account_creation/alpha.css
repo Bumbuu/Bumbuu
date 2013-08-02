@@ -5,12 +5,10 @@ html, body {
 	margin: 0 auto;
 	padding: 0px;
 }
-
 body {
 	background-color: #abadb0;
 	overflow: hidden;
 }
-
 #background {
 	position: fixed;
 	top: 0%;
@@ -21,7 +19,6 @@ body {
 	background: radial-gradient(#cbcdd0, rgba(255,255,255,0));
 	z-index: 0;
 }
-
 div.main {
 	position: absolute;
 	width: 100%;
@@ -31,7 +28,6 @@ div.main {
 	display: block;
 	z-index: 1;
 }
-
 .main_title {
 	text-align: center;
 	margin-left: auto;
@@ -40,7 +36,6 @@ div.main {
 	height: 140px;
 	padding: 5px;
 }
-
 .main_title span:first-child {
 	font-family: "Bauhaus 93", Arial;
 	font-size: 80px;
@@ -49,7 +44,6 @@ div.main {
 	text-shadow: 0px 3px 3px #7f7f7f;
 	line-height: 110px;
 }
-
 .main_title span:nth-child(2) {
 	font-family: Arial;
 	font-size: 20px;
@@ -58,15 +52,12 @@ div.main {
 	text-shadow: 0px 1px 0px #efefef;
 	line-height: 40px;
 }
-
 .main_title span::selection {
 	background-color: none;
 }
-
 .main_title span::-moz-selection {
 	background-color: none;
 }
-
 .step_counter {
 	width: 20px;
 	height: 20px;
@@ -89,33 +80,27 @@ div.main {
 	-webkit-transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
 	-o-transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
 }
-
 .step_counter[active] {
 	cursor: pointer;
 }
-
 .step_counter:hover {
 	background-color: #cbcdd0;
 	border: 1px solid #808b8d;
 	color: #474747;
 	text-shadow: 0px 1px 0px #efefef;
 }
-
 .step_counter:active {
 	background-color: #bbbdc0;
 	border: 1px solid #707b7d;
 	color: #373737;
 	text-shadow: 0px 1px 0px #dfdfdf;
 }
-
 .step_counter::selection {
 	background-color: #cbcdd0;
 }
-
 .step_counter::-moz-selection {
 	background-color: #cbcdd0;
 }
-
 .signup_holder {
 	width: 720px;
 	height: 340px;
@@ -125,7 +110,6 @@ div.main {
 	box-shadow: 0px 0px 5px #929292;
 	border-radius: 10px;
 }
-
 .signup_holder > div:first-child {
 	width: calc(30% - 20px - 1px);
 	height: calc(100% - 20px - 2px);
@@ -140,7 +124,6 @@ div.main {
 	background-image: url(http://bumbuu.com/files/img/noise_overlay.png);
 	background-repeat: repeat;
 }
-
 .signup_holder > div:last-child {
 	width: calc(70% - 20px - 1px);
 	height: calc(100% - 20px - 2px);
@@ -155,7 +138,6 @@ div.main {
 	background-image: url(http://bumbuu.com/files/img/noise_overlay.png);
 	background-repeat: repeat;
 }
-
 .signup_info_title {
 	width: 100%;
 	height: 14px;
@@ -166,7 +148,6 @@ div.main {
 	color: #9fb4bf;
 	text-shadow: 0px 1px 0px #010507;
 }
-
 .signup_info_description {
 	width: calc(100% - 20px);
 	height: calc(100% - 20px - 20px);
@@ -179,14 +160,12 @@ div.main {
 	text-shadow: 0px 1px 0px #010507;
 	line-height: 14px;
 }
-
 .signup_interaction_inside {
 	width: 100%;
 	height: 220px;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .signup_interaction_row {
 	width: calc(100% - 20px);
 	height: 30px;
@@ -194,13 +173,11 @@ div.main {
 	margin-bottom: 0px;
 	padding: 10px;
 }
-
 .signup_interaction_row > .bumbuu_input_holder {
 	float: left;
 	clear: none;
 	margin-left: 20px;
 }
-
 .signup_interaction_row > .bumbuu_input_holder:first-child {
 	margin-left: 0px;
 }

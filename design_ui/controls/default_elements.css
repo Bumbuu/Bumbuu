@@ -280,7 +280,7 @@ textarea.bumbuu_textarea_light_text {
 	width: 100%;
 	width: -webkit-calc(100% - 4px);
 	height: calc(100% - 16px);
-	height: -webkit-calc(100% - 4px - 19px);
+	height: -webkit-calc(100% - 19px);
 	margin-top: 0px;
 	margin-left: 0px;
 	border: none;
@@ -291,6 +291,8 @@ textarea.bumbuu_textarea_light_text {
 	color: #454545;
 	text-shadow: 0px 1px 0px #fafafa;
 	outline: none;
+	line-height: 14px;
+	display: block;
 }
 textarea.bumbuu_textarea_light_text::selection {
 	background-color: #d3d3d3;
