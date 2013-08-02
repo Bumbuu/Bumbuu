@@ -190,7 +190,7 @@ button.bumbuu_button_dark:active {
 	box-shadow: inset 0px 0px 3px #3f3f3f, 0px 0px 5px #b7b7b7;
 }
 input.bumbuu_input_light,
-input.bumbuu_input_light[type=password] {
+input.bumbuu_input_light[isvalidated] {
 	width: 206px;
 	min-width: 200px;
 	height: 16px;
@@ -205,7 +205,7 @@ input.bumbuu_input_light[type=password] {
 	border-radius: 6px;
 	outline: none;
 }
-input.bumbuu_input_light[type=password] {
+input.bumbuu_input_light[isvalidated] {
 	border-radius: 6px 0px 0px 6px;
 	min-width: 169px;
 	width: 169px;
@@ -224,35 +224,52 @@ div.bumbuu_input_light_right_label {
 	width: 12px;
 	height: 4px;
 	padding: 12px;
-	border: 1px solid #af1919;
-	background-color: #c33030;
+	border: 1px solid #afafaf;
+	background-color: #c9c9c9;
 	border-radius: 0px 6px 6px 0px;
-	box-shadow: inset 0px 0px 5px #d35959, 0px 0px 5px #d9d9d9;
+	box-shadow: inset 0px 0px 5px #d6d6d6, 0px 0px 5px #d9d9d9;
 	float: right;
 	clear: none;
 }
-div.bumbuu_input_light_right_label div {
+div.bumbuu_input_light_right_label > div {
 	/* inside bar, indicating invalidity */
 	width: 12px;
 	height: 4px;
-	background-color: #f1bdbd;
-	box-shadow: 0px 1px 0px #570d0d;
+	background-color: #e8e8e8;
+	box-shadow: 0px 1px 0px #707070;
 	margin-left: auto;
 	margin-right: auto;
 }
+div.bumbuu_input_light_right_label[type=invalid] {
+	border: 1px solid #af1919;
+	background-color: #c33030;
+	box-shadow: inset 0px 0px 5px #d35959, 0px 0px 5px #d9d9d9;
+}
+div.bumbuu_input_light_right_label[type=invalid] > div {
+	background-color: #f1bdbd;
+	box-shadow: 0px 1px 0px #570d0d;
+}
+div.bumbuu_input_light_right_label[type=valid] {
+	border: 1px solid #55b119;
+	background-color: #6bc331;
+	box-shadow: inset 0px 0px 5px #8bd469, 0px 0px 5px #d9d9d9;
+}
+div.bumbuu_input_light_right_label[type=valid] > div {
+	background-color: #d3f3be;
+	box-shadow: 0px 1px 0px #2b570d;
+}
 input.bumbuu_input_light::selection,
-input.bumbuu_input_light[type=password]::selection {
+input.bumbuu_input_light[isvalidated]::selection {
 	background-color: #d3d3d3;
 }
 input.bumbuu_input_light::-moz-selection,
-input.bumbuu_input_light[type=password]::-moz-selection {
+input.bumbuu_input_light[isvalidated]::-moz-selection {
 	background-color: #d3d3d3;
 }
 div.bumbuu_textarea_light {
 	width: 200px;
 	min-width: 200px;
-	height: 70px;
-	min-height: 70px;
+	height: 100px;
 	padding: 10px;
 	background-color: #f0f0f0;
 	box-shadow: inset 0px 1px 3px #cfcfcf, 0px 0px 5px #d9d9d9;
@@ -261,9 +278,9 @@ div.bumbuu_textarea_light {
 }
 textarea.bumbuu_textarea_light_text {
 	width: 100%;
-	height: 100%;
+	width: -webkit-calc(100% - 4px);
 	height: calc(100% - 16px);
-	height: -webkit-calc(100% - 19px);
+	height: -webkit-calc(100% - 4px - 19px);
 	margin-top: 0px;
 	margin-left: 0px;
 	border: none;
@@ -273,7 +290,6 @@ textarea.bumbuu_textarea_light_text {
 	font-size: 14px;
 	color: #454545;
 	text-shadow: 0px 1px 0px #fafafa;
-	display: block;
 	outline: none;
 }
 textarea.bumbuu_textarea_light_text::selection {
@@ -290,9 +306,7 @@ div.bumbuu_textarea_light_submit_button {
 	border-top: 1px solid #b7b7b7;
 	border-radius: 0px 0px 6px 0px;
 	margin-top: 0px;
-	margin-left: 185px;
-	margin-left: calc(100% - 15px);
-	margin-left: -webkit-calc(100% - 15px);
+	margin-left: calc(100% - 25px + 10px);
 	background-color: #d9d9d9;
 	box-shadow: inset 0px 0px 5px #e8e8e8;
 	cursor: pointer;
@@ -498,7 +512,7 @@ div.bumbuu_label[type=below]:before {
 	position: absolute;
 	clear: none;
 }
-.bumbuu_checkbox_light[value=checked] div:nth-child(2) {
+.bumbuu_checkbox_light[value=checked] div:last-child {
 	height: 4px;
 	width: 12px;
 	background-color: #4f4f4f;
@@ -535,7 +549,7 @@ div.bumbuu_label[type=below]:before {
 	position: absolute;
 	clear: none;
 }
-.bumbuu_checkbox_dark[value=checked] div:nth-child(2) {
+.bumbuu_checkbox_dark[value=checked] div:last-child {
 	height: 4px;
 	width: 12px;
 	background-color: #dfdfdf;

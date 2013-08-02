@@ -85,6 +85,9 @@ div.main {
 	left: 50%;
 	margin-left: -20px;
 	margin-top: 50px;
+	transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
+	-webkit-transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
+	-o-transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
 }
 
 .step_counter[active] {

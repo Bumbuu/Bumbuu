@@ -15,13 +15,15 @@ signup_process = new function() {
 		if (has_initiated) return false;
 		else has_initiated = true;
 		step_counters = $_(".step_counter").div;
-		for (var i=1; i<step_counters.length; i++)
+		for (var i=1; i<step_counters.length; i++) {
+			$_(step_counters[i]).attr("active", true);
 			$_(step_counters[i]).click(function() {
 				var n = parseInt($_(this).html())-1;
 				$_(window).effects.scrollTo("y", n*0.8*window.innerHeight, 1200);
 				if (_this.debug)
 					console.log("Scrolling to y-coordinate "+(n*0.8*window.innerHeight)+".");
 			});
+		}
 		if (_this.debug) console.log("Signup process has initialized.");
 		$_("input#signup_email").blur(function() {
 			_this.validate(1);
