@@ -9,7 +9,7 @@ function initiate_default_elements() {
 	   each standard user control. */
 	//sliders
 	if (typeof $_ == "undefined") {
-		console.error("Requires ScriJe API, at http://bumbuu.com/files/js/scrije.lib.js");
+		throw new Error("Requires ScriJe API, at http://bumbuu.com/files/js/scrije.lib.js");
 		return false;
 	}
 	var sliders = $_(".bumbuu_slider_handle");
