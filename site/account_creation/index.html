@@ -3,8 +3,8 @@
 <head>
 <title>Bumbuu - Alpha</title>
 <meta charset="utf-8">
-<link rel="StyleSheet" type="text/css" href="alpha.css">
 <link rel="StyleSheet" type="text/css" href="http://bumbuu.com/files/apis/default_elements.css">
+<link rel="StyleSheet" type="text/css" href="alpha.css">
 <script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
 <script type="text/javascript" src="http://bumbuu.com/files/apis/default_elements.js"></script>
 <script type="text/javascript" src="alpha.js"></script>
@@ -25,30 +25,33 @@
 			</div>
 		</div>
 		<div>
+			<div class="bumbuu_intext_notif" type="warning"></div>
 			<div class="signup_interaction_inside" style="margin-top: 60px;">
 				<div class="signup_interaction_row">
 					<div class="bumbuu_input_holder">
-						<input class="bumbuu_input_light" type="text" id="signup_username" placeholder="Username"></input>
+						<input class="bumbuu_input_light" type="text" id="signup_username" placeholder="Username" isvalidated></input>
+						<div class="bumbuu_input_light_right_label" id="signup_username_label">
+							<div></div>
+						</div>
 					</div>
 				</div>
 				<div class="signup_interaction_row">
 					<div class="bumbuu_input_holder">
-						<input class="bumbuu_input_light" type="text" id="signup_firstname" placeholder="First Name"></input>
+						<input class="bumbuu_input_state_light" type="text" id="signup_firstname" placeholder="First Name" maxlength="20"></input>
 					</div>
 					<div class="bumbuu_input_holder">
-						<input class="bumbuu_input_light" type="text" id="signup_lastname" placeholder="Last Name"></input>
+						<input class="bumbuu_input_state_light" type="text" id="signup_lastname" placeholder="Last Name" maxlength="20"></input>
 					</div>
 				</div>
 				<div class="signup_interaction_row">
 					<div class="bumbuu_input_holder">
-						<input class="bumbuu_input_light" type="text" id="signup_email" placeholder="Email Address"></input>
+						<input class="bumbuu_input_state_light" type="text" id="signup_email" placeholder="Email Address"></input>
 					</div>
 				</div>
 				<div class="signup_interaction_row">
 					<div class="bumbuu_input_holder">
 						<select class="bumbuu_selectarea_light" id="signup_gender">
-							<option value="" selected>Select Gender</option>
-							<option value="Unspecified">Unspecified</option>
+							<option value="Unspecified" selected>Unspecified</option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 						</select>
@@ -64,6 +67,7 @@
 		<div>
 		</div>
 		<div>
+			<div class="bumbuu_intext_notif" type="warning"></div>
 		</div>
 	</div>
 </div>
@@ -73,6 +77,7 @@
 		<div>
 		</div>
 		<div>
+			<div class="bumbuu_intext_notif" type="warning"></div>
 		</div>
 	</div>
 </div>

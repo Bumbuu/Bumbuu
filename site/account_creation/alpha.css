@@ -19,7 +19,7 @@ body {
 	background: radial-gradient(#cbcdd0, rgba(255,255,255,0));
 	z-index: 0;
 }
-div.main {
+.main {
 	position: absolute;
 	width: 100%;
 	height: 80%;
@@ -180,4 +180,11 @@ div.main {
 }
 .signup_interaction_row > .bumbuu_input_holder:first-child {
 	margin-left: 0px;
+}
+.bumbuu_intext_notif {
+	position: absolute;
+	margin-top: 10px;
+	margin-left: calc((464px - 410px)/2);
+	width: 410px;
+	display: none;
 }
