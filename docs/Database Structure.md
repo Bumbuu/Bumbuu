@@ -51,7 +51,8 @@ Format: <br>
 *	Pref\_ContentCensorContent: **Boolean** (uses algorithm to censor pictures/media in addition to text; default is false)
 
 #####buzzes_USERID
-*	BuzzID: **Integer** (unique integer incremented value)
-*	Content: **String**
-*	DatePosted: **Date**
-*	Device: **String** (could be "Computer", "Windows Phone", "Android", et cetera...)
+*	BuzzID: **UNSIGNED INT(64)** (unique integer incremented value)
+*	Content: **VARCHAR(65535)** (raw textual user content; utf-8)
+*	DatePosted: **Date** (date/time stamp of post)
+*	Device: **VARCHAR(64)** (could be "Computer", "Windows Phone", "Android", et cetera...)
+*	Location: **VARCHAR(64)** (is recorded when **Pref\_ShowBuzzLocation** is set to anything other than 'None')

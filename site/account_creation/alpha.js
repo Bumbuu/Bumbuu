@@ -2,14 +2,15 @@
 
 signup_process = new function() {
 	var _this = this;
-	var current = 1, step_counters, has_initiated = false, timers = {};
-	var valid = {
-		username: false,
-		firstname: false,
-		lastname: false,
-		email: false,
-		gender: false
-	};
+	var current = 1, step_counters, has_initiated = false, timers = {}, interim = false;
+	var valid = [ //gender doesn't need validation
+		{
+			username: false,
+			firstname: false,
+			lastname: false,
+			email: false
+		}
+	];
 	this.debug = false; 
 	this.init = function() {
 		if (has_initiated) return false;
@@ -19,12 +20,21 @@ signup_process = new function() {
 		for (var i=1; i<step_counters.length; i++) {
 			$_(step_counters[i]).attr("active", true);
 			$_(step_counters[i]).click(function() {
+				if (interim) return false;
+				interim = true;
 				var n = parseInt($_(this).html())-1;
-				if (!_this.validate(n))
-					return _this.notify("warning", "Failed to validate!");
-				$_(window).effects.scrollTo("y", n*0.8*window.innerHeight, 1200);
-				if (_this.debug)
-					console.log("Scrolling to y-coordinate "+(n*0.8*window.innerHeight)+".");
+				_this.validate(n);
+				clearTimeout(timers.validation);
+				timers.validation = setTimeout(function() {
+					interim = false;
+					for (var f in valid[n])
+						if (!valid[n][f]) return _this.debug ? _this.notify("warning", f.replace(/^.{1}/i, function(w){ return w.toUpperCase() })+" is improper.") : false;
+					$_(window).effects.scrollTo("y", n*0.8*window.innerHeight, 1200);
+					_this.debug ? console.log("Scrolling to y-coordinate "+(n*0.8*window.innerHeight)+".") : (function(){})();
+					_this.debug ? console.log("Moving to step "+(++current)+".") : current++;
+					$_(this).click(null);
+					$_(this).deleteAttr("active");
+				}, 5000);
 			});
 		}
 		if (_this.debug) console.log("Signup process has initialized.");
@@ -99,6 +109,8 @@ signup_process = new function() {
 			switch (true) {
 			case (step > 2):
 			case (step > 1):
+				//step 2 validation
+				
 			case (step > 0):
 				//step 1 validation
 				validate.username();
@@ -111,16 +123,16 @@ signup_process = new function() {
 			validate[step]();
 	};
 	this.notify = function(type, message) {
-		if (type in timers) clearTimeout(timers["notif"]);
-		var d = $_($_(".bumbuu_intext_notif").div[0]);
+		clearTimeout(timers.notif);
+		var d = $_($_(".bumbuu_intext_notif").div[current-1]);
 		d.attr("type", type);
 		d.html(encodeURI(message).replace(/\%20/g, " "));
 		d.effects.fadeTo(100, 618, function() {
-			timers["notif"] = setTimeout(function() {
-				$_($_(".bumbuu_intext_notif").div[0]).effects.fadeTo(0, 618);
+			timers.notif = setTimeout(function() {
+				d.effects.fadeTo(0, 618);
 			}, 7000);
 		});
-		return {fail: false, success: true}[type];
+		return {fail: false, success: true, warning: false}[type];
 	};
 };
 
