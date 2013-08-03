@@ -652,3 +652,46 @@ select.bumbuu_selectarea_light::selection {
 select.bumbuu_selectarea_light:focus {
 	outline: none;
 }
+input.bumbuu_input_state_light {
+	width: 206px;
+	min-width: 200px;
+	height: 16px;
+	font-family: Arial;
+	font-size: 14px;
+	padding: 6px;
+	background-color: #f0f0f0;
+	box-shadow: inset 0px 1px 3px #cfcfcf, 0px 0px 5px #d9d9d9;
+	text-shadow: 0px 1px 0px #fafafa;
+	border: 1px solid #b7b7b7;
+	color: #454545;
+	border-radius: 6px;
+	outline: none;
+}
+input.bumbuu_input_state_light::selection {
+	background-color: #d3d3d3;
+}
+input.bumbuu_input_state_light::-moz-selection {
+	background-color: #d3d3d3;
+}
+input.bumbuu_input_state_light[validity=valid] {
+	border: 1px solid #8db175;
+	background-color: #ecf3e7;
+	box-shadow: inset 0px 1px 3px #b6cfa6, 0px 0px 5px #d9d9d9;
+}
+input.bumbuu_input_state_light[validity=valid]::selection {
+	background-color: #b6d49f;
+}
+input.bumbuu_input_state_light[validity=valid]::-moz-selection {
+	background-color: #b6d49f;
+}
+input.bumbuu_input_state_light[validity=invalid] {
+	border: 1px solid #b17575;
+	background-color: #f3e7e7;
+	box-shadow: inset 0px 1px 3px #cfa6a6, 0px 0px 5px #d9d9d9;
+}
+input.bumbuu_input_state_light[validity=invalid]::selection {
+	background-color: #d49f9f;
+}
+input.bumbuu_input_state_light[validity=invalid]::-moz-selection {
+	background-color: #d49f9f;
+}

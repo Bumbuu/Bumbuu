@@ -133,6 +133,11 @@ body {
 #select_container > select.bumbuu_selectarea_light {
 	margin-top: 10px;
 }
+#stateinputs_holder > .bumbuu_input_holder {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
 </style>
 <script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
 <script type="text/javascript" src="default_elements.js"></script>
@@ -280,8 +285,23 @@ window.onresize = initiate_default_elements;
 				<option>Select Area Light</option>
 				<option>Select Area Light</option>
 			</select>
+			<select class="bumbuu_selectarea_light">
+				<option>Select Area Light</option>
+				<option>Select Area Light</option>
+				<option>Select Area Light</option>
+			</select>
 		</div>
-		<div class="container">
+		<div class="container" id="stateinputs_holder">
+			<div class="container_label">State-Driven Text Input</div>
+			<div class="bumbuu_input_holder">
+				<input class="bumbuu_input_state_light" type="text" value="State-Based Input (Inactive)"></input>
+			</div>
+			<div class="bumbuu_input_holder">
+				<input class="bumbuu_input_state_light" type="text" value="State-Based Input (Valid)" validity="valid"></input>
+			</div>
+			<div class="bumbuu_input_holder">
+				<input class="bumbuu_input_state_light" type="text" value="State-Based Input (Invalid)" validity="invalid"></input>
+			</div>
 		</div>
 		<div class="container">
 		</div>
