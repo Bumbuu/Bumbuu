@@ -80,7 +80,7 @@ body {
 	-webkit-transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
 	-o-transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
 }
-.step_counter[active] {
+.step_counter[active=true] {
 	cursor: pointer;
 }
 .step_counter:hover {

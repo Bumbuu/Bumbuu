@@ -18,22 +18,23 @@ signup_process = new function() {
 		$_("#signup_username, #signup_firstname, #signup_lastname, #signup_email").value("");
 		step_counters = $_(".step_counter").div;
 		for (var i=1; i<step_counters.length; i++) {
-			$_(step_counters[i]).attr("active", true);
+			$_(step_counters[i]).attr("active", "true");
 			$_(step_counters[i]).click(function() {
 				if (interim) return false;
 				interim = true;
+				var step_this = this;
 				var n = parseInt($_(this).html())-1;
 				_this.validate(n);
 				clearTimeout(timers.validation);
 				timers.validation = setTimeout(function() {
 					interim = false;
-					for (var f in valid[n])
-						if (!valid[n][f]) return _this.debug ? _this.notify("warning", f.replace(/^.{1}/i, function(w){ return w.toUpperCase() })+" is improper.") : false;
+					for (var f in valid[n-1])
+						if (!valid[n-1][f]) return _this.debug ? _this.notify("warning", f.replace(/^.{1}/i, function(w){ return w.toUpperCase() })+" is improper.") : false;
 					$_(window).effects.scrollTo("y", n*0.8*window.innerHeight, 1200);
 					_this.debug ? console.log("Scrolling to y-coordinate "+(n*0.8*window.innerHeight)+".") : (function(){})();
 					_this.debug ? console.log("Moving to step "+(++current)+".") : current++;
-					$_(this).click(null);
-					$_(this).deleteAttr("active");
+					$_(step_this).click(null);
+					$_(step_this).attr("attr", "false");
 				}, 5000);
 			});
 		}
@@ -55,8 +56,8 @@ signup_process = new function() {
 		validate = {
 			username: function() {
 				var d = $_("#signup_username");
-				valid.username = /^([^\W]+)$/.test(d.value());
-				if (valid.username)
+				valid[0].username = /^([^\W]+)$/.test(d.value());
+				if (valid[0].username)
 					$_.req({
 						url: "index.php?validate",
 						method: "post",
@@ -64,8 +65,8 @@ signup_process = new function() {
 						headers: ["Content-Type", "application/x-www-form-urlencoded"],
 						readystatechange: function(ajax) {
 							if (ajax.readyState !== 4) return;
-							valid.username = (ajax.responseText == "valid");
-							if (!valid.username) {
+							valid[0].username = (ajax.responseText == "valid");
+							if (!valid[0].username) {
 								_this.notify("warning", "That username is already taken.");
 								$_("#signup_username_label").attr("type", "invalid");
 							} else $_("#signup_username_label").attr("type", "valid");						
@@ -78,8 +79,8 @@ signup_process = new function() {
 			},
 			email: function() {
 				var d = $_("#signup_email");
-				valid.email = /^(\w+\@\w+\.\w+)$/.test(d.value());
-				if (valid.email)
+				valid[0].email = /^(\w+\@\w+\.\w+)$/.test(d.value());
+				if (valid[0].email)
 					$_.req({
 						url: "index.php?validate",
 						method: "post",
@@ -87,22 +88,22 @@ signup_process = new function() {
 						headers: ["Content-Type", "application/x-www-form-urlencoded"],
 						readystatechange: function(ajax) {
 							if (ajax.readyState !== 4) return;
-							valid.email = (ajax.responseText == "valid");
-							d.attr("validity", valid.email ? "valid" : "invalid");
-							if (!valid.email) _this.notify("warning", "That email is already taken.");
+							valid[0].email = (ajax.responseText == "valid");
+							d.attr("validity", valid[0].email ? "valid" : "invalid");
+							if (!valid[0].email) _this.notify("warning", "That email is already taken.");
 						}
 					});
-				else d.attr("validity", valid.email ? "valid" : "invalid");
+				else d.attr("validity", valid[0].email ? "valid" : "invalid");
 			},
 			firstname: function() {
 				var d = $_("#signup_firstname");
-				valid.firstname = /^([^_\W]+)$/.test(d.value());
-				d.attr("validity", valid.firstname ? "valid" : "invalid");
+				valid[0].firstname = /^([^_\W]+)$/.test(d.value());
+				d.attr("validity", valid[0].firstname ? "valid" : "invalid");
 			},
 			lastname: function() {
 				var d = $_("#signup_lastname");
-				valid.lastname = /^([^_\W]+)$/.test(d.value());
-				d.attr("validity", valid.lastname ? "valid" : "invalid");
+				valid[0].lastname = /^([^_\W]+)$/.test(d.value());
+				d.attr("validity", valid[0].lastname ? "valid" : "invalid");
 			}
 		};
 		if (typeof step == "number")
