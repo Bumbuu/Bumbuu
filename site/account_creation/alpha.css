@@ -7,7 +7,6 @@ html, body {
 }
 body {
 	background-color: #abadb0;
-	overflow: hidden;
 }
 #background {
 	position: fixed;
@@ -19,22 +18,26 @@ body {
 	background: radial-gradient(#cbcdd0, rgba(255,255,255,0));
 	z-index: 0;
 }
-.main {
+#main {
 	position: absolute;
-	width: 100%;
-	height: 80%;
+	width: calc(300% + 20px);
+	min-width: 3020px;
+	height: 100%;
 	left: 0%;
-	top: 0%;
+	top: 0px;
 	display: block;
 	z-index: 1;
 }
 .main_title {
 	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
+	left: 50%;
+	top: 0px;
+	margin-left: -500px;
 	width: 1000px;
 	height: 140px;
 	padding: 5px;
+	position: fixed;
+	z-index: 2;
 }
 .main_title span:first-child {
 	font-family: "Bauhaus 93", Arial;
@@ -58,6 +61,20 @@ body {
 .main_title span::-moz-selection {
 	background-color: none;
 }
+.signup_holders_holder {
+	width: calc((100% - 20px)/3);
+	min-width: 1000px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 160px;
+	margin-right: 10px;
+	position: relative;
+	float: left;
+	clear: none;
+}
+.signup_holders_holder:last-child {
+	margin-right: 0px;
+}
 .step_counter {
 	width: 20px;
 	height: 20px;
@@ -72,15 +89,15 @@ body {
 	text-align: center;
 	box-shadow: inset 0px 0px 4px #f2e5f6, 0px 0px 2px #a6a6a6;
 	cursor: default;
-	position: absolute;
-	left: 50%;
-	margin-left: -20px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
 	margin-top: 50px;
 	transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
 	-webkit-transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
 	-o-transition: background-color 300ms, border 300ms, color 300ms, text-shadow 300ms;
 }
-.step_counter[active=true] {
+.step_counter[immediacy=current] {
 	cursor: pointer;
 }
 .step_counter:hover {
@@ -106,7 +123,7 @@ body {
 	height: 340px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 140px;
+	margin-top: 40px;
 	box-shadow: 0px 0px 5px #929292;
 	border-radius: 10px;
 }
