@@ -2,6 +2,7 @@
 
 signup_process = new function() {
 	var _this = this;
+	var current_step = 1;
 	var valid_v = [
 		{
 			username: false,
@@ -32,8 +33,21 @@ signup_process = new function() {
 			$_(next_buttons[i]).click(function() {
 				var step_i = parseInt($_(this).attr("step"));
 				_this.validate(step_i, "all", function(is_valid) {
-					//TODO: validate and advance if everything is good
+					if (is_valid) return;
+					//NOTE: change to if (is_valid) return; for debugging
+					var next_signup_d = $_(".signup_holders_holder").div[step_i];
+					var pos_x = $_(next_signup_d).offset().x;
+					$_(window).effects.scrollTo("x", pos_x, 750);
+					current_step++; //TODO: address whether or not this matters
 				});
+			});
+		var back_buttons = $_(".signup_retreater").div;
+		for (var i=0; i<back_buttons.length; i++)
+			$_(back_buttons[i]).click(function() {
+				var step_i = parseInt($_(this).attr("step"));
+				var previous_signup_d = $_(".signup_holders_holder").div[step_i-2];
+				var pos_x = $_(previous_signup_d).offset().x;
+				$_(window).effects.scrollTo("x", pos_x, 750);
 			});
 		$_("#signup_username").keyup(function() {
 			_this.validate(1, "username");
