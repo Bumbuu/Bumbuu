@@ -25,6 +25,8 @@ signup_process = new function() {
 		//set up listeners, etc
 		
 	};
+	this.validate = {
+	};
 	this.resize = function() {
 		//set up resize events
 	};
