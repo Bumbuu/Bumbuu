@@ -38,7 +38,7 @@ signup_process = new function() {
 					var next_signup_d = $_(".signup_holders_holder").div[step_i];
 					var pos_x = $_(next_signup_d).offset().x;
 					$_(window).effects.scrollTo("x", pos_x, 1618);
-					current_step++; //TODO: address whether or not this matters
+					current_step++;
 				});
 			});
 		var back_buttons = $_(".signup_retreater").div;
@@ -48,6 +48,7 @@ signup_process = new function() {
 				var previous_signup_d = $_(".signup_holders_holder").div[step_i-2];
 				var pos_x = $_(previous_signup_d).offset().x;
 				$_(window).effects.scrollTo("x", pos_x, 1618);
+				current_step--;
 			});
 		$_("#signup_username").keyup(function() {
 			_this.validate(1, "username");
@@ -186,7 +187,8 @@ signup_process = new function() {
 		});
 	};
 	this.resize = function() {
-		//set up resize events
+		if (current_step > 1)
+			$_(window).effects.scrollTo("x", $_($_(".signup_holders_holder").div[(current_step-1)]).offset().x, 618);
 	};
 };
 
