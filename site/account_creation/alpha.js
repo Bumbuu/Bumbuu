@@ -197,8 +197,16 @@ window.onload = function() {
 	initiate_default_elements();
 	signup_process.debug = true;
 	signup_process.init();
-	
 };
+
+$(document).ready(function() {
+	$("#signup_timezone_img").timezonePicker({
+		countryTarget: '#signup_country'
+	});
+	$("#signup_timezone_holder").click(function() {
+		$("#signup_timezone_img").timezonePicker('detectLocation');
+	});
+});
 
 window.onresize = function() {
 	initiate_default_elements();

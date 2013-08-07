@@ -261,7 +261,7 @@ body {
 	margin-left: 2px;
 	margin-top: 0px;
 }
-.signup_timezone_holder {
+#signup_timezone_holder {
 	width: 80%;
 	height: 182px;
 	border: 1px solid #bfbfbf;
@@ -269,4 +269,11 @@ body {
 	box-shadow: inset 0px 1px 3px #cfcfcf, 0px 0px 5px #d9d9d9;
 	margin-left: auto;
 	margin-right: auto;
+	overflow: hidden;
+}
+img#signup_timezone_img {
+	width: 100%;
+	margin-top: 0px;
+	margin-left: 0px;
+	position: absolute;
 }
