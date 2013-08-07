@@ -201,7 +201,8 @@ window.onload = function() {
 
 $(document).ready(function() {
 	$("#signup_timezone_img").timezonePicker({
-		countryTarget: '#signup_country'
+		countryTarget: '#signup_country',
+		target: '#signup_timezone_label'
 	});
 	$("#signup_timezone_holder").click(function() {
 		$("#signup_timezone_img").timezonePicker('detectLocation');
