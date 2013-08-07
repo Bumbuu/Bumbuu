@@ -209,6 +209,7 @@ if (isset($_GET['create'])) {
 							<?php endforeach; ?>
 						</map>
 					</div>
+					<div id="signup_timezone_label"></div>
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
 							<select class="bumbuu_selectarea_light" id="signup_language">
