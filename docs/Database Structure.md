@@ -62,3 +62,5 @@ Format: <br>
 #####country_list
 *	Shortname: **CHAR(2)** (the two-letter abbreviated name of the country or area; unique; primary)
 *	Fullname: **VARCHAR(50)** (the full name of the country; unique)
+#####timezone_list
+*	PHP_Timezone: **VARCHAR(48)** (the full name of the timezone, according to the PHP timezone specification)
