@@ -159,7 +159,7 @@ if (isset($_GET['create'])) {
 	</div>
 	<div class="signup_holders_holder">
 		<div class="step_counter">2</div>
-		<div class="signup_holder" style="height: 390px">
+		<div class="signup_holder" style="height: 396px">
 			<div>
 				<div class="signup_info_title">Localization</div>
 				<div class="signup_info_description">
