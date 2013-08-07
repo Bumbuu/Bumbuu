@@ -197,6 +197,7 @@ window.onload = function() {
 	initiate_default_elements();
 	signup_process.debug = true;
 	signup_process.init();
+	
 };
 
 window.onresize = function() {
