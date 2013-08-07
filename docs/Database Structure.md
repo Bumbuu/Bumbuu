@@ -56,3 +56,10 @@ Format: <br>
 *	DatePosted: **Date** (date/time stamp of post)
 *	Device: **VARCHAR(64)** (could be "Computer", "Windows Phone", "Android", et cetera...)
 *	Location: **VARCHAR(64)** (is recorded when **Pref\_ShowBuzzLocation** is set to anything other than 'None')
+
+###bumbuuco_sendata
+####bumbuuco_miscInfo
+#####CountryList
+*	ShortName: **CHAR(2)** (the two-letter abbreviated name of the country or area; unique; primary)
+*	FullName: **VARCHAR(50)** (the full name of the country; unique)
+*	TimeZone: **VARCHAR(40)** (the corresponding timezone for that country)
