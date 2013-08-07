@@ -62,4 +62,3 @@ Format: <br>
 #####country_list
 *	Shortname: **CHAR(2)** (the two-letter abbreviated name of the country or area; unique; primary)
 *	Fullname: **VARCHAR(50)** (the full name of the country; unique)
-*	Timezone: **VARCHAR(40)** (the corresponding timezone for that country)
