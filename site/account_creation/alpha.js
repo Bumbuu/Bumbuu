@@ -13,8 +13,8 @@ signup_process = new function() {
 		},
 		{
 			country: false,
-			language: false,
-			timezone: false
+			timezone: false,
+			language: false
 		},
 		{
 			password: false
@@ -33,8 +33,7 @@ signup_process = new function() {
 			$_(next_buttons[i]).click(function() {
 				var step_i = parseInt($_(this).attr("step"));
 				_this.validate(step_i, "all", function(is_valid) {
-					if (is_valid) return;
-					//NOTE: change to if (is_valid) return; for debugging
+					if (!is_valid && !_this.debug) return _this.notify(step_i, "warning", "Some values are invalid/blank. Please fix them before continuing."); //NOTE: change to if (is_valid) return; for debugging
 					var next_signup_d = $_(".signup_holders_holder").div[step_i];
 					var pos_x = $_(next_signup_d).offset().x;
 					$_(window).effects.scrollTo("x", pos_x, 1618);
@@ -73,31 +72,28 @@ signup_process = new function() {
 					if (ajax.readyState !== 4) return;
 					//check validity
 					var username_label = $_("#signup_username_label");
-					valid_v.username = check_alphanumeric_underscore("#signup_username");
-					if (!valid_v.username
-					&&	typeof callback_function !== "undefined")
-						callback_function(false);
-					else { //check to see if response is valid
-						valid_v.username = (ajax.responseText == "valid");
-						if (typeof callback_function !== "undefined")
-							callback_function(valid_v.username);
-					}
-					username_label.attr("type", valid_v.username ? "valid" : "invalid");
+					valid_v[step-1].username = check_alphanumeric_underscore("#signup_username");
+					if (valid_v[step-1].username) //if first conditional is true
+						valid_v[step-1].username = (ajax.responseText == "valid");
+						
+					if (typeof callback_function !== "undefined")
+						callback_function(valid_v[step-1].username);
+					username_label.attr("type", valid_v[step-1].username ? "valid" : "invalid");
 				});
 				break;
 			case "firstname":
 				//validate firstname here
-				valid_v.firstname = check_alphanumeric("#signup_firstname");
-				$_("#signup_firstname").attr("validity", valid_v.firstname ? "valid" : "invalid");
+				valid_v[step-1].firstname = check_alphanumeric("#signup_firstname");
+				$_("#signup_firstname").attr("validity", valid_v[step-1].firstname ? "valid" : "invalid");
 				if (typeof callback_function !== "undefined")
-					callback_function(valid_v.firstname);
+					callback_function(valid_v[step-1].firstname);
 				break;
 			case "lastname":
 				//validate firstname here
-				valid_v.lastname = check_alphanumeric("#signup_lastname");
-				$_("#signup_lastname").attr("validity", valid_v.lastname ? "valid" : "invalid");
+				valid_v[step-1].lastname = check_alphanumeric("#signup_lastname");
+				$_("#signup_lastname").attr("validity", valid_v[step-1].lastname ? "valid" : "invalid");
 				if (typeof callback_function !== "undefined")
-					callback_function(valid_v.lastname);
+					callback_function(valid_v[step-1].lastname);
 				break;
 			case "email":
 				//validate; callback
@@ -105,17 +101,26 @@ signup_process = new function() {
 					if (ajax.readyState !== 4) return;
 					//get validity
 					var email_d = $_("#signup_email");
-					valid_v.email = /^([\w]+[\@]([\w]+[\.][\w]{2,})+)$/.test(email_d.value());
-					if (!valid_v.email
-					&&	typeof callback_function !== "undefined")
-						callback_function(false); //first flag failed
-					else { //second test if first test is successful
-						valid_v.email = (ajax.responseText == "valid");
-						if (typeof callback_function !== "undefined")
-							callback_function(valid_v.email);
-					}
-					email_d.attr("validity", valid_v.email ? "valid" : "invalid");
+					valid_v[step-1].email = /^([\w]+[\@]([\w]+[\.][\w]{2,})+)$/.test(email_d.value());
+					if (valid_v[step-1].email) //if first conditional is true
+						valid_v[step-1].email = (ajax.responseText == "valid");
+						
+					if (typeof callback_function !== "undefined")
+						callback_function(valid_v[step-1].email);
+					email_d.attr("validity", valid_v[step-1].email ? "valid" : "invalid");
 				});
+				break;
+			case "country":
+				var country_d = $_("#signup_country");
+				valid_v[step-1].country = (country_d.value() !== "");
+				break;
+			case "timezone":
+				var timezone_d = $_("#signup_timezone");
+				valid_v[step-1].timezone = (timezone_d.value() !== "");
+				break;
+			case "language":
+				var language_d = $_("#signup_language");
+				valid_v[step-1].language = (language_d.value() !== "");
 				break;
 			//add more options here...
 			}
@@ -125,6 +130,9 @@ signup_process = new function() {
 				//step 3 and below stuff
 			case (step > 1):
 				//step 2 and below stuff
+				_this.validate(2, "country");
+				_this.validate(2, "timezone");
+				_this.validate(2, "language");
 			case (step > 0):
 				//step 1
 				_this.validate(1, "username", function() {
@@ -202,10 +210,10 @@ window.onload = function() {
 $(document).ready(function() {
 	$("#signup_timezone_img").timezonePicker({
 		countryTarget: '#signup_country',
-		target: '#signup_timezone_label'
+		target: '#signup_timezone'
 	});
-	$("#signup_timezone_holder").click(function() {
-		$("#signup_timezone_img").timezonePicker('detectLocation');
+	$("#signup_timezone_holder").mousemove(function() {
+		$("#signup_timezone_label").html($("#signup_timezone").val());
 	});
 });
 

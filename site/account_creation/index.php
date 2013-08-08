@@ -179,8 +179,8 @@ if (isset($_GET['create'])) {
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
 							<select class="bumbuu_selectarea_light" id="signup_country">
-								<option value="" selected>Choose a country</option>
-								<?php
+								<option value="" selected="selected">Select a country</option>
+<?php
 									$con = mysql_connect("localhost","bumbuuco_sendata",$db_passwords["bumbuuco_sendata"]) or die("Unable to connect to SQL server");
 									mysql_select_db("bumbuuco_miscInfo", $con) or die("Unable to SELECT DB.");
 									$query = mysql_query("SELECT * FROM country_list ORDER BY Fullname ASC");
@@ -190,8 +190,11 @@ if (isset($_GET['create'])) {
 								?>
 							</select>
 						</div>
+						<div class="bumbuu_input_holder">
+							<input type="hidden" id="signup_timezone" />
+						</div>
 					</div>
-					<div class="signup_interaction_row" style="height: 16px;">
+					<div class="signup_interaction_row" style="height: 12px; padding: 2px 2px 2px 10px;">
 						<p class="checkbox_label">Reveal timezone information</p>
 						<div class="bumbuu_checkbox_light" value="checked"><div></div><div></div></div>
 					</div>
