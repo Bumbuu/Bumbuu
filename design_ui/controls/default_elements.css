@@ -695,3 +695,43 @@ input.bumbuu_input_state_light[validity=invalid]::selection {
 input.bumbuu_input_state_light[validity=invalid]::-moz-selection {
 	background-color: #d49f9f;
 }
+.bumbuu_input_label_light {
+	width: 180px;
+	min-height: 12px;
+	padding: 5px 20px 5px 20px;
+	border: 1px solid #c5c5c5;
+	background-color: #e0e0e0;
+	border-radius: 6px;
+	box-shadow: inset 0px 1px 0px #efefef, inset 0px -4px 4px #dbdbdb, 0px 0px 5px #dfdfdf;
+	font-family: Arial;
+	font-size: 12px;
+	color: #777777;
+	text-shadow: 0px 1px 0px #efefef;
+	text-align: center;
+}
+.bumbuu_input_label_light::selection {
+	background-color: #d2d2d2;
+}
+.bumbuu_input_label_light::-moz-selection {
+	background-color: #d2d2d2;
+}
+.bumbuu_input_label_dark {
+	width: 180px;
+	min-height: 12px;
+	padding: 5px 20px 5px 20px;
+	border: 1px solid #555555;
+	background-color: #707070;
+	border-radius: 6px;
+	box-shadow: inset 0px 1px 0px #7f7f7f, inset 0px -4px 4px #6b6b6b, 0px 0px 5px #6f6f6f;
+	font-family: Arial;
+	font-size: 12px;
+	color: #dadada;
+	text-shadow: 0px 1px 0px #494949;
+	text-align: center;
+}
+.bumbuu_input_label_dark::selection {
+	background-color: #626262;
+}
+.bumbuu_input_label_dark::-moz-selection {
+	background-color: #626262;
+}

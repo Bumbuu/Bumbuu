@@ -133,10 +133,14 @@ body {
 #select_container > select.bumbuu_selectarea_light {
 	margin-top: 10px;
 }
-#stateinputs_holder > .bumbuu_input_holder {
+#stateinputs_holder > .bumbuu_input_holder,
+#input_labels > div {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
+}
+#input_labels > div:first-child {
+	margin-top: 0px;
 }
 </style>
 <script type="text/javascript" src="http://bumbuu.com/files/js/scrije.lib.js"></script>
@@ -226,7 +230,7 @@ window.onresize = initiate_default_elements;
 			</div>
 		</div>
 		<div class="container" id="labels_area">
-			<div class="container_label">Labels</div>
+			<div class="container_label">Text Labels</div>
 			<span>Within a general sentence, some words, such as </span>
 			<div class="bumbuu_labeled_item" id="labeled_item_1" to="bumbuu_label_1">
 				<span>this,</span>
@@ -303,7 +307,11 @@ window.onresize = initiate_default_elements;
 				<input class="bumbuu_input_state_light" type="text" value="State-Based Input (Invalid)" validity="invalid"></input>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container" id="input_labels">
+			<div class="container_label">Input Labels</div>
+			<div class="bumbuu_input_label_light">Bumbuu Input Label Light</div>
+			<div class="bumbuu_input_label_light">Bumbuu Input Label Light with more text that expands vertically</div>
+			<div class="bumbuu_input_label_dark">Bumbuu Input Label Dark</div>
 		</div>
 	</div>
 </div>

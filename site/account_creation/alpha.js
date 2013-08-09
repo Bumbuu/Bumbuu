@@ -8,8 +8,8 @@ signup_process = new function() {
 			username: false,
 			firstname: false,
 			lastname: false,
-			email: false
-			//gender is pre-selected
+			email: false,
+			gender: false
 		},
 		{
 			country: false,
@@ -17,7 +17,8 @@ signup_process = new function() {
 			language: false
 		},
 		{
-			password: false
+			password: false,
+			password_again: false
 			//the three options after "password" are pre-selected
 		}
 	];
@@ -60,6 +61,12 @@ signup_process = new function() {
 		});
 		$_("#signup_email").keyup(function() {
 			_this.validate(1, "email");
+		});
+		$_("#signup_password").keyup(function() {
+			_this.validate(3, "password");
+		});
+		$_("#signup_password_again").keyup(function() {
+			_this.validate(3, "password_again");
 		});
 	};
 	this.validate = function(step, name, callback_function) {
@@ -110,24 +117,53 @@ signup_process = new function() {
 					email_d.attr("validity", valid_v[step-1].email ? "valid" : "invalid");
 				});
 				break;
+			case "gender":
+				var gender_d = $_("#signup_gender");
+				valid_v[step-1].gender = (gender_d.value() !== "");
+				if (typeof callback_function !== "undefined")
+					callback_function(valid_v[step-1].gender);
+				break;
 			case "country":
 				var country_d = $_("#signup_country");
 				valid_v[step-1].country = (country_d.value() !== "");
+				if (typeof callback_function !== "undefined")
+					callback_function(valid_v[step-1].country);
 				break;
 			case "timezone":
 				var timezone_d = $_("#signup_timezone");
 				valid_v[step-1].timezone = (timezone_d.value() !== "");
+				if (typeof callback_function !== "undefined")
+					callback_function(valid_v[step-1].timezone);
 				break;
 			case "language":
 				var language_d = $_("#signup_language");
 				valid_v[step-1].language = (language_d.value() !== "");
+				if (typeof callback_function !== "undefined")
+					callback_function(valid_v[step-1].language);
 				break;
-			//add more options here...
+			case "password":
+				var password_d = $_("#signup_password");
+				var password_label = $_("#signup_password_label");
+				valid_v[step-1].password = /^([\w\W]{12,})$/.test(password_d.value());
+				if (typeof callback_function !== "undefined")
+					callback_function(valid_v[step-1].password);
+				password_label.attr("type", valid_v[step-1].password ? "valid" : "invalid");
+				break;
+			case "password_again":
+				var password_again_d = $_("#signup_password_again");
+				var password_again_label = $_("#signup_password_again_label");
+				valid_v[step-1].password_again = ($_("#signup_password").value() == password_again_d.value());
+				if (typeof callback_function !== "undefined")
+					callback_function(valid_v[step-1].password_again);
+				password_again_label.attr("type", valid_v[step-1].password_again ? "valid" : "invalid");
+				break;
 			}
 		else //validate everything for each step
 			switch(true) {
 			case (step > 2):
 				//step 3 and below stuff
+				_this.validate(3, "password");
+				_this.validate(3, "password_again");
 			case (step > 1):
 				//step 2 and below stuff
 				_this.validate(2, "country");
@@ -138,6 +174,7 @@ signup_process = new function() {
 				_this.validate(1, "username", function() {
 					_this.validate(1, "firstname");
 					_this.validate(1, "lastname");
+					_this.validate(1, "gender");
 					_this.validate(1, "email", function() {
 						//check if everything is valid
 						var everything_valid = true;
@@ -197,6 +234,10 @@ signup_process = new function() {
 	this.resize = function() {
 		if (current_step > 1)
 			$_(window).effects.scrollTo("x", $_($_(".signup_holders_holder").div[(current_step-1)]).offset().x, 618);
+	};
+	this.finish = function() {
+		//finish everything
+		
 	};
 };
 
