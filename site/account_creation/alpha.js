@@ -68,6 +68,8 @@ signup_process = new function() {
 		$_("#signup_password_again").keyup(function() {
 			_this.validate(3, "password_again");
 		});
+		//TODO: implement actual function for finish button
+		$_("#signup_finish").click(_this.test.done);
 	};
 	this.validate = function(step, name, callback_function) {
 		//name is specific element to validate
@@ -263,7 +265,7 @@ signup_process = new function() {
 					if (ajax.readyState !== 4); return;
 					if (ajax.responseText == "Registration successful.") {
 						//_this.notify(3, "success", "Registration was successful.");
-						
+						//TODO: copy code from this.test.done into here
 					} else if (ajax.responseText.substr(0, 18)  == "There was an error") {
 						if (_this.debug) console.log(ajax.responseText);
 						return _this.notify(3, "warning", "Registration was unsuccessful.");
@@ -274,6 +276,20 @@ signup_process = new function() {
 				}
 			});
 		});
+	};
+	this.test = {
+		done: function() {
+			var bthis = this;
+			//TODO: copy into response
+			$_(window).effects.scrollTo("x", $_($_(".signup_holders_holder").div[3]).offset().x, 1618, 
+			function() {
+				$_(".main_title").effects.fadeTo(0, 700, function() {
+					$_(".main_title").html("<span>You're done!!</span>");
+					$_(".main_title").effects.fadeTo(100, 700);
+				});
+				$_("#signup_epilogue").effects.fadeTo(100, 700);
+			});
+		}
 	};
 };
 
@@ -295,6 +311,5 @@ $(document).ready(function() {
 });
 
 window.onresize = function() {
-	initiate_default_elements();
 	signup_process.resize();
 };

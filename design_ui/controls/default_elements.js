@@ -52,20 +52,22 @@ function initiate_default_elements() {
 	for (var i=0; i<labels.div.length; i++) {
 		var label = $_(labels.div[i]);
 		var labeled_item = $_("#"+label.attr("for"));
-		//if (!labeled_item) continue;
+		if (!labeled_item) continue;
 		label.css("display", "block");
-		var x = labeled_item.div.getBoundingClientRect().left + labeled_item.offsetWidth()/2 - label.offsetWidth()/2,
-			y = labeled_item.div.getBoundingClientRect().top + (label.attr("type")=="above" ? -labeled_item.offsetHeight()/2 - label.offsetHeight() : labeled_item.offsetHeight()*3/2);
-		$_(labels.div[i]).css({
-			left: x+"px",
-			top: y+"px"
-		});
 		if (!labeled_item.attr("to"))
 			labeled_item.attr("to", labels.div[i].id);
 		$_(labels.div[i]).css("display", "none");
 		labeled_item.mouseover(function() {
-			var labeldiv = $_("#"+$_(this).attr("to"));
-			labeldiv.effects.fadeTo(90, 400);
+			//reposition the elements on mouseover
+			var label_d = $_("#"+$_(this).attr("to"));
+			label_d.css("display", "block");
+			var x = this.getBoundingClientRect().left + $_(this).offsetWidth()/2 - label_d.offsetWidth()/2,
+				y = this.getBoundingClientRect().top + (label_d.attr("type") == "below" ? $_(this).offsetHeight()*2 + label_d.offsetHeight() : 0);
+			label_d.css({
+				left: x+"px",
+				top: y+"px"
+			});
+			label_d.effects.fadeTo(90, 400);
 		});
 		labeled_item.mouseout(function() {
 			var labeldiv = $_("#"+$_(this).attr("to"));

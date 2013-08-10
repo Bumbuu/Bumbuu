@@ -35,7 +35,7 @@
 				<div class="signup_interaction_inside" style="margin-top: 60px;">
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
-							<input type="hidden" id="signup_session_id" style="display: none;" />
+							<input type="hidden" id="signup_session_id" />
 							<input class="bumbuu_input_light" type="text" id="signup_username" placeholder="Username" isvalidated />
 							<div class="bumbuu_input_light_right_label" id="signup_username_label">
 								<div></div>
@@ -180,9 +180,21 @@
 					</div>
 					<div class="signup_interaction_row" type="bottom">
 						<button class="bumbuu_button_dark signup_retreater" step="3">Back</button>
-						<button class="bumbuu_button_radioactive">Finish</button>
+						<button class="bumbuu_button_radioactive" id="signup_finish">Finish</button>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="signup_holders_holder">
+		<div id="signup_epilogue">
+			<div>
+				<span>We've sent you a confirmation message. Check your	</span>
+				<div class="bumbuu_labeled_item" id="labeled_item_final_email" to="item_final_email_lbl">
+					<span>email</span>
+				</div>
+				<div class="bumbuu_label" id="item_final_email_lbl" for="labeled_item_final_email" type="above">your_email</div>
+				<span>to activate your account.</span>
 			</div>
 		</div>
 	</div>

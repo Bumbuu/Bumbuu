@@ -21,8 +21,8 @@ body {
 }
 #main {
 	position: absolute;
-	width: calc(300% + 20px);
-	min-width: 3020px;
+	width: calc(400% + 40px);
+	min-width: 4040px;
 	height: 100%;
 	left: 0%;
 	top: 0px;
@@ -63,7 +63,7 @@ body {
 	background-color: none;
 }
 .signup_holders_holder {
-	width: calc((100% - 20px)/3);
+	width: calc((100% - 40px)/4);
 	min-width: 1000px;
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -302,4 +302,18 @@ img#signup_timezone_img {
 }
 #signup_timezone_label::-moz-selection {
 	background-color: #d0d0d0;
+}
+#signup_epilogue {
+	width: 500px;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	position: relative;
+	display: none;
+	font-family: Arial;
+	font-size: 16px;
+	color: #494949;
+	text-shadow: 0px 1px 0px #f3f3f3;
+	text-align: center;
 }
