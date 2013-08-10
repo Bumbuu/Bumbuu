@@ -54,8 +54,8 @@ function initiate_default_elements() {
 		var labeled_item = $_("#"+label.attr("for"));
 		//if (!labeled_item) continue;
 		label.css("display", "block");
-		var x = labeled_item.offset().x + labeled_item.offsetWidth()/2 - label.offsetWidth()/2,
-			y = labeled_item.offset().y + (label.attr("type")=="above" ? -labeled_item.offsetHeight()/2 - label.offsetHeight() : labeled_item.offsetHeight()*3/2);
+		var x = labeled_item.div.getBoundingClientRect().left + labeled_item.offsetWidth()/2 - label.offsetWidth()/2,
+			y = labeled_item.div.getBoundingClientRect().top + (label.attr("type")=="above" ? -labeled_item.offsetHeight()/2 - label.offsetHeight() : labeled_item.offsetHeight()*3/2);
 		$_(labels.div[i]).css({
 			left: x+"px",
 			top: y+"px"

@@ -170,8 +170,8 @@ if (isset($_GET['create'])) {
 				<div class="bumbuu_intext_notif" type="warning"></div>
 				<div class="signup_interaction_inside" style="margin-top: 60px;">
 					<div class="signup_interaction_row">
-						<input type="hidden" id="signup_session_id" value="<?php echo $_SESSION['form_number']; ?>"/>
 						<div class="bumbuu_input_holder">
+							<input type="hidden" id="signup_session_id" value="<?php echo $_SESSION['form_number']; ?>"/>
 							<input class="bumbuu_input_light" type="text" id="signup_username" placeholder="Username" isvalidated />
 							<div class="bumbuu_input_light_right_label" id="signup_username_label">
 								<div></div>

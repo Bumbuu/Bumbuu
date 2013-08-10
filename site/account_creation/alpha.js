@@ -262,7 +262,8 @@ signup_process = new function() {
 				readystatechange: function(ajax) {
 					if (ajax.readyState !== 4); return;
 					if (ajax.responseText == "Registration successful.") {
-						_this.notify(3, "success", "Registration was successful.");
+						//_this.notify(3, "success", "Registration was successful.");
+						
 					} else if (ajax.responseText.substr(0, 18)  == "There was an error") {
 						if (_this.debug) console.log(ajax.responseText);
 						return _this.notify(3, "warning", "Registration was unsuccessful.");
