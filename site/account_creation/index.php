@@ -53,7 +53,7 @@ if (isset($_GET['create'])) {
 		'ShowLocation'	=>	($pref_show_buzz_location == 'true' ? 'Everyone' : 'None')
 	);
 	
-	//generate salt
+	//generate random salt
 	$salt = Bumbuu::generate_salt();
 	
 	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to SQL server");
@@ -93,7 +93,7 @@ if (isset($_GET['create'])) {
 			'%s',
 			'%s',
 		 	NOW()
-		 )", $username, crypt($password, $salt), $email, $firstname, $lastname, $country, $language, $salt, $gender, $timezone, $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
+		 )", $username, hash($password.$salt), $email, $firstname, $lastname, $country, $language, $salt, $gender, $timezone, $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
 	) or die("There was an error while creating a new user: ".mysql_error());
 	//send email to user notifying them of an activation necessity
 	//TODO: specify $message
