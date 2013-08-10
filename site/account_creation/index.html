@@ -34,6 +34,7 @@
 				<div class="bumbuu_intext_notif" type="warning"></div>
 				<div class="signup_interaction_inside" style="margin-top: 60px;">
 					<div class="signup_interaction_row">
+						<input type="hidden" id="signup_session_id" />
 						<div class="bumbuu_input_holder">
 							<input class="bumbuu_input_light" type="text" id="signup_username" placeholder="Username" isvalidated />
 							<div class="bumbuu_input_light_right_label" id="signup_username_label">
@@ -100,9 +101,7 @@
 							</select>
 						</div>
 						<div class="bumbuu_input_label_dark" style="float: right; clear: none; margin-top: 3px;" orientation="left">May be unspecified.</div>
-						<div class="bumbuu_input_holder" style="display: none;">
-							<input type="hidden" id="signup_timezone" />
-						</div>
+						<input type="hidden" id="signup_timezone" />
 					</div>
 					<div class="signup_interaction_row" style="height: 12px; padding: 2px 2px 2px 10px;">
 						<p class="checkbox_label">Publicly display timezone information</p>

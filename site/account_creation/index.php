@@ -1,11 +1,9 @@
 <?php
 //the general account creation script that conducts SQL queries to update the DB with a new user
+include "../files/apis/general.php";
+session_start(); //start php session
+
 ini_set('error_reporting', E_ALL);
-if ($_SERVER['HTTP_REFERER'] !== $_SERVER['HTTP_HOST']) {
-	//prevent remote POST/GET requests
-	header("No remote access allowed.", true, 400);
-	exit;
-}
 $xml_data = simplexml_load_file("../server_info/server.conf.xml");
 $db_passwords = array();
 //populate array with user, password iznformation
@@ -15,6 +13,11 @@ foreach ($xml_data->children() as $user)
 			$db_passwords[((string)$user['name'])] = $user_attr;
 if (isset($_GET['create'])) {
 	header("Cache-Control: no-store, no-cache, must-revalidate");
+	//check for session and prevent remote POST requests
+	if (!isset($_POST['session_id']) || $_POST['session_id'] !== $_SESSION['form_number']) {
+		header("No remote access allowed.", true, 400);
+		exit;
+	}
 	$username = mysql_real_escape_string($_POST['username']);
 		!empty($username) or die("No username specified.");
 	$password = mysql_real_escape_string($_POST['password']);
@@ -51,7 +54,7 @@ if (isset($_GET['create'])) {
 	);
 	
 	//generate salt
-	$salt = "";
+	$salt = Bumbuu::generate_salt();
 	
 	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to SQL server");
 	mysql_select_db("bumbuuco_users", $con) or die("Unable to SELECT DB.");
@@ -120,6 +123,7 @@ if (isset($_GET['create'])) {
 	if (mysql_num_rows($results) > 0) exit("invalid");
 	elseif (mysql_num_rows($results) == 0) exit("valid");
 } else { //display normal page
+	$_SESSION['form_number'] = rand(0, 3600000);
 	$timezone_api_dir = "http://bumbuu.com/files/apis/timezone_picker";
 	$timezone_api_dir_relative = "../files/apis/timezone_picker";
 	date_default_timezone_set('UTC');
@@ -166,6 +170,7 @@ if (isset($_GET['create'])) {
 				<div class="bumbuu_intext_notif" type="warning"></div>
 				<div class="signup_interaction_inside" style="margin-top: 60px;">
 					<div class="signup_interaction_row">
+						<input type="hidden" id="signup_session_id" value="<?php echo $_SESSION['form_number']; ?>"/>
 						<div class="bumbuu_input_holder">
 							<input class="bumbuu_input_light" type="text" id="signup_username" placeholder="Username" isvalidated />
 							<div class="bumbuu_input_light_right_label" id="signup_username_label">
@@ -240,9 +245,7 @@ if (isset($_GET['create'])) {
 							</select>
 						</div>
 						<div class="bumbuu_input_label_dark" style="float: right; clear: none; margin-top: 3px;" orientation="left">May be unspecified.</div>
-						<div class="bumbuu_input_holder" style="display: none;">
-							<input type="hidden" id="signup_timezone" />
-						</div>
+						<input type="hidden" id="signup_timezone" />
 					</div>
 					<div class="signup_interaction_row" style="height: 12px; padding: 2px 2px 2px 10px;">
 						<p class="checkbox_label">Publicly display timezone information</p>

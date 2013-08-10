@@ -255,7 +255,8 @@ signup_process = new function() {
 					password: encodeURIComponent($_("#signup_password").value()),
 					show_buzzes: $_("#signup_show_buzzes").value() == "checked",
 					show_email: $_("#signup_show_email").value() == "checked",
-					show_buzz_location: $_("#signup_show_buzz_location").value() == "checked"
+					show_buzz_location: $_("#signup_show_buzz_location").value() == "checked",
+					session_id: $_("#signup_session_id").value()
 				},
 				headers: ["Content-Type", "application/x-www-form-urlencoded"],
 				readystatechange: function(ajax) {
