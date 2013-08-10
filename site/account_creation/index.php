@@ -87,7 +87,7 @@ if (isset($_GET['create'])) {
 			'%s',
 			'%s',
 		 	NOW()
-		 )", $username, $password, $email, $firstname, $lastname, $country, $language/*, TODO: add PSalt*/, $gender), $timezone, $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
+		 )", $username, $password, $email, $firstname, $lastname, $country, $language/*, TODO: add PSalt*/, $gender, $timezone, $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
 	) or die("There was an error while creating a new user: ".mysql_error());
 	//send email to user notifying them of an activation necessity
 	//TODO: specify $message
