@@ -1,11 +1,11 @@
 <?php
 //the general account creation script that conducts SQL queries to update the DB with a new user
-//ini_set('error_reporting', E_ALL);
-/*if ($_SERVER['HTTP_REFERER'] !== $_SERVER['HTTP_HOST']) {
+ini_set('error_reporting', E_ALL);
+if ($_SERVER['HTTP_REFERER'] !== $_SERVER['HTTP_HOST']) {
 	//prevent remote POST/GET requests
 	header("No remote access allowed.", true, 400);
 	exit;
-} TODO: fix */
+}
 $xml_data = simplexml_load_file("../server_info/server.conf.xml");
 $db_passwords = array();
 //populate array with user, password iznformation
@@ -49,7 +49,10 @@ if (isset($_GET['create'])) {
 		'ShowEmail'		=>	($pref_show_email == 'true' ? 'Everyone' : 'None'),
 		'ShowLocation'	=>	($pref_show_buzz_location == 'true' ? 'Everyone' : 'None')
 	);
-		
+	
+	//generate salt
+	$salt = "";
+	
 	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to SQL server");
 	mysql_select_db("bumbuuco_users", $con) or die("Unable to SELECT DB.");
 	$results = mysql_query(
@@ -87,7 +90,7 @@ if (isset($_GET['create'])) {
 			'%s',
 			'%s',
 		 	NOW()
-		 )", $username, $password, $email, $firstname, $lastname, $country, $language/*, TODO: add PSalt*/, $gender, $timezone, $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
+		 )", $username, crypt($password, $salt), $email, $firstname, $lastname, $country, $language, $salt, $gender, $timezone, $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
 	) or die("There was an error while creating a new user: ".mysql_error());
 	//send email to user notifying them of an activation necessity
 	//TODO: specify $message
