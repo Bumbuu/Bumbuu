@@ -3,6 +3,7 @@
 signup_process = new function() {
 	var _this = this;
 	var current_step = 1;
+	var is_finished = false;
 	var valid_v = [
 		{
 			username: false,
@@ -34,7 +35,7 @@ signup_process = new function() {
 			$_(next_buttons[i]).click(function() {
 				var step_i = parseInt($_(this).attr("step"));
 				_this.validate(step_i, "all", function(is_valid) {
-					if (!is_valid && !_this.debug) return _this.notify(step_i, "warning", "Some values are invalid/blank. Please fix them before continuing."); //NOTE: change to if (is_valid) return; for debugging
+					if (!is_valid) return _this.debug ? _this.notify(step_i, "warning", "Some values are invalid/blank. Please fix them before continuing.") : false; //NOTE: change to if (is_valid) return; for debugging
 					var next_signup_d = $_(".signup_holders_holder").div[step_i];
 					var pos_x = $_(next_signup_d).offset().x;
 					$_(window).effects.scrollTo("x", pos_x, 1618);
@@ -68,8 +69,7 @@ signup_process = new function() {
 		$_("#signup_password_again").keyup(function() {
 			_this.validate(3, "password_again");
 		});
-		//TODO: implement actual function for finish button
-		$_("#signup_finish").click(_this.test.done);
+		$_("#signup_finish").click(_this.finish);
 	};
 	this.validate = function(step, name, callback_function) {
 		//name is specific element to validate
@@ -154,7 +154,7 @@ signup_process = new function() {
 			case "password_again":
 				var password_again_d = $_("#signup_password_again");
 				var password_again_label = $_("#signup_password_again_label");
-				valid_v[step-1].password_again = ($_("#signup_password").value() == password_again_d.value());
+				valid_v[step-1].password_again = ($_("#signup_password").value() == password_again_d.value() && $_("#signup_password").value() !== "");
 				if (typeof callback_function !== "undefined")
 					callback_function(valid_v[step-1].password_again);
 				password_again_label.attr("type", valid_v[step-1].password_again ? "valid" : "invalid");
@@ -234,11 +234,14 @@ signup_process = new function() {
 		});
 	};
 	this.resize = function() {
-		if (current_step > 1)
+		if (is_finished)
+			$_(window).effects.scrollTo("x", $_($_(".signup_holders_holder").div[3]).offset().x, 618);
+		else if (current_step > 1)
 			$_(window).effects.scrollTo("x", $_($_(".signup_holders_holder").div[(current_step-1)]).offset().x, 618);
 	};
 	this.finish = function() {
-		//finish everything
+		//finalize the user registration process
+		if (is_finished) return;
 		_this.validate(3, "all", function(is_valid) {
 			if (!is_valid) return _this.notify(3, "warning", "Please correct some things first.");
 			$_.req({ //send request for a new user
@@ -262,11 +265,19 @@ signup_process = new function() {
 				},
 				headers: ["Content-Type", "application/x-www-form-urlencoded"],
 				readystatechange: function(ajax) {
-					if (ajax.readyState !== 4); return;
+					if (ajax.readyState !== 4) return;
 					if (ajax.responseText == "Registration successful.") {
-						//_this.notify(3, "success", "Registration was successful.");
-						//TODO: copy code from this.test.done into here
-					} else if (ajax.responseText.substr(0, 18)  == "There was an error") {
+						//successful registration
+						is_finished = true;
+						$_(window).effects.scrollTo("x", $_($_(".signup_holders_holder").div[3]).offset().x, 1618, 
+						function() {
+							$_(".main_title").effects.fadeTo(0, 700, function() {
+								$_(".main_title").html("<span>You're done!!</span>");
+								$_(".main_title").effects.fadeTo(100, 700);
+							});
+							$_("#signup_epilogue").effects.fadeTo(100, 700);
+						});
+					} else if (ajax.responseText.substr(0, 18) == "There was an error") {
 						if (_this.debug) console.log(ajax.responseText);
 						return _this.notify(3, "warning", "Registration was unsuccessful.");
 					} else {
@@ -276,20 +287,6 @@ signup_process = new function() {
 				}
 			});
 		});
-	};
-	this.test = {
-		done: function() {
-			var bthis = this;
-			//TODO: copy into response
-			$_(window).effects.scrollTo("x", $_($_(".signup_holders_holder").div[3]).offset().x, 1618, 
-			function() {
-				$_(".main_title").effects.fadeTo(0, 700, function() {
-					$_(".main_title").html("<span>You're done!!</span>");
-					$_(".main_title").effects.fadeTo(100, 700);
-				});
-				$_("#signup_epilogue").effects.fadeTo(100, 700);
-			});
-		}
 	};
 };
 

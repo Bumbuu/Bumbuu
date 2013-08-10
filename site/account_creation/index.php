@@ -1,7 +1,8 @@
 <?php
 //the general account creation script that conducts SQL queries to update the DB with a new user
 include "../files/apis/general.php";
-session_start(); //start php session
+if (!isset($_SESSION))
+	session_start(); //start php session
 
 ini_set('error_reporting', E_ALL);
 $xml_data = simplexml_load_file("../server_info/server.conf.xml");
@@ -14,35 +15,35 @@ foreach ($xml_data->children() as $user)
 if (isset($_GET['create'])) {
 	header("Cache-Control: no-store, no-cache, must-revalidate");
 	//check for session and prevent remote POST requests
-	if (!isset($_POST['session_id']) || $_POST['session_id'] !== $_SESSION['form_number']) {
+	if (!isset($_POST['session_id']) || intval($_POST['session_id']) !== $_SESSION['form_number']) {
 		header("No remote access allowed.", true, 400);
 		exit;
 	}
-	$username = mysql_real_escape_string($_POST['username']);
+	$username = $_POST['username'];
 		!empty($username) or die("No username specified.");
-	$password = mysql_real_escape_string($_POST['password']);
+	$password = $_POST['password'];
 		!empty($password) or die("No password specified.");
-	$email = mysql_real_escape_string($_POST['email']);
+	$email = $_POST['email'];
 		!empty($email) or die("No email specified.");
-	$country = mysql_real_escape_string($_POST['country']);
-		!empty($country) or die("No country specified.");
-	$gender = mysql_real_escape_string($_POST['gender']);
+	$country_code = $_POST['country'];
+		!empty($country_code) or die("No country specified.");
+	$gender = $_POST['gender'];
 		!empty($gender) or die("No gender information specified.");
-	$firstname = mysql_real_escape_string($_POST['firstname']);
+	$firstname = $_POST['firstname'];
 		!empty($firstname) or die("No first name given.");
-	$lastname = mysql_real_escape_string($_POST['lastname']);
+	$lastname = $_POST['lastname'];
 		!empty($lastname) or die("No last name given.");
-	$language = mysql_real_escape_string($_POST['language']);
+	$language = $_POST['language'];
 		!empty($language) or die("No language given.");
-	$time_offset = mysql_real_escape_string($_POST['timezone']);
+	$time_offset = $_POST['timezone'];
 		!empty($time_offset) or die("No timezone information specified.");
-	$pref_show_timezone = mysql_real_escape_string($_POST['reveal_timezone']);
+	$pref_show_timezone = $_POST['reveal_timezone'];
 		!empty($pref_show_timezone) or die("No timezone privacy specified.");
-	$pref_show_buzzes = mysql_real_escape_string($_POST['show_buzzes']);
+	$pref_show_buzzes = $_POST['show_buzzes'];
 		!empty($pref_show_buzzes) or die("No buzz privacy specified.");
-	$pref_show_email = mysql_real_escape_string($_POST['show_email']);
+	$pref_show_email = $_POST['show_email'];
 		!empty($pref_show_email) or die("No email privacy specified.");
-	$pref_show_buzz_location = mysql_real_escape_string($_POST['show_buzz_location']);
+	$pref_show_buzz_location = $_POST['show_buzz_location'];
 		!empty($pref_show_buzz_location) or die("No buzz location privacy specified.");
 	
 	//preferences
@@ -56,9 +57,16 @@ if (isset($_GET['create'])) {
 	//generate random salt
 	$salt = Bumbuu::generate_salt();
 	
-	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to SQL server");
-	mysql_select_db("bumbuuco_users", $con) or die("Unable to SELECT DB.");
-	$results = mysql_query(
+	$con_sd = mysql_connect("localhost", "bumbuuco_sendata", $db_passwords["bumbuuco_sendata"]) or die("Unable to connect to server.");
+	mysql_select_db("bumbuuco_miscInfo", $con_sd) or die("unable to select DB.");
+	$res = mysql_query(	sprintf("SELECT Fullname FROM country_info WHERE Shortname='%s' LIMIT 1", mysql_real_escape_string($country_code)) );
+	$row = mysql_fetch_assoc($res);
+	$country = $row["Fullname"];
+	mysql_close($con_sd);
+	
+	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to server");
+	mysql_select_db("bumbuuco_users", $con) or die("Unable to select DB.");
+	mysql_query(
 		sprintf(
 		"INSERT INTO userlist(
 			Username,
@@ -93,7 +101,7 @@ if (isset($_GET['create'])) {
 			'%s',
 			'%s',
 		 	NOW()
-		 )", $username, hash($password.$salt), $email, $firstname, $lastname, $country, $language, $salt, $gender, $timezone, $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
+		 )", mysql_real_escape_string($username), hash("sha256", $password.$salt), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), $country, mysql_real_escape_string($language), $salt, mysql_real_escape_string($gender), mysql_real_escape_string($time_offset), $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
 	) or die("There was an error while creating a new user: ".mysql_error());
 	//send email to user notifying them of an activation necessity
 	//TODO: specify $message
@@ -123,7 +131,8 @@ if (isset($_GET['create'])) {
 	if (mysql_num_rows($results) > 0) exit("invalid");
 	elseif (mysql_num_rows($results) == 0) exit("valid");
 } else { //display normal page
-	$_SESSION['form_number'] = rand(0, 3600000);
+	if (!isset($_SESSION['form_number']))
+		$_SESSION['form_number'] = rand(0, 3600000);
 	$timezone_api_dir = "http://bumbuu.com/files/apis/timezone_picker";
 	$timezone_api_dir_relative = "../files/apis/timezone_picker";
 	date_default_timezone_set('UTC');
@@ -223,7 +232,7 @@ if (isset($_GET['create'])) {
 						<span>privacy policy.</span>
 					</div>
 					Language information is useful in customizing content on Bumbuu to a preferred language. Support for languages other than English on Bumbuu is currently non-existent, although it is a planned feature. For now, the option has no effect.
-					<div class="bumbuu_label" id="privacy_policy_label" for="privacy_policy_labeled_item" type="above">Privacy Policy</div>
+					<div class="bumbuu_label" id="privacy_policy_label" for="privacy_policy_labeled_item" type="above">Not available yet. Sorry!</div>
 				</div>
 			</div>
 			<div>
@@ -331,9 +340,21 @@ if (isset($_GET['create'])) {
 					</div>
 					<div class="signup_interaction_row" type="bottom">
 						<button class="bumbuu_button_dark signup_retreater" step="3">Back</button>
-						<button class="bumbuu_button_radioactive">Finish</button>
+						<button class="bumbuu_button_radioactive" id="signup_finish">Finish</button>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="signup_holders_holder">
+		<div id="signup_epilogue">
+			<div>
+				<span>We've sent you a confirmation message. Check your	</span>
+				<div class="bumbuu_labeled_item" id="labeled_item_final_email" to="item_final_email_lbl" style="display: inline-block;">
+					<span>email</span>
+				</div>
+				<div class="bumbuu_label" id="item_final_email_lbl" for="labeled_item_final_email" type="above"></div>
+				<span>to activate your account.</span>
 			</div>
 		</div>
 	</div>

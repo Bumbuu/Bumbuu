@@ -317,3 +317,9 @@ img#signup_timezone_img {
 	text-shadow: 0px 1px 0px #f3f3f3;
 	text-align: center;
 }
+div.bumbuu_label {
+	box-shadow: inset 0px 1px 0px #555555, 0px 0px 5px #202020;
+}
+.bumbuu_intext_notif {
+	z-index: 12;
+}
