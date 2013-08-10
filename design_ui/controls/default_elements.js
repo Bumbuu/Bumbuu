@@ -60,9 +60,10 @@ function initiate_default_elements() {
 		labeled_item.mouseover(function() {
 			//reposition the elements on mouseover
 			var label_d = $_("#"+$_(this).attr("to"));
+			var this_item = this.querySelector("span");
 			label_d.css("display", "block");
-			var x = this.getBoundingClientRect().left + $_(this).offsetWidth()/2 - label_d.offsetWidth()/2,
-				y = this.getBoundingClientRect().top + (label_d.attr("type") == "below" ? $_(this).offsetHeight()*2 + label_d.offsetHeight() : 0);
+			var x = this_item.getBoundingClientRect().left + this_item.getBoundingClientRect().width/2 - label_d.offsetWidth()/2,
+				y = (label_d.attr("type") == "below" ? this_item.getBoundingClientRect().top + this_item.getBoundingClientRect().height + 10 : this_item.getBoundingClientRect().top - label_d.offsetHeight() - 10);
 			label_d.css({
 				left: x+"px",
 				top: y+"px"
