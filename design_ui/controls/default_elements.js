@@ -72,6 +72,7 @@ function initiate_default_elements() {
 			labeldiv.effects.fadeTo(0, 400);
 		});
 	}
+	//checkboxes
 	var checkboxes = $_(".bumbuu_checkbox_light, .bumbuu_checkbox_dark");
 	for (var i=0; i<checkboxes.div.length; i++)
 		$_(checkboxes.div[i]).click(function() {

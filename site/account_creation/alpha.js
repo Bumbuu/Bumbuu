@@ -158,7 +158,7 @@ signup_process = new function() {
 				password_again_label.attr("type", valid_v[step-1].password_again ? "valid" : "invalid");
 				break;
 			}
-		else //validate everything for each step
+		else if (name == "all") //validate everything for each step
 			switch(true) {
 			case (step > 2):
 				//step 3 and below stuff
@@ -237,7 +237,40 @@ signup_process = new function() {
 	};
 	this.finish = function() {
 		//finish everything
-		
+		_this.validate(3, "all", function(is_valid) {
+			if (!is_valid) return _this.notify(3, "warning", "Please correct some things first.");
+			$_.req({ //send request for a new user
+				url: "index.php?create",
+				method: "post",
+				data: {
+					username: encodeURIComponent($_("#signup_username").value()),
+					firstname: encodeURIComponent($_("#signup_firstname").value()),
+					lastname: encodeURIComponent($_("#signup_lastname").value()),
+					email: encodeURIComponent($_("#signup_email").value()),
+					gender: encodeURIComponent($_("#signup_gender").value()),
+					country: encodeURIComponent($_("#signup_country").value()),
+					timezone: encodeURIComponent($_("#signup_timezone").value()),
+					reveal_timezone: $_("#signup_reveal_timezone").value() == "checked",
+					language: encodeURIComponent($_("#signup_language").value()),
+					password: encodeURIComponent($_("#signup_password").value()),
+					show_buzzes: $_("#signup_show_buzzes").value() == "checked",
+					show_email: $_("#signup_show_email").value() == "checked",
+					show_buzz_location: $_("#signup_show_buzz_location").value() == "checked"
+				},
+				headers: ["Content-Type", "application/x-www-form-urlencoded"],
+				readystatechange: function(ajax) {
+					if (ajax.readyState !== 4); return;
+					if (ajax.responseText == "Registration successful.") {
+						_this.notify(3, "success", "Registration was successful.");
+					} else if (ajax.responseText == "Registration unsuccessful.")
+						return _this.notify(3, "warning", "Registration was unsuccessful.");
+					else {
+						if (_this.debug) console.log(ajax.responseText);
+						return _this.notify(3, "warning", "An error occurred during registration.");
+					}
+				}
+			});
+		});
 	};
 };
 

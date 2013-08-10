@@ -41,6 +41,7 @@ Format: <br>
 *	Bio: **VARCHAR(1024)** (autobiographical component)
 <br>_Note that all preferences from here on will be denoted with the prefix "Pref\_"_
 *	Pref\_TimeOffset: **VARCHAR(48)** (PHP timezone; i.e. America/New_York; see [PHP Timezones](http://php.net/manual/en/timezones.php))
+*	Pref\_ShowTimeOffset: **ENUM('Everyone', 'OnlyFollowers', 'None')** (default is Everyone)
 *	Pref\_ShowEmail: **ENUM('Everyone', 'OnlyFollowers', 'None')** (default is Everyone)
 *	Pref\_ShowBuzzes: **ENUM('Everyone', 'OnlyFollowers', 'None')** (default is Everyone)
 *	Pref\_ShowBuzzLocation: **ENUM('Everyone', 'OnlyFollowers', 'None')** (Involves decision to show location in buzzes, but is **not retroactive**; default is OnlyFollowers)

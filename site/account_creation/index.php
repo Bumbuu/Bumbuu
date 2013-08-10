@@ -24,7 +24,19 @@ if (isset($_GET['create'])) {
 	$lastname = $_POST['lastname'] or die("No last name given.");
 	$language = $_POST['language'] or die("No language given.");
 	$time_offset = $_POST['timezone'] or die("No timezone information specified.");
+	$pref_show_timezone = $_POST['reveal_timezone'] or die("No timezone privacy specified.");
+	$pref_show_buzzes = $_POST['show_buzzes'] or die("No buzz privacy specified.");
+	$pref_show_email = $_POST['show_email'] or die("No email privacy specified.");
+	$pref_show_buzz_location = $_POST['show_buzz_location'] or die("No buzz location privacy specified.");
 	
+	//preferences
+	$preferences = array(
+		'ShowTimezone'	=>	($pref_show_timezone == 'true' ? 'Everyone' : 'None'),
+		'ShowBuzzes'	=>	($pref_show_buzzes == 'true' ? 'Everyone' : 'None'),
+		'ShowEmail'		=>	($pref_show_email == 'true' ? 'Everyone' : 'None'),
+		'ShowLocation'	=>	($pref_show_buzz_location == 'true' ? 'Everyone' : 'None')
+	);
+		
 	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to SQL server");
 	mysql_select_db("bumbuuco_users", $con) or die("Unable to SELECT DB.");
 	$results = mysql_query(
@@ -40,21 +52,29 @@ if (isset($_GET['create'])) {
 			PSalt,
 			Gender,
 			Pref_TimeOffset,
+			Pref_ShowTimeOffset,
+			Pref_ShowEmail,
+			Pref_ShowBuzzes,
+			Pref_ShowBuzzLocation,
 			JoinDate
 		 ) 
 		 VALUES(
-		 	'%s', 
-		 	'%s', 
-		 	'%s', 
-		 	'%s', 
-		 	'%s', 
-		 	'%s', 
-		 	'%s',
-		 	'%s',
-		 	'%s',
-		 	'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
 		 	NOW()
-		 )", mysql_real_escape_string($username), mysql_real_escape_string($password), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), mysql_real_escape_string($country), mysql_real_escape_string($language)/*, TODO: add PSalt*/, mysql_real_escape_string($gender), mysql_real_escape_string($timezone))
+		 )", mysql_real_escape_string($username), mysql_real_escape_string($password), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), mysql_real_escape_string($country), mysql_real_escape_string($language)/*, TODO: add PSalt*/, mysql_real_escape_string($gender), mysql_real_escape_string($timezone), $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
 	) or die ("There was an error while creating a new user: ".mysql_error());
 	//TODO: send email to user for confirmation and activation
 } elseif (isset($_GET['validate'])) {
@@ -126,6 +146,7 @@ if (isset($_GET['create'])) {
 								<div></div>
 							</div>
 						</div>
+						<div class="bumbuu_input_label_light" style="float: right; clear: none; margin-top: 2px;" orientation="left">Unique and alphanumeric.</div>
 					</div>
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
@@ -143,7 +164,8 @@ if (isset($_GET['create'])) {
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
 							<select class="bumbuu_selectarea_light" id="signup_gender">
-								<option value="Unspecified" selected>Unspecified</option>
+								<option value="" selected>Choose a gender</option>
+								<option value="Unspecified">Unspecified</option>
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
 							</select>
@@ -164,7 +186,7 @@ if (isset($_GET['create'])) {
 				<div class="signup_info_title">Localization</div>
 				<div class="signup_info_description">
 					<span>
-					Location and timezone information is crucial for localization of times and content in Bumbuu. Due to the inherent importance of privacy, however, if you wish not to reveal any potentially sensitive information then you are provided with the option of leaving these fields as unspecified. For more information on Bumbuu's ideals of privacy, please consult the
+					Location and timezone information is crucial for localization of times and content in Bumbuu. Due to the inherent importance of privacy, however, if you wish not to reveal any potentially sensitive information then you are provided with the option of leaving certain fields as unspecified. For more information on Bumbuu's ideals of privacy, please consult the
 					</span>
 					<div class="bumbuu_labeled_item" id="privacy_policy_labeled_item" to="privacy_policy_label">
 						<span>privacy policy.</span>
@@ -179,7 +201,8 @@ if (isset($_GET['create'])) {
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
 							<select class="bumbuu_selectarea_light" id="signup_country">
-								<option value="" selected="selected">Select a country</option>
+								<option value="" selected=>Select a country</option>
+								<option value="Unspecified">Unspecified</option>
 <?php
 									$con = mysql_connect("localhost","bumbuuco_sendata",$db_passwords["bumbuuco_sendata"]) or die("Unable to connect to SQL server");
 									mysql_select_db("bumbuuco_miscInfo", $con) or die("Unable to SELECT DB.");
@@ -190,13 +213,14 @@ if (isset($_GET['create'])) {
 								?>
 							</select>
 						</div>
-						<div class="bumbuu_input_holder">
+						<div class="bumbuu_input_label_dark" style="float: right; clear: none; margin-top: 3px;" orientation="left">May be unspecified.</div>
+						<div class="bumbuu_input_holder" style="display: none;">
 							<input type="hidden" id="signup_timezone" />
 						</div>
 					</div>
 					<div class="signup_interaction_row" style="height: 12px; padding: 2px 2px 2px 10px;">
-						<p class="checkbox_label">Reveal timezone information</p>
-						<div class="bumbuu_checkbox_light" value="checked"><div></div><div></div></div>
+						<p class="checkbox_label">Publicly display timezone information</p>
+						<div class="bumbuu_checkbox_light" id="signup_reveal_timezone" value="checked"><div></div><div></div></div>
 					</div>
 					<div id="signup_timezone_holder">
 						<img id="signup_timezone_img" usemap="#timezone-map" src="<?php print $scaled_timezone_image; ?>" />
@@ -233,13 +257,52 @@ if (isset($_GET['create'])) {
 		<div class="step_counter">3</div>
 		<div class="signup_holder">
 			<div>
+				<div class="signup_info_title">Security and Privacy</div>
+				<div class="signup_info_description">
+					Some information we need to protect your account from impersonation and theft, as well as provide any personally-preferred privacy options. Bumbuu takes privacy very seriously. As such, unlike other social networks, any options set here will be honored in their most literal respect, without disregard to the user's preference. 
+				</div>
 			</div>
 			<div>
 				<div class="bumbuu_intext_notif" type="warning"></div>
-				<div class="signup_interaction_inside">
+				<div class="signup_interaction_inside" style="margin-top: 10px;">
+					<div class="signup_interaction_row">
+						<div class="bumbuu_input_holder">
+							<input class="bumbuu_input_light" type="password" id="signup_password" placeholder="Password" isvalidated />
+							<div class="bumbuu_input_light_right_label" id="signup_password_label">
+								<div></div>
+							</div>
+						</div>
+						<div class="bumbuu_input_label_light" style="float: right; clear: none; margin-top: 2px;" orientation="left">At least 12 characters.</div>
+					</div>
+					<div class="signup_interaction_row">
+						<div class="bumbuu_input_holder">
+							<input class="bumbuu_input_light" type="password" id="signup_password_again" placeholder="Password (Again)" isvalidated />
+							<div class="bumbuu_input_light_right_label" id="signup_password_again_label">
+								<div></div>
+							</div>
+						</div>
+					</div>
+					<div class="signup_interaction_row">
+						<div class="signup_interaction_row" style="height: 12px; padding: 2px 2px 2px 10px;">
+							<p class="checkbox_label">Show buzzes publicly</p>
+							<div class="bumbuu_checkbox_light" id="signup_show_buzzes" value="checked"><div></div><div></div></div>
+						</div>
+					</div>
+					<div class="signup_interaction_row">
+						<div class="signup_interaction_row" style="height: 12px; padding: 2px 2px 2px 10px;">
+							<p class="checkbox_label">Show email publicly</p>
+							<div class="bumbuu_checkbox_light" id="signup_show_email" value="checked"><div></div><div></div></div>
+						</div>
+					</div>
+					<div class="signup_interaction_row">
+						<div class="signup_interaction_row" style="height: 12px; padding: 2px 2px 2px 10px;">
+							<p class="checkbox_label">Display location publicly in buzzes</p>
+							<div class="bumbuu_checkbox_light" id="signup_show_buzz_location" value="checked"><div></div><div></div></div>
+						</div>
+					</div>
 					<div class="signup_interaction_row" type="bottom">
 						<button class="bumbuu_button_dark signup_retreater" step="3">Back</button>
-						<span></span>
+						<button class="bumbuu_button_radioactive">Finish</button>
 					</div>
 				</div>
 			</div>

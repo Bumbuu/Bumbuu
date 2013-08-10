@@ -40,6 +40,7 @@
 								<div></div>
 							</div>
 						</div>
+						<div class="bumbuu_input_label_light" style="float: right; clear: none; margin-top: 2px;" orientation="left">Unique and alphanumeric.</div>
 					</div>
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
@@ -79,7 +80,7 @@
 				<div class="signup_info_title">Localization</div>
 				<div class="signup_info_description">
 					<span>
-					Location and timezone information is crucial for localization of times and content in Bumbuu. Due to the inherent importance of privacy, however, if you wish not to reveal any potentially sensitive information then you are provided with the option of leaving these fields as unspecified. For more information on Bumbuu's ideals of privacy, please consult the
+					Location and timezone information is crucial for localization of times and content in Bumbuu. Due to the inherent importance of privacy, however, if you wish not to reveal any potentially sensitive information then you are provided with the option of leaving certain fields as unspecified. For more information on Bumbuu's ideals of privacy, please consult the
 					</span>
 					<div class="bumbuu_labeled_item" id="privacy_policy_labeled_item" to="privacy_policy_label">
 						<span>privacy policy.</span>
@@ -94,15 +95,17 @@
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
 							<select class="bumbuu_selectarea_light" id="signup_country">
-								<option value="" selected="selected">Select a country</option>
+								<option value="" selected=>Select a country</option>
+								<option value="Unspecified">Unspecified</option>
 							</select>
 						</div>
-						<div class="bumbuu_input_holder">
+						<div class="bumbuu_input_label_dark" style="float: right; clear: none; margin-top: 3px;" orientation="left">May be unspecified.</div>
+						<div class="bumbuu_input_holder" style="display: none;">
 							<input type="hidden" id="signup_timezone" />
 						</div>
 					</div>
 					<div class="signup_interaction_row" style="height: 12px; padding: 2px 2px 2px 10px;">
-						<p class="checkbox_label">Reveal timezone information</p>
+						<p class="checkbox_label">Publicly display timezone information</p>
 						<div class="bumbuu_checkbox_light" id="signup_reveal_timezone" value="checked"><div></div><div></div></div>
 					</div>
 					<div id="signup_timezone_holder">
@@ -148,6 +151,7 @@
 								<div></div>
 							</div>
 						</div>
+						<div class="bumbuu_input_label_light" style="float: right; clear: none; margin-top: 2px;" orientation="left">At least 12 characters.</div>
 					</div>
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
