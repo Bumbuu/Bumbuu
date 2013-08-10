@@ -15,19 +15,32 @@ foreach ($xml_data->children() as $user)
 			$db_passwords[((string)$user['name'])] = $user_attr;
 if (isset($_GET['create'])) {
 	header("Cache-Control: no-store, no-cache, must-revalidate");
-	$username = $_POST['username'] or die("No username specified.");
-	$password = $_POST['password'] or die("No password specified.");
-	$email = $_POST['email'] or die("No email specified.");
-	$country = $_POST['country'] or die("No country specified.");
-	$gender = $_POST['gender'] or die("No gender information specified.");
-	$firstname = $_POST['firstname'] or die("No first name given.");
-	$lastname = $_POST['lastname'] or die("No last name given.");
-	$language = $_POST['language'] or die("No language given.");
-	$time_offset = $_POST['timezone'] or die("No timezone information specified.");
-	$pref_show_timezone = $_POST['reveal_timezone'] or die("No timezone privacy specified.");
-	$pref_show_buzzes = $_POST['show_buzzes'] or die("No buzz privacy specified.");
-	$pref_show_email = $_POST['show_email'] or die("No email privacy specified.");
-	$pref_show_buzz_location = $_POST['show_buzz_location'] or die("No buzz location privacy specified.");
+	$username = mysql_real_escape_string($_POST['username']);
+		!empty($username) or die("No username specified.");
+	$password = mysql_real_escape_string($_POST['password']);
+		!empty($password) or die("No password specified.");
+	$email = mysql_real_escape_string($_POST['email']);
+		!empty($email) or die("No email specified.");
+	$country = mysql_real_escape_string($_POST['country']);
+		!empty($country) or die("No country specified.");
+	$gender = mysql_real_escape_string($_POST['gender']);
+		!empty($gender) or die("No gender information specified.");
+	$firstname = mysql_real_escape_string($_POST['firstname']);
+		!empty($firstname) or die("No first name given.");
+	$lastname = mysql_real_escape_string($_POST['lastname']);
+		!empty($lastname) or die("No last name given.");
+	$language = mysql_real_escape_string($_POST['language']);
+		!empty($language) or die("No language given.");
+	$time_offset = mysql_real_escape_string($_POST['timezone']);
+		!empty($time_offset) or die("No timezone information specified.");
+	$pref_show_timezone = mysql_real_escape_string($_POST['reveal_timezone']);
+		!empty($pref_show_timezone) or die("No timezone privacy specified.");
+	$pref_show_buzzes = mysql_real_escape_string($_POST['show_buzzes']);
+		!empty($pref_show_buzzes) or die("No buzz privacy specified.");
+	$pref_show_email = mysql_real_escape_string($_POST['show_email']);
+		!empty($pref_show_email) or die("No email privacy specified.");
+	$pref_show_buzz_location = mysql_real_escape_string($_POST['show_buzz_location']);
+		!empty($pref_show_buzz_location) or die("No buzz location privacy specified.");
 	
 	//preferences
 	$preferences = array(
@@ -74,9 +87,19 @@ if (isset($_GET['create'])) {
 			'%s',
 			'%s',
 		 	NOW()
-		 )", mysql_real_escape_string($username), mysql_real_escape_string($password), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), mysql_real_escape_string($country), mysql_real_escape_string($language)/*, TODO: add PSalt*/, mysql_real_escape_string($gender), mysql_real_escape_string($timezone), $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
-	) or die ("There was an error while creating a new user: ".mysql_error());
-	//TODO: send email to user for confirmation and activation
+		 )", $username, $password, $email, $firstname, $lastname, $country, $language/*, TODO: add PSalt*/, $gender), $timezone, $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
+	) or die("There was an error while creating a new user: ".mysql_error());
+	//send email to user notifying them of an activation necessity
+	//TODO: specify $message
+	$message = "Congratulations, $firstname $lastname, on successfully registering for Bumbuu."; //separate with \r\n for each line; no longer than 70 chars
+	
+	$headers  = 'MIME-Version: 1.0' . "\r\n"; //separate with \r\n for each header
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'To: '. $username .' <'. $email .'>' . "\r\n";
+	$headers .= 'From: Bumbuu <bumbuu.com>' . "\r\n";
+	
+	mail($email, "Bumbuu Alpha - Activation Required", $message, $headers);
+	exit("Registration successful.");
 } elseif (isset($_GET['validate'])) {
 	header("Cache-Control: no-store, no-cache, must-revalidate");
 	header("Content-Type: text/plain");
