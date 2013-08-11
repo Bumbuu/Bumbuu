@@ -258,10 +258,10 @@ signup_process = new function() {
 					reveal_timezone: $_("#signup_reveal_timezone").value() == "checked",
 					language: encodeURIComponent($_("#signup_language").value()),
 					password: encodeURIComponent($_("#signup_password").value()),
-					show_buzzes: $_("#signup_show_buzzes").value() == "checked",
-					show_email: $_("#signup_show_email").value() == "checked",
-					show_buzz_location: $_("#signup_show_buzz_location").value() == "checked",
-					session_id: $_("#signup_session_id").value()
+					show_buzzes: encodeURIComponent($_("#signup_show_buzzes").attr("value") == "checked"),
+					show_email: encodeURIComponent($_("#signup_show_email").attr("value") == "checked"),
+					show_buzz_location: encodeURIComponent($_("#signup_show_buzz_location").attr("value") == "checked"),
+					session_id: encodeURIComponent($_("#signup_session_id").value())
 				},
 				headers: ["Content-Type", "application/x-www-form-urlencoded"],
 				readystatechange: function(ajax) {
@@ -275,6 +275,7 @@ signup_process = new function() {
 								$_(".main_title").html("<span>You're done!!</span>");
 								$_(".main_title").effects.fadeTo(100, 700);
 							});
+							$_("#item_final_email_lbl").html($_("#signup_email").value());
 							$_("#signup_epilogue").effects.fadeTo(100, 700);
 						});
 					} else if (ajax.responseText.substr(0, 18) == "There was an error") {

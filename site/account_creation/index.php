@@ -16,16 +16,83 @@ foreach ($xml_data->children() as $user)
 if ( isset($_GET['activate']) && !empty($_GET['activate']) && !empty($_GET['u']) ) {
 	//activate account
 	header("Cache-Control: no-store, no-cache, must-revalidate");
+	$response_text = "";
+	$success = false;
 	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to server");
 	mysql_select_db("bumbuuco_users", $con) or die("Unable to select DB.");
-	if ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%d AND Active=0", intval(mysql_real_escape_string($_GET['u']))))) == 0 )
-		exit("That account has already been activated");
-	elseif ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%i AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate']))) or die(mysql_error())) == 0 )
-		exit("No account exists.");
-	mysql_query( sprintf("UPDATE userlist SET Active=1 WHERE UserID=%i AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate'])) ) or die(mysql_error());
+	if ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%d AND Active=0", intval(mysql_real_escape_string($_GET['u']))))) == 0 ) {
+		$response_text = "That account has already been activated";
+		$success = true;
+	} elseif ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%d AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate']))) or die(mysql_error())) == 0 ) {
+		$response_text = "No account exists.";
+		$success = false;
+	} else {
+		mysql_query( sprintf("UPDATE userlist SET Active=1 WHERE UserID=%d AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate'])) ) or die(mysql_error());
 	
-	mysql_close($con);
-	exit("Your account has been successfully activated.");
+		mysql_close($con);
+		$response_text = "Your account has been successfully activated.";
+		$success = true;
+	}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Account Activation</title>
+<meta charset="utf-8">
+<link rel="StyleSheet" type="text/css" href="alpha.css" />
+<style type="text/css">
+#activation_container {
+	width: 400px;
+	height: 14px;
+	padding: 10px;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-family: Arial;
+	font-size: 14px;
+	color: #444;
+	text-shadow: 0px 1px 0px #f0f0f0;
+	text-align: center;
+}
+#activation_container span::selection {
+	background-color: #d7d7d7;
+}
+#activation_container span::-moz-selection {
+	background-color: #d7d7d7;
+}
+a:link, a:visited {
+	color: #446f7f;
+	text-decoration: none;
+}
+a:active {
+	color: #244f5f;
+	text-decoration: underline;
+}
+a:hover {
+	color: #648f9f;
+	text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div id="background"></div>
+<div class="main_title">
+	<span>Closed Alpha</span>
+	<span><br><?php echo $response_text; ?></span>
+</div> 
+<?php if ($success) { ?>
+<div id="activation_container">
+	<span>Well, what are you waiting for? 
+		<a href="http://bumbuu.com">Start using your account today.</a>
+	</span>
+</div>
+<?php } ?>
+</body>
+</html>
+<?php
 } elseif (isset($_GET['create'])) {
 	//check for session and prevent remote POST requests
 	header("Cache-Control: no-store, no-cache, must-revalidate");

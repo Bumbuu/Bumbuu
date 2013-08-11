@@ -30,6 +30,7 @@ Format: <br>
 <br>_Note that using a varchar maximum length of 255 instead of 256 is more efficient. See [here](http://dev.mysql.com/doc/refman/5.0/en/char.html)._
 *	Email: **VARCHAR(254)** (254 is current email length maximum specified in [RFC 5321](http://tools.ietf.org/html/rfc5321#section-4.5.3); is unique)
 *	Active: **Boolean** (defaults to `false` until user activates account)
+*	ActivationCode: **VARCHAR(60)** (sha256 activation code)
 *	JoinDate: **Date**
 *	FirstName: **VARCHAR(20)**
 *	LastName: **VARCHAR(20)**
