@@ -3,7 +3,7 @@
 header("Cache-Control: no-store, no-cache, must-revalidate");
 $xml_data = simplexml_load_file("server_info/server.conf.xml");
 $db_passwords = array();
-//populate array with user, password iznformation
+//populate array with user, password information
 foreach ($xml_data->children() as $user)
 	foreach ($user->children() as $user_attr)
 		if ($user_attr->getName() == 'password')
