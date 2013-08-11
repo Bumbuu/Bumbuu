@@ -20,12 +20,12 @@ if ( isset($_GET['activate']) && !empty($_GET['activate']) && !empty($_GET['u'])
 	$success = false;
 	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to server");
 	mysql_select_db("bumbuuco_users", $con) or die("Unable to select DB.");
-	if ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%u AND Active=0", intval(mysql_real_escape_string($_GET['u']))))) == 0 ) {
-		$response_text = "That account has already been activated";
-		$success = true;
-	} elseif ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%u AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate'])))) == 0 ) {
+	if ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%u AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate'])))) == 0 ) {
 		$response_text = "That account does not exist.";
 		$success = false;
+	} elseif ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%u AND Active=0", intval(mysql_real_escape_string($_GET['u']))))) == 0 ) {
+		$response_text = "That account has already been activated";
+		$success = true;
 	} else {
 		mysql_query( sprintf("UPDATE userlist SET Active=1 WHERE UserID=%u AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate'])) ) or die(mysql_error());
 	
