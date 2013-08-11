@@ -25,12 +25,13 @@ Format: <br>
 
 #####userlist
 *	UserID: **UNSIGNED INT(64)** (unique integer value; indexed; auto-increments)
+*	AlphaCode: **VARCHAR(60)** (unique sha256 alpha code; temporary for the alpha stage of Bumbuu)
 *	Username: **VARCHAR(40)** (unique textual name)
 *	Password: **VARCHAR(255)** (salted SHA256()-encrypted)
 <br>_Note that using a varchar maximum length of 255 instead of 256 is more efficient. See [here](http://dev.mysql.com/doc/refman/5.0/en/char.html)._
 *	Email: **VARCHAR(254)** (254 is current email length maximum specified in [RFC 5321](http://tools.ietf.org/html/rfc5321#section-4.5.3); is unique)
 *	Active: **Boolean** (defaults to `false` until user activates account)
-*	ActivationCode: **VARCHAR(60)** (sha256 activation code)
+*	ActivationCode: **VARCHAR(60)** (sha256 activation code; unique)
 *	JoinDate: **Date**
 *	FirstName: **VARCHAR(20)**
 *	LastName: **VARCHAR(20)**
@@ -58,6 +59,10 @@ Format: <br>
 *	DatePosted: **Date** (date/time stamp of post)
 *	Device: **VARCHAR(64)** (could be "Computer", "Windows Phone", "Android", et cetera...)
 *	Location: **VARCHAR(64)** (is recorded when **Pref\_ShowBuzzLocation** is set to anything other than 'None')
+
+#####alpha_codes
+*	Code: **VARCHAR(60)** (unique sha256 value)
+*	Usable: **Boolean** (if the code is still valid)
 
 ###bumbuuco_sendata
 ####bumbuuco_miscInfo

@@ -273,10 +273,11 @@ signup_process = new function() {
 						function() {
 							$_(".main_title").effects.fadeTo(0, 700, function() {
 								$_(".main_title").html("<span>You're done!!</span>");
-								$_(".main_title").effects.fadeTo(100, 700);
+								$_(".main_title").effects.fadeTo(100, 700, function() {
+									$_("#item_final_email_lbl").html($_("#signup_email").value());
+									$_("#signup_epilogue").effects.fadeTo(100, 700);
+								});
 							});
-							$_("#item_final_email_lbl").html($_("#signup_email").value());
-							$_("#signup_epilogue").effects.fadeTo(100, 700);
 						});
 					} else if (ajax.responseText.substr(0, 18) == "There was an error") {
 						if (_this.debug) console.log(ajax.responseText);

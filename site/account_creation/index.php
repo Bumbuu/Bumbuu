@@ -12,6 +12,24 @@ foreach ($xml_data->children() as $user)
 	foreach ($user->children() as $user_attr)
 		if ($user_attr->getName() == 'password')
 			$db_passwords[((string)$user['name'])] = $user_attr;
+			
+//temporary: check for a valid alpha code
+if ( isset($_GET['code']) && !empty($_GET['code']) ) {
+	$alpha_con = mysql_connect("localhost", "bumbuuco_usrdata", $db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to server.");
+	mysql_select_db("bumbuuco_users", $alpha_con) or die("Unable to select DB.");
+	if (mysql_num_rows( mysql_query(sprintf("SELECT Code FROM alpha_codes WHERE Code='%s'", mysql_real_escape_string($_GET['code']))) ) == 0) {
+		header("Location: http://bumbuu.com"); //alpha code not in db
+		exit;
+	} elseif (mysql_num_rows( mysql_query(sprintf("SELECT Code FROM alpha_codes WHERE Code='%s' AND Usable=1", mysql_real_escape_string($_GET['code']))) ) == 0) {
+		header("Location: http://bumbuu.com"); //alpha code already in use
+		exit;
+	}
+	mysql_close($alpha_con);
+} elseif ( !isset($_GET['activate']) ) {
+	header("Location: http://bumbuu.com"); //no alpha code provided
+	exit;
+}
+//---------------------------------------
 
 if ( isset($_GET['activate']) && !empty($_GET['activate']) && !empty($_GET['u']) ) {
 	//activate account
@@ -166,6 +184,7 @@ a:hover {
 			Pref_ShowBuzzes,
 			Pref_ShowBuzzLocation,
 			ActivationCode,
+			AlphaCode,
 			JoinDate
 		 ) 
 		 VALUES(
@@ -184,17 +203,25 @@ a:hover {
 			'%s',
 			'%s',
 			'%s',
+			'%s',
 		 	NOW()
-		 )", mysql_real_escape_string($username), hash("sha256", $password.$salt), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), $country, mysql_real_escape_string($language), $salt, mysql_real_escape_string($gender), mysql_real_escape_string($time_offset), $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'], $activation_code)
+		 )", mysql_real_escape_string($username), hash("sha256", $password.$salt), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), $country, mysql_real_escape_string($language), $salt, mysql_real_escape_string($gender), mysql_real_escape_string($time_offset), $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'], $activation_code, mysql_real_escape_string($_GET['code']) /* temporary: alpha code */)
 	) or die("There was an error while creating a new user: ".mysql_error());
 	
 	$u_id = mysql_query( sprintf("SELECT UserID FROM userlist WHERE Email='%s'", mysql_real_escape_string($email)) );
 	$row = mysql_fetch_assoc($u_id);
 	
-	mysql_close($con); 
+	mysql_close($con);
+	
+	//temporary: set old alpha code to used
+	$alpha_con = mysql_connect("localhost", "bumbuuco_usrdata", $db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to DB.");
+	mysql_select_db("bumbuuco_users", $alpha_con) or die("Could not select DB.");
+	mysql_query( sprintf("UPDATE alpha_codes SET Usable=0 WHERE Code='%s'", mysql_real_escape_string($_GET['code'])) );
+	mysql_close($alpha_con);
+	//-------------------------------------
 	
 	//send email to user notifying them of an activation necessity
-	//TODO: specify $message
+	//TODO: specify $message as HTML
 	$message = "Congratulations, $firstname $lastname, on successfully registering for Bumbuu. In order to activate your account, you must visit this link: http://bumbuu.com/alpha/?activate=$activation_code&u=".$row['UserID']; //separate with \r\n for each line; no longer than 70 chars
 	
 	$headers  = 'MIME-Version: 1.0' . "\r\n"; //separate with \r\n for each header
