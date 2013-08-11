@@ -277,7 +277,7 @@ a:hover {
 <!-- page js -->
 <?php
 	echo "<script type=\"text/javascript\">\n";
-	echo "bumbuu_alpha_code = \"" . isset($_GET['code']) . "\";\n"; 
+	echo "bumbuu_alpha_code = \"" . $_GET['code'] . "\";\n"; 
 	echo "</script>\n";
 ?>
 <script type="text/javascript" src="alpha.js"></script>
