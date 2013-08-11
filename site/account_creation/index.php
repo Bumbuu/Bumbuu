@@ -12,30 +12,44 @@ foreach ($xml_data->children() as $user)
 	foreach ($user->children() as $user_attr)
 		if ($user_attr->getName() == 'password')
 			$db_passwords[((string)$user['name'])] = $user_attr;
-if (isset($_GET['create'])) {
+
+if ( isset($_GET['activate']) && !empty($_GET['activate']) && !empty($_GET['u']) ) {
+	//activate account
 	header("Cache-Control: no-store, no-cache, must-revalidate");
+	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to server");
+	mysql_select_db("bumbuuco_users", $con) or die("Unable to select DB.");
+	if ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%d AND Active=0", intval(mysql_real_escape_string($_GET['u']))))) == 0 )
+		exit("That account has already been activated");
+	elseif ( mysql_num_rows(mysql_query(sprintf("SELECT Active FROM userlist WHERE UserID=%i AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate']))) or die(mysql_error())) == 0 )
+		exit("No account exists.");
+	mysql_query( sprintf("UPDATE userlist SET Active=1 WHERE UserID=%i AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate'])) ) or die(mysql_error());
+	
+	mysql_close($con);
+	exit("Your account has been successfully activated.");
+} elseif (isset($_GET['create'])) {
 	//check for session and prevent remote POST requests
+	header("Cache-Control: no-store, no-cache, must-revalidate");
 	if (!isset($_POST['session_id']) || intval($_POST['session_id']) !== $_SESSION['form_number']) {
 		header("No remote access allowed.", true, 400);
 		exit;
 	}
-	$username = $_POST['username'];
+	$username = urldecode($_POST['username']);
 		!empty($username) or die("No username specified.");
-	$password = $_POST['password'];
+	$password = urldecode($_POST['password']);
 		!empty($password) or die("No password specified.");
-	$email = $_POST['email'];
+	$email = urldecode($_POST['email']);
 		!empty($email) or die("No email specified.");
-	$country_code = $_POST['country'];
+	$country_code = urldecode($_POST['country']);
 		!empty($country_code) or die("No country specified.");
-	$gender = $_POST['gender'];
+	$gender = urldecode($_POST['gender']);
 		!empty($gender) or die("No gender information specified.");
-	$firstname = $_POST['firstname'];
+	$firstname = urldecode($_POST['firstname']);
 		!empty($firstname) or die("No first name given.");
-	$lastname = $_POST['lastname'];
+	$lastname = urldecode($_POST['lastname']);
 		!empty($lastname) or die("No last name given.");
-	$language = $_POST['language'];
+	$language = urldecode($_POST['language']);
 		!empty($language) or die("No language given.");
-	$time_offset = $_POST['timezone'];
+	$time_offset = urldecode($_POST['timezone']);
 		!empty($time_offset) or die("No timezone information specified.");
 	$pref_show_timezone = $_POST['reveal_timezone'];
 		!empty($pref_show_timezone) or die("No timezone privacy specified.");
@@ -56,10 +70,11 @@ if (isset($_GET['create'])) {
 	
 	//generate random salt
 	$salt = Bumbuu::generate_salt();
+	$activation_code = Bumbuu::generate_salt();
 	
 	$con_sd = mysql_connect("localhost", "bumbuuco_sendata", $db_passwords["bumbuuco_sendata"]) or die("Unable to connect to server.");
 	mysql_select_db("bumbuuco_miscInfo", $con_sd) or die("unable to select DB.");
-	$res = mysql_query(	sprintf("SELECT Fullname FROM country_info WHERE Shortname='%s' LIMIT 1", mysql_real_escape_string($country_code)) );
+	$res = mysql_query(	sprintf("SELECT Fullname FROM country_list WHERE Shortname='%s' LIMIT 1", mysql_real_escape_string($country_code)), $con_sd );
 	$row = mysql_fetch_assoc($res);
 	$country = $row["Fullname"];
 	mysql_close($con_sd);
@@ -83,6 +98,7 @@ if (isset($_GET['create'])) {
 			Pref_ShowEmail,
 			Pref_ShowBuzzes,
 			Pref_ShowBuzzLocation,
+			ActivationCode,
 			JoinDate
 		 ) 
 		 VALUES(
@@ -100,12 +116,19 @@ if (isset($_GET['create'])) {
 			'%s',
 			'%s',
 			'%s',
+			'%s',
 		 	NOW()
-		 )", mysql_real_escape_string($username), hash("sha256", $password.$salt), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), $country, mysql_real_escape_string($language), $salt, mysql_real_escape_string($gender), mysql_real_escape_string($time_offset), $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'])
+		 )", mysql_real_escape_string($username), hash("sha256", $password.$salt), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), $country, mysql_real_escape_string($language), $salt, mysql_real_escape_string($gender), mysql_real_escape_string($time_offset), $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'], $activation_code)
 	) or die("There was an error while creating a new user: ".mysql_error());
+	
+	$u_id = mysql_query( sprintf("SELECT UserID FROM userlist WHERE Email='%s'", mysql_real_escape_string($email)) );
+	$row = mysql_fetch_assoc($u_id);
+	
+	mysql_close($con); 
+	
 	//send email to user notifying them of an activation necessity
 	//TODO: specify $message
-	$message = "Congratulations, $firstname $lastname, on successfully registering for Bumbuu."; //separate with \r\n for each line; no longer than 70 chars
+	$message = "Congratulations, $firstname $lastname, on successfully registering for Bumbuu. In order to activate your account, you must visit this link: http://bumbuu.com/alpha/?activate=$activation_code&u=".$row['UserID']; //separate with \r\n for each line; no longer than 70 chars
 	
 	$headers  = 'MIME-Version: 1.0' . "\r\n"; //separate with \r\n for each header
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -200,6 +223,7 @@ if (isset($_GET['create'])) {
 						<div class="bumbuu_input_holder">
 							<input class="bumbuu_input_state_light" type="text" id="signup_email" placeholder="Email Address" />
 						</div>
+						<div class="bumbuu_input_label_light" style="float: right; clear: none; margin-top: 2px;" orientation="left">Email cannot be taken.</div>
 					</div>
 					<div class="signup_interaction_row">
 						<div class="bumbuu_input_holder">
