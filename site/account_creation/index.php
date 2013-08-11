@@ -86,7 +86,7 @@ a:hover {
 <?php if ($success) { ?>
 <div id="activation_container">
 	<span>Well, what are you waiting for? 
-		<a href="http://bumbuu.com">Start using your account today.</a>
+		<a href="http://bumbuu.com">Start using Bumbuu today.</a>
 	</span>
 </div>
 <?php } ?>
