@@ -18,9 +18,14 @@ Below is a list of _remaining_ objectives, not including any completions in the 
 * Consider security plans ( **done** - see `mockups/security.png` )
 * Formulate database model ( **in progress** - see `docs/Database Structure.md` )
 * Populate MySQL DB ( **in progress** )
-* Set PHP frontends for acquiring info ( **started** )
+* Set PHP frontends for acquiring info ( **in progress** )
 
 ##APIs
 * BuuJS ( **started** )
 * Isis ( **suspended** )
+
+##Miscellaneous
+* Set up git server at git.bumbuu.com
+ - Set up git ( **done** )
+ - Set up web frontend ( **not started** )
 
