@@ -25,8 +25,8 @@ if ( isset($_GET['code']) && !empty($_GET['code']) ) {
 		exit;
 	}
 	mysql_close($alpha_con);
-} elseif ( !isset($_GET['activate']) && !isset($_GET['validate']) && !isset($_GET['create']) ) {
-	//if page is neither the activate, registrate, nor validate page
+} elseif ( !isset($_GET['activate']) && !isset($_GET['validate']) ) {
+	//if page is neither the activate nor validate page
 	header("Location: http://bumbuu.com"); //no alpha code provided
 	exit;
 }
@@ -275,6 +275,11 @@ a:hover {
 <script type="text/javascript" src="http://bumbuu.com/files/apis/timezone_picker/lib/jquery.maphilight.min.js"></script>
 <script type="text/javascript" src="http://bumbuu.com/files/apis/timezone_picker/lib/jquery.timezone-picker.min.js"></script>
 <!-- page js -->
+<?php
+	echo "<script type=\"text/javascript\">\n";
+	echo "bumbuu_alpha_code = \"" . isset($_GET['code']) . "\";\n"; 
+	echo "</script>\n";
+?>
 <script type="text/javascript" src="alpha.js"></script>
 </head>
 <body>

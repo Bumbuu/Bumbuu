@@ -245,7 +245,7 @@ signup_process = new function() {
 		_this.validate(3, "all", function(is_valid) {
 			if (!is_valid) return _this.notify(3, "warning", "Please correct some things first.");
 			$_.req({ //send request for a new user
-				url: "index.php?create",
+				url: "index.php?create&code="+(typeof bumbuu_alpha_code == "undefined" ? "" : bumbuu_alpha_code),
 				method: "post",
 				data: {
 					username: encodeURIComponent($_("#signup_username").value()),
