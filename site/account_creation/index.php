@@ -25,8 +25,8 @@ if ( isset($_GET['code']) && !empty($_GET['code']) ) {
 		exit;
 	}
 	mysql_close($alpha_con);
-} elseif ( !isset($_GET['activate']) && !isset($_GET['validate']) ) {
-	//if page is neither the activate nor validate page
+} elseif ( !isset($_GET['activate']) && !isset($_GET['validate']) && !isset($_GET['create']) ) {
+	//if page is neither the activate, registrate, nor validate page
 	header("Location: http://bumbuu.com"); //no alpha code provided
 	exit;
 }
