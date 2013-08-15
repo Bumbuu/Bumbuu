@@ -10,6 +10,16 @@ html, body {
 body {
 	background-color: #abadb0;
 }
+a:link, a:visited {
+	color: #6f9f9f;
+}
+a:hover {
+	color: #5f8f8f;
+	text-decoration: underline;
+}
+a:active {
+	color: #3f5f5f;
+}
 div#background {
 	position: fixed;
 	top: 0%;
@@ -28,7 +38,7 @@ div#background {
 	bottom: 0;
 	position: absolute;
 	width: 700px;
-	height: 700px;
+	height: 900px;
 	padding: 10px;
 }
 #main_title {
@@ -57,9 +67,9 @@ div#background {
 	border-radius: 7px;
 	background-color: #f2f2f2;
 	box-shadow: inset 0px 4px 3px #fbfbfb, 0px 0px 15px #929292;
-	width: 600px;
-	height: 500px;
-	padding: 10px;
+	width: 560px;
+	height: 660px;
+	padding: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
@@ -71,13 +81,17 @@ div#background {
 	font-size: 14px;
 	color: #4f4f4f;
 	text-shadow: 0px 1px 0px #f9f9f9;
+	text-align: justify;
+	line-height: 18px;
 }
 #main > p {
 	text-indent: 20px;
 }
+a::selection,
 #main > p::selection {
 	background-color: #dfdfdf;
 }
+a::-moz-selection,
 #main > p::-moz-selection {
 	background-color: #dfdfdf;
 }
@@ -89,6 +103,10 @@ div#background {
 	<div id="main_title">Bumbuu Alpha</div>
 	<div id="main">
 		<p>Congratulations on registering for the Alpha stage of Bumbuu.</p>
+		<p>Your help in testing a prototype of a next-generation social network is greatly appreciated, and we encourage you, throughout your use of the service, to share with us your uncensored feedback in what improvements are necessary in order to make Bumbuu more viable to human beings. You may file all feedback through <a href="http://bumbuu.com/feedback">here</a>, and we shall do our best to address each comment directly.</p>
+		<p>More importantly, however, is that we want to let you know that Bumbuu was created on a mission; what we are trying to incorporate into this service is a unique feeling of social participation that is unquestionably absent on other sites. From the one-directional "conversations" of Twitter to the model of Facebook (that employs a commercialism which is gradually inhibiting social interaction in the same manner of MySpace's ill-fated direction), to the micro-blogging spheres of Tumblr, and the promotional aspects of LinkedIn, it has become apparent that a true <b>social</b> network does not exist.</p>
+		<p>While many enjoy all of these services, and while we certainly do not look down on them, the fact that, as of 2013, the Internet has yet to produce a truly personal alternative to face-to-face conversation, short of videoconferencing, is astounding. One of the indicators of this lacking is the ever-vocal array of television commentators you'll hear suggesting that our current generation is growing up in an "age of narcissism" or that we are at least becoming less social. Couple that with academic research that's starting to trace the tendencies of relationship degradation from growing behaviors such as <a href="http://epapers.bham.ac.uk/1723/1/2013-03_D_Houghton.pdf">posting too many pictures, not just of yourself, on your account</a>.</p>
+		<p>This doesn't have to be the case, though. At Bumbuu, the maxim which we adhere to is that <i>it should not be possible to be antisocial on a social network</i>.</p>
 	</div>
 </div>
 </body>
