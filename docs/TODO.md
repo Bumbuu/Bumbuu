@@ -15,7 +15,7 @@ Below is a list of _remaining_ objectives, not including any completions in the 
  - dev.bumbuu.com ( **not started** )
  - bumbuu.com/daybook ( **not started** )
  - bumbuu.com/feedback ( **not started** )
-* Create aesthetic and design-conforming email templates ( **started** )
+* Create aesthetic and design-conforming email templates ( **in progress** )
 
 ##Database Structuring
 * Consider security plans ( **done** - see `mockups/security.png` )
