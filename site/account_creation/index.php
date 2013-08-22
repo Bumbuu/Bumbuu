@@ -12,7 +12,7 @@ foreach ($xml_data->children() as $user)
 	foreach ($user->children() as $user_attr)
 		if ($user_attr->getName() == 'password')
 			$db_passwords[((string)$user['name'])] = $user_attr;
-			
+
 //temporary: check for a valid alpha code
 if ( isset($_GET['code']) && !empty($_GET['code']) ) {
 	$alpha_con = mysql_connect("localhost", "bumbuuco_usrdata", $db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to server.");
@@ -47,11 +47,144 @@ if ( isset($_GET['activate']) && !empty($_GET['activate']) && !empty($_GET['u'])
 		$success = true;
 	} else {
 		mysql_query( sprintf("UPDATE userlist SET Active=1 WHERE UserID=%u AND ActivationCode='%s'", intval(mysql_real_escape_string($_GET['u'])), mysql_real_escape_string($_GET['activate'])) ) or die(mysql_error());
-	
-		mysql_close($con);
+		//mysql_close($con);
 		$response_text = "Your account has been successfully activated.";
 		$success = true;
 	}
+	//TODO: send email to the user
+	$res = mysql_query( sprintf("SELECT * FROM userlist WHERE UserID=%u", intval(mysql_real_escape_string($_GET['u']))) ) or die("Unable to select email.");
+	$u_row = mysql_fetch_row($res);
+$message = <<<EOD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bumbuu Alpha</title>
+<style type="text/css">
+@font-face {
+	font-family: "Bauhaus 93";
+	src: local("Bauhaus 93"),
+		 url('http://bumbuu.com/files/fonts/bauhaus_93/bauhaus_93.tff'),
+		 url('http://bumbuu.com/files/fonts/bauhaus_93/bauhaus_93.otf'),
+		 url('http://bumbuu.com/files/fonts/bauhau_93/bauhaus_93.woff');
+}
+
+html, body {
+	margin: 0 auto;
+	padding: 0px;
+}
+body {
+	background-color: #abadb0;
+}
+a:link, a:visited {
+	color: #6f9f9f;
+}
+a:hover {
+	color: #5f8f8f;
+	text-decoration: underline;
+}
+a:active {
+	color: #3f5f5f;
+}
+div#background {
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	clear: none;
+	background: radial-gradient(#cbcdd0, rgba(255,255,255,0));
+	z-index: -1;
+}
+#main_container {
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	position: absolute;
+	width: 700px;
+	height: 900px;
+	padding: 10px;
+}
+#main_title {
+	margin-left: auto;
+	margin-right: auto;
+	width: 590px;
+	height: 62px;
+	padding: 5px;
+	text-align: center;
+	font-family: "Bauhaus 93", Helvetica, Arial;
+	font-size: 60px;
+	font-weight: 500;
+	color: #f9f9f9;
+	text-shadow: 0px 3px 3px #7f7f7f;
+	line-height: 90px;
+	margin-top: 30px;
+}
+#main_title::selection {
+	background-color: #bfbfbf;
+}
+#main_title::-moz-selection {
+	background-color: #bfbfbf;
+}
+#main {
+	border: 1px solid #7f7f7f;
+	border-radius: 7px;
+	background-color: #f2f2f2;
+	box-shadow: inset 0px 4px 3px #fbfbfb, 0px 0px 15px #929292;
+	width: 560px;
+	height: 730px;
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	background-image: url(http://bumbuu.com/files/img/bee_2_greyed.png);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	background-origin: content-box;
+	font-family: Arial;
+	font-size: 14px;
+	color: #4f4f4f;
+	text-shadow: 0px 1px 0px #f9f9f9;
+	text-align: justify;
+	line-height: 18px;
+}
+#main > p {
+	text-indent: 20px;
+}
+a::selection,
+#main > p::selection,
+#main > p *::selection {
+	background-color: #dfdfdf;
+}
+a::-moz-selection,
+#main > p::-moz-selection,
+#main > p *::-moz-selection {
+	background-color: #dfdfdf;
+}
+</style>
+</head>
+<body>
+<div id="background"></div>
+<div id="main_container">
+	<div id="main_title">Bumbuu Alpha</div>
+	<div id="main">
+		<p>Congratulations on registering for the Alpha stage of Bumbuu.</p>
+		<p>Your help in testing a prototype of a next-generation social network is greatly appreciated, and we encourage you, throughout your use of the service, to share with us your uncensored feedback in what improvements are necessary in order to make Bumbuu more viable to human beings. You may file all feedback through <a href="http://bumbuu.com/feedback">here</a>, and we shall do our best to address each comment directly.</p>
+		<p>More importantly, however, is that we want to let you know that Bumbuu was created on a mission; what we are trying to incorporate into this service is a unique feeling of social participation that is unquestionably absent on other sites. From the one-directional "conversations" of Twitter to the model of Facebook (that employs a commercialism which is gradually inhibiting social interaction in the same manner of MySpace's ill-fated direction), to the micro-blogging sphere of Tumblr, and the promotional aspects of LinkedIn, it has become apparent that a true <b>social</b> network does not exist.</p>
+		<p>While many enjoy all of these services, and while we certainly do not look down on them, the fact that, as of 2013, the Internet has yet to produce a truly personal alternative to face-to-face conversation, short of videoconferencing, is astounding. One of the indicators of this lacking is the ever-vocal array of television commentators you'll hear suggesting that our current generation is growing up in an "age of narcissism" or that we are at least becoming less social. Couple that with academic research that's starting to trace the tendencies of relationship degradation from growing behaviors such as <a href="http://epapers.bham.ac.uk/1723/1/2013-03_D_Houghton.pdf">posting too many pictures, not just of yourself, on your account</a>, or the fact that <a href="http://www.economist.com/news/science-and-technology/21583593-using-social-network-seems-make-people-more-miserable-get-life">using Facebook makes you less happy over time</a>, and one can begin to understand that there is a problem with the current approach to social media that no one outside of academia seems to understand.</p>
+		<p>This doesn't have to be the case, though. At Bumbuu, the maxim which we adhere to is that <i>it should not be possible to be antisocial on a social network</i>. With this in mind, our aim is for a more participatory environment where the use of the website encourages and facilitates interpersonal relationships&#x2500;instead of them simply being optional to the service's use. <a href="http://bumbuu.com/philosophy">You can read more about our philosophy here</a>, but the main takeaway from this message should be that we're trying to do something <i>different</i>. While we cannot say that these ambitions may be initially well-received, it can be said that we'll never meet progress if we don't give it an honest try.</p><br>
+		<p>- PF</p>
+	</div>
+</div>
+</body>
+</html>
+EOD;
+	$headers  = 'MIME-Version: 1.0' . "\r\n"; //separate with \r\n for each header
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'To: '. $u_row["Username"] .' <'. $u_row["Email"] .'>' . "\r\n";
+	$headers .= 'From: Bumbuu <bumbuu.com>' . "\r\n";
+	mail($u_row["Email"], "Your Help is Greatly Appreciated", $message, $headers);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,10 +234,10 @@ a:hover {
 <div class="main_title">
 	<span>Closed Alpha</span>
 	<span><br><?php echo $response_text; ?></span>
-</div> 
+</div>
 <?php if ($success) { ?>
 <div id="activation_container">
-	<span>Well, what are you waiting for? 
+	<span>Well, what are you waiting for?
 		<a href="http://bumbuu.com">Start using Bumbuu today.</a>
 	</span>
 </div>
@@ -145,7 +278,7 @@ a:hover {
 		!empty($pref_show_email) or die("No email privacy specified.");
 	$pref_show_buzz_location = $_POST['show_buzz_location'];
 		!empty($pref_show_buzz_location) or die("No buzz location privacy specified.");
-	
+
 	//preferences
 	$preferences = array(
 		'ShowTimezone'	=>	($pref_show_timezone == 'true' ? 'Everyone' : 'None'),
@@ -153,18 +286,18 @@ a:hover {
 		'ShowEmail'		=>	($pref_show_email == 'true' ? 'Everyone' : 'None'),
 		'ShowLocation'	=>	($pref_show_buzz_location == 'true' ? 'Everyone' : 'None')
 	);
-	
+
 	//generate random salt
 	$salt = Bumbuu::generate_salt();
 	$activation_code = Bumbuu::generate_salt();
-	
+
 	$con_sd = mysql_connect("localhost", "bumbuuco_sendata", $db_passwords["bumbuuco_sendata"]) or die("Unable to connect to server.");
 	mysql_select_db("bumbuuco_miscInfo", $con_sd) or die("unable to select DB.");
 	$res = mysql_query(	sprintf("SELECT Fullname FROM country_list WHERE Shortname='%s' LIMIT 1", mysql_real_escape_string($country_code)), $con_sd );
 	$row = mysql_fetch_assoc($res);
 	$country = $row["Fullname"];
 	mysql_close($con_sd);
-	
+
 	$con = mysql_connect("localhost","bumbuuco_usrdata",$db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to server");
 	mysql_select_db("bumbuuco_users", $con) or die("Unable to select DB.");
 	mysql_query(
@@ -187,7 +320,7 @@ a:hover {
 			ActivationCode,
 			AlphaCode,
 			JoinDate
-		 ) 
+		 )
 		 VALUES(
 			'%s',
 			'%s',
@@ -208,28 +341,28 @@ a:hover {
 		 	NOW()
 		 )", mysql_real_escape_string($username), hash("sha256", $password.$salt), mysql_real_escape_string($email), mysql_real_escape_string($firstname), mysql_real_escape_string($lastname), $country, mysql_real_escape_string($language), $salt, mysql_real_escape_string($gender), mysql_real_escape_string($time_offset), $preferences['ShowTimezone'], $preferences['ShowEmail'], $preferences['ShowBuzzes'], $preferences['ShowLocation'], $activation_code, mysql_real_escape_string($_GET['code']) /* temporary: alpha code */)
 	) or die("There was an error while creating a new user: ".mysql_error());
-	
+
 	$u_id = mysql_query( sprintf("SELECT UserID FROM userlist WHERE Email='%s'", mysql_real_escape_string($email)) );
 	$row = mysql_fetch_assoc($u_id);
-	
+
 	mysql_close($con);
-	
+
 	//temporary: set old alpha code to used
 	$alpha_con = mysql_connect("localhost", "bumbuuco_usrdata", $db_passwords["bumbuuco_usrdata"]) or die("Unable to connect to DB.");
 	mysql_select_db("bumbuuco_users", $alpha_con) or die("Could not select DB.");
 	mysql_query( sprintf("UPDATE alpha_codes SET Usable=0 WHERE Code='%s'", mysql_real_escape_string($_GET['code'])) );
 	mysql_close($alpha_con);
 	//-------------------------------------
-	
+
 	//send email to user notifying them of an activation necessity
 	//TODO: specify $message as HTML
 	$message = "Congratulations, $firstname $lastname, on successfully registering for Bumbuu. In order to activate your account, you must visit this link: http://bumbuu.com/alpha/?activate=$activation_code&u=".$row['UserID']; //separate with \r\n for each line; no longer than 70 chars
-	
+
 	$headers  = 'MIME-Version: 1.0' . "\r\n"; //separate with \r\n for each header
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 	$headers .= 'To: '. $username .' <'. $email .'>' . "\r\n";
 	$headers .= 'From: Bumbuu <bumbuu.com>' . "\r\n";
-	
+
 	mail($email, "Bumbuu Alpha - Activation Required", $message, $headers);
 	exit("Registration successful.");
 } elseif (isset($_GET['validate'])) {
@@ -277,7 +410,7 @@ a:hover {
 <!-- page js -->
 <?php
 	echo "<script type=\"text/javascript\">\n";
-	echo "bumbuu_alpha_code = \"" . $_GET['code'] . "\";\n"; 
+	echo "bumbuu_alpha_code = \"" . $_GET['code'] . "\";\n";
 	echo "</script>\n";
 ?>
 <script type="text/javascript" src="alpha.js"></script>
@@ -421,7 +554,7 @@ a:hover {
 			<div>
 				<div class="signup_info_title">Security and Privacy</div>
 				<div class="signup_info_description">
-					Some information we need to protect your account from impersonation and theft, as well as provide any personally-preferred privacy options. Bumbuu takes privacy very seriously. As such, unlike other social networks, any options set here will be honored in their most literal respect, without disregard to the user's preference. 
+					Some information we need to protect your account from impersonation and theft, as well as provide any personally-preferred privacy options. Bumbuu takes privacy very seriously. As such, unlike other social networks, any options set here will be honored in their most literal respect, without disregard to the user's preference.
 				</div>
 			</div>
 			<div>
