@@ -3,7 +3,7 @@ Bumbuu
 
 [Bumbuu](http://bumbuu.com) is a social network currently in development. **Pull requests are welcome.**
 
-##Paradigm
+###Paradigm
 The model of Bumbuu is ideally one that distances itself from the "commercialism" and narcissism of Facebook, Twitter, Tumblr, and (what was once popular) MySpace. By establishing itself as a social network oriented entirely around truly *social* interaction, and not one where "Likes", shared stories, and one-sided corporate or financial spheres can gain prominence as the metric by which "socializing" is considered, Bumbuu aims to do something different. It is arguable that this model, currently in effect at Facebook, mimics the same philosophy that "killed" MySpace: too much focus on advertisements with the network's purpose as a "cash cow" for future businesses, and an emphasis on narcissistic interaction, which both detract from the idealism of a simple electronic version of face-to-face interaction.
 
 
@@ -15,5 +15,5 @@ Consequently, a basic principle of Bumbuu will be that it contains no advertisem
 
 I'm trying to do something different here, and while I can't be sure of its feasibility, at least someone can say that there was an effort to change things.
 
-##Documentation
+###Documentation
 Consult [docs/](docs/) for further information.
