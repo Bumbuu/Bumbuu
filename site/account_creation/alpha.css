@@ -1,6 +1,14 @@
 /* alpha.css
  * For the Bumbuu Alpha user registration page.
  * 2013 Bumbuu */
+@font-face {
+	font-family: "Bauhaus 93";
+	src: local("Bauhaus 93"),
+		 url('http://bumbuu.com/files/fonts/bauhaus_93/bauhaus_93.tff'),
+		 url('http://bumbuu.com/files/fonts/bauhaus_93/bauhaus_93.otf'),
+		 url('http://bumbuu.com/files/fonts/bauhau_93/bauhaus_93.woff');
+}
+
 html, body {
 	margin: 0 auto;
 	padding: 0px;
