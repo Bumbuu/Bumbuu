@@ -28,6 +28,6 @@ Below is a list of _remaining_ objectives, not including any completions in the 
 * Isis ( **suspended** )
 
 ##Miscellaneous
-* Set up git server at git.bumbuu.com
+* Set up git server at git.bumbuu.com ( **almost** )
  - Set up git ( **done** )
- - Set up web frontend ( **not started** )
+ - Set up web frontend ( **almost - need syntax highlighting** )

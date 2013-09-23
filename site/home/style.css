@@ -1,0 +1,34 @@
+/* style.css - main home page for Bumbuu */
+
+html, body {
+	margin: 0 auto;
+	padding: 0px;
+}
+
+body {
+	background-color: #abadb0;
+}
+
+div#background {
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	clear: none;
+	background: radial-gradient(#cbcdd0, rgba(255,255,255,0));
+	z-index: -1;
+}
+
+#main {
+	width: 380px;
+	height: 380px;
+	padding: 12px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-left: -202px;
+	margin-top: -202px;
+	background-image: url('files/home/img/home_bee.png');
+	background-repeat: no-repeat;
+}
