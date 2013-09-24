@@ -1,0 +1,51 @@
+/* site-wide navigation bar CSS
+ * Bumbuu 2013
+ */
+#bumbuu_navbar_main {
+	height: 40px;
+	margin-top: 0px;
+	width: auto;
+	background-color: #5b5d60;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: inset 0px -5px 15px #444, 0px 1px 0px #b0bbbe;
+	background-image: url(http://bumbuu.com/files/img/noise_overlay.png),
+		linear-gradient(to bottom, #3f3f3f 0%, #444444 100%);
+	border-bottom: 1px solid #333;
+	text-align: center;
+	overflow: hidden;
+}
+#bumbuu_navbar_main div::selection {
+	background-color: #444;
+}
+#bumbuu_navbar_main div::-moz-selection {
+	background-color: #444;
+}
+#bumbuu_navbar_main_center {
+	padding-top: 13px;
+	padding-bottom: 13px;
+	height: 14px;
+	display: inline-block;
+	min-width: 200px;
+}
+#bumbuu_navbar_main_center > div {
+	display: block;
+	float: left;
+	clear: none;
+	height: 100%;
+	min-width: 100px;
+}
+#bumbuu_navbar_main_center > img {
+	display: block;
+	float: left;
+	clear: none;
+	height: 20px;
+	margin-top: -2px;
+}
+#bumbuu_navbar_main_center > div[type=titular] {
+	font-family: "Museo Slab", MuseoSlab, Arial, Verdana;
+	font-size: 14px;
+	color: #dfdfdf;
+	text-shadow: 0px 0px 5px #111;
+}
