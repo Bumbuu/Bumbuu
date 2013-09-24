@@ -42,10 +42,43 @@
 	clear: none;
 	height: 20px;
 	margin-top: -2px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+#bumbuu_navbar_main_center > img#bumbuu_navbar_account {
+	border-radius: 10px;
+	cursor: pointer;
+}
+#bumbuu_navbar_main_center > img#bumbuu_navbar_account:hover {
+	box-shadow: 0px 0px 5px #a0a0a0;
 }
 #bumbuu_navbar_main_center > div[type=titular] {
 	font-family: "Museo Slab", MuseoSlab, Arial, Verdana;
 	font-size: 14px;
 	color: #dfdfdf;
 	text-shadow: 0px 0px 5px #111;
+}
+input#bumbuu_navbar_search {
+	height: 24px;
+	min-width: 250px;
+	margin-top: -6px;
+	border: 1px solid #222;
+	border-radius: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color: #777;
+	box-shadow: 0px 1px 0px #5f5f5f, inset 0px 1px 1px #535353;
+	display: block;
+	float: left;
+	clear: none;
+	transition: min-width 700ms, background-color 700ms, text-shadow 700ms;
+	font-family: Arial;
+	font-size: 14px;
+	color: #2f2f2f;
+	text-shadow: 0px 1px 0px #9b9b9b;
+}
+input#bumbuu_navbar_search:focus {
+	min-width: 400px;
+	background-color: #999;
+	text-shadow: 0px 1px 0px #b5b5b5;
 }
