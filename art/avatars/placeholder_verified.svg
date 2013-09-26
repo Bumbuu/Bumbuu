@@ -14,11 +14,11 @@
    height="20"
    id="svg2"
    version="1.1"
-   inkscape:version="0.49 r12577"
+   inkscape:version="0.49 r12590 custom"
    sodipodi:docname="placeholder_verified.svg"
-   inkscape:export-filename="/home/princetonferro/Documents/Git/Bumbuu/art/avatars/placeholder_verified.png"
-   inkscape:export-xdpi="90.112648"
-   inkscape:export-ydpi="90.112648">
+   inkscape:export-filename="/home/princetonferro/Documents/Git/Bumbuu/art/avatars/placeholder_verified_large.png"
+   inkscape:export-xdpi="2306.8838"
+   inkscape:export-ydpi="2306.8838">
   <defs
      id="defs4">
     <linearGradient
@@ -51,16 +51,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="90.509668"
-     inkscape:cx="15.761594"
-     inkscape:cy="4.4259977"
+     inkscape:zoom="22.627417"
+     inkscape:cx="14.137507"
+     inkscape:cy="9.5816"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1503"
      inkscape:window-height="897"
-     inkscape:window-x="216"
-     inkscape:window-y="96"
+     inkscape:window-x="128"
+     inkscape:window-y="84"
      inkscape:window-maximized="0"
      showguides="false">
     <inkscape:grid
@@ -113,8 +113,8 @@
        d="m 6,10 c 2.5773487,1.33977 5.245879,1.31182 8,0 l 0,5 -8,0 z"
        id="path4390"
        inkscape:connector-curvature="0"
-       transform="translate(0,1032.3622)"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccc"
+       transform="translate(0,1032.3622)" />
     <path
        style="fill:#6f6f6f;fill-opacity:1;stroke:none"
        d="M 6,5.0101525 C 9,7 11,7 14,5.0101525 15,4 5,4 6,5.0101525 Z"
@@ -137,12 +137,23 @@
        transform="translate(0,1032.3622)"
        sodipodi:nodetypes="ccccc" />
     <path
+       style="fill:#575757;fill-opacity:1;stroke:none"
+       d="m 10,1043.3899 -1,4.9723 1,1 1,-1 z"
+       id="path4093"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
        style="fill:#aeaeae;fill-opacity:1;stroke:none"
        d="m 6,10 2,1 5.163675,7.760723 C 9.7759714,20.130143 5.2351847,19.746454 2.015625,14.941406 2.1143743,14.368224 1.8445338,11.540851 6,10 Z"
        id="path4078"
        inkscape:connector-curvature="0"
        transform="translate(0,1032.3622)"
        sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#575757;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 9,1043.3622 1,1 1,-1 z"
+       id="path3291"
+       inkscape:connector-curvature="0" />
     <path
        style="fill:#ffffff;stroke:none;stroke-width:0.05;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 6,10 4,1 -2,1 z"
